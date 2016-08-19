@@ -2,18 +2,72 @@ package com.veridu.sdk_java;
 
 import java.io.UnsupportedEncodingException;
 
-import com.veridu.sdk_java.endpoints.Companies;
+import com.google.gson.JsonObject;
 import com.veridu.sdk_java.exceptions.SDKException;
+import com.veridu.sdk_java.settings.Settings;
 
 public class CompanySample {
 
 	public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
-		String companyPrivKey = "";
-		Factory factory = new Factory(companyPrivKey);
-		System.out.println(factory.getCompany().listAll());
-		System.out.println(factory.getCompany().create("Company Example"));
-		System.out.println(factory.getCompany().update("Updated Company", "company-example"));
-		System.out.println(factory.getCompany().getOne("updated-company"));
-		System.out.println(factory.getCompany().delete("updated-company"));
+		/**
+		 * JsonObject used to parse the response
+		 * @see https://github.com/google/gson
+		 */
+		JsonObject parsed = null;
+		
+		/**
+		 * CompanyFactory is a class that instantiate all endpoints as their methods (getEndpointName) are called. 
+		 * The endpoints don't need to be instantiated one by one. You just need to call the factory.getEndpoint 
+		 * and its going to be instantiated and available to call its methods. 
+		 * In other words, it means that all endpoints is going to pass by an Factory Class, and accessed through this object
+		 * 
+		 * @param privateKey The company private key that authorizes requests to the API 
+		 */
+		CompanyFactory companyFactory = new CompanyFactory(Settings.privateKey);
+		
+		/**
+		 * Gets the response from the API listing all companies
+		 */
+		JsonObject json = companyFactory.getCompany().listAll();
+		
+		/**
+		 * Prints the json
+		 */		
+		System.out.println(json);
+		
+		/**
+		 * Gets the response from the API trying to create a new company
+		 */
+		json = companyFactory.company.create("Sample Company");
+		
+		/**
+		 * Gets the status of the response
+		 * If true, gets the company that was just created giving its slug
+		 * If false, prints the message
+		 */
+		if (json.get("status").getAsBoolean() == true) {
+			/**
+			 * Get the response form the API geting one company
+			 */
+			json = companyFactory.getCompany().getOne("sample-company");
+			
+			/**
+			 * Prints the array response
+			 */
+			System.out.println(json.get("data").getAsJsonObject());
+		} else {
+			System.out.println(json.get("message").getAsString());
+		}
+		
+		/**
+		 * Deletes the company that was just created giving its slug
+		 * 
+		 */
+		json = companyFactory.getCompany().delete("sample-company");
+		
+		/**
+		 * Prints the status of the request
+		 */
+		System.out.println(json.get("status").getAsBoolean());
 	}
 }

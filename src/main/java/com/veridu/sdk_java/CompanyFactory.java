@@ -7,7 +7,7 @@ import com.veridu.sdk_java.exceptions.EmptyPrivateKey;
  * Factory Endpoint creates all Endpoints
  *
  */
-public class Factory {
+public class CompanyFactory {
 	
 	public static String privateKey;
 	
@@ -17,18 +17,12 @@ public class Factory {
 	public Companies company;
 	
 	
-	public Factory (String privateKey) throws EmptyPrivateKey {
+	public CompanyFactory (String privateKey) throws EmptyPrivateKey {
 		if (privateKey.isEmpty() || privateKey == null) {
 			throw new EmptyPrivateKey();
 		} 
 		
-		Factory.privateKey = privateKey;
-	}
-	
-	public Factory () throws EmptyPrivateKey {
-		if (Factory.privateKey == null) {
-			throw new EmptyPrivateKey();
-		}
+		CompanyFactory.privateKey = privateKey;
 	}
 	
 	/**

@@ -13,9 +13,14 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.veridu.sdk_java.Factory;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.veridu.sdk_java.CompanyFactory;
 import com.veridu.sdk_java.exceptions.EmptyPrivateKey;
 import com.veridu.sdk_java.exceptions.SDKException;
+import com.veridu.sdk_java.settings.Settings;
 
 public class AbstractEndpoint {
 	
@@ -23,14 +28,6 @@ public class AbstractEndpoint {
 	 * Company's slug necessary to make most of requests to the API
 	 */
 	protected String companySlug = null;	
-	/**
-	 * Default base URL;
-	 */
-	protected static String BASE_URL = "http://localhost:8080/index.php"; 	
-	/**
-	 * Default API version
-	 */
-	protected static String VERSION = "1.0";	
 	/**
 	 * Default connection
 	 */
@@ -56,7 +53,7 @@ public class AbstractEndpoint {
 	 * @throws SDKException 
 	 *
 	 */
-   public String fetch(String method, String resource) throws SDKException {
+   public JsonObject fetch(String method, String resource) throws SDKException {
        return fetch(method, resource, "");
    }
    
@@ -73,17 +70,15 @@ public class AbstractEndpoint {
     * @throws SDKException 
     *
     */
-   public String fetch(String method, String resource, String data) throws SDKException {
+   public JsonObject fetch(String method, String resource, String data) throws SDKException {
 	   String url = this.transformURL(method, resource, data);
-	   String response = request(method, url, data);
-	   if ((response == null) || (response.isEmpty()))
-           throw new SDKException();
-
+	   JsonObject response = request(method, url, data);
+	  
        return response;
    }
    
    public String transformURL(String method, String resource, String data) {
-	   String url = this.formBaseURL();
+	   String url = Settings.BASE_URL;
 	   if (resource.charAt(0) != '/')
            url = url.concat("/");
        url = url.concat(resource);
@@ -101,7 +96,7 @@ public class AbstractEndpoint {
        else
     	   url = url.concat("?");
        
-       url = url.concat("companyPrivKey="+Factory.privateKey);
+       url = url.concat("companyPrivKey="+CompanyFactory.privateKey);
 	   
 	   return url;
    }
@@ -138,7 +133,6 @@ public class AbstractEndpoint {
    */
   protected String queryBuilder(String key, String value) throws UnsupportedEncodingException {
      String data = "";
-     data = data.concat("&");
      data = data.concat(URLEncoder.encode(key, "UTF-8"));
      data = data.concat("=");
      data = data.concat(URLEncoder.encode(value, "UTF-8"));
@@ -160,7 +154,7 @@ public class AbstractEndpoint {
    * @throws RequestFailed
    *             Exception
    */
-  public String request(String method, String url, String data) {
+  public JsonObject request(String method, String url, String data) {
 	  try {
     	  this.setConnectionSettings(url, method);
     	  this.sendRequest(method, data);
@@ -187,7 +181,7 @@ public class AbstractEndpoint {
   private void sendRequest(String method, String data) throws IOException {
 	  if ((method.compareTo("GET") != 0) && (data != null) && (!data.isEmpty())) {
           this.connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//          this.connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
+          this.connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
           this.connection.setRequestProperty("Cache-Control", "no-cache");
           this.connection.setDoInput(true);
           DataOutputStream wr = new DataOutputStream(this.connection.getOutputStream());
@@ -197,7 +191,7 @@ public class AbstractEndpoint {
       }
   }
   
-  private String getResponse() throws IOException {
+  private JsonObject getResponse() throws IOException {
 	  this.lastCode = this.connection.getResponseCode();
       InputStream is;
       if (this.lastCode >= 400)
@@ -212,11 +206,14 @@ public class AbstractEndpoint {
           response.append('\r');
       }
       rd.close();
-      return response.toString();
+      return this.convertToJson(response.toString());
   }
-  
-  private String formBaseURL() {
-	  String url = AbstractEndpoint.BASE_URL;
-	  return url.concat("/"+AbstractEndpoint.VERSION);
+ 
+  private JsonObject convertToJson(String apiResponse) {
+	  JsonParser parser = new JsonParser();
+      JsonElement response = parser.parse(apiResponse);
+      JsonObject json = response.getAsJsonObject();
+      
+      return json;
   }
 }

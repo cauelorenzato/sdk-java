@@ -3,6 +3,9 @@ package com.veridu.sdk_java.endpoints;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.veridu.sdk_java.exceptions.EmptyPrivateKey;
 import com.veridu.sdk_java.exceptions.SDKException;
 
@@ -28,7 +31,7 @@ public class Companies extends AbstractEndpoint {
 	 * 
 	 * @throws SDKException
 	 */
-	public String listAll() throws SDKException {
+	public JsonObject listAll() throws SDKException {
 		return this.fetch("GET", "companies");
 	}
 	
@@ -41,7 +44,7 @@ public class Companies extends AbstractEndpoint {
 	 *
 	 * @throws SDKException 
 	 */
-	public String getOne(String companySlug) throws SDKException {
+	public JsonObject getOne(String companySlug) throws SDKException {
 		return this.fetch("GET", "companies/"+companySlug);
 	}
 	
@@ -55,7 +58,7 @@ public class Companies extends AbstractEndpoint {
 	 * @throws SDKException
 	 * @throws UnsupportedEncodingException
 	 */
-	public String create(String name) throws SDKException, UnsupportedEncodingException {
+	public JsonObject create(String name) throws SDKException, UnsupportedEncodingException {
 		String data = this.queryBuilder("name", name);
 		return this.fetch("POST", "companies", data);
 	}
@@ -71,7 +74,7 @@ public class Companies extends AbstractEndpoint {
 	 * @throws SDKException
 	 * @throws UnsupportedEncodingException
 	 */
-	public String update(String name, String companySlug) throws SDKException, UnsupportedEncodingException {
+	public JsonObject update(String name, String companySlug) throws SDKException, UnsupportedEncodingException {
 		String data = this.queryBuilder("name", name);
 		return this.fetch("PUT", "companies/"+companySlug, data);
 	}
@@ -85,7 +88,7 @@ public class Companies extends AbstractEndpoint {
 	 * 
 	 * @throws SDKException
 	 */
-	public String delete(String companySlug) throws SDKException {
+	public JsonObject delete(String companySlug) throws SDKException {
 		return this.fetch("DELETE", "companies/"+companySlug);
 	}
 }
