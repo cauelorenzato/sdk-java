@@ -113,7 +113,9 @@ public class AbstractEndpoint {
           return "";
       StringBuilder dataAsString = new StringBuilder();
       for (Entry<String, String> entry : data.entrySet()) {
-          dataAsString.append("&");
+    	  if (dataAsString.length() != 0) {
+	          dataAsString.append("&");
+    	  }
           dataAsString.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
           dataAsString.append("=");
           dataAsString.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
@@ -168,7 +170,7 @@ public class AbstractEndpoint {
       return null;
   }
   
-  private void setConnectionSettings(String url, String method) throws IOException {
+  protected void setConnectionSettings(String url, String method) throws IOException {
 	  URL requestUrl = new URL(url);
       this.connection = (HttpURLConnection) requestUrl.openConnection();
       this.connection.setRequestMethod(method);
@@ -178,7 +180,7 @@ public class AbstractEndpoint {
       this.connection.setDoOutput(true);
   }
   
-  private void sendRequest(String method, String data) throws IOException {
+  protected void sendRequest(String method, String data) throws IOException {
 	  if ((method.compareTo("GET") != 0) && (data != null) && (!data.isEmpty())) {
           this.connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
           this.connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
@@ -191,7 +193,7 @@ public class AbstractEndpoint {
       }
   }
   
-  private JsonObject getResponse() throws IOException {
+  protected JsonObject getResponse() throws IOException {
 	  this.lastCode = this.connection.getResponseCode();
       InputStream is;
       if (this.lastCode >= 400)
@@ -209,7 +211,7 @@ public class AbstractEndpoint {
       return this.convertToJson(response.toString());
   }
  
-  private JsonObject convertToJson(String apiResponse) {
+  protected JsonObject convertToJson(String apiResponse) {
 	  JsonParser parser = new JsonParser();
       JsonElement response = parser.parse(apiResponse);
       JsonObject json = response.getAsJsonObject();
