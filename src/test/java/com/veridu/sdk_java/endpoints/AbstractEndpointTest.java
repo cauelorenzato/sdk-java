@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.JsonObject;
+import com.veridu.sdk_java.CompanyFactory;
+import com.veridu.sdk_java.exceptions.EmptyPrivateKey;
 import com.veridu.sdk_java.exceptions.SDKException;
 import com.veridu.sdk_java.settings.Settings;
 
@@ -36,9 +38,11 @@ public class AbstractEndpointTest {
 	}
 
 	@Test
-	public void testTransformURLGetMethod() {
+	public void testTransformURLGetMethod() throws EmptyPrivateKey {
 		assertSame("http://localhost:8080/index.php/1.0/companies&companyPrivKey=null", this.abstractMock.transformURL("GET", "companies", ""));
-	
+		CompanyFactory factory = new CompanyFactory("privKey");
+		System.out.println(this.abstractMock.transformURL("GET", "companies", ""));
+		
 	}
 
 	@Test

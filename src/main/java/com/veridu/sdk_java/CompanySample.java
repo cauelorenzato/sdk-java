@@ -45,7 +45,7 @@ public class CompanySample {
 		 * If true, gets the company that was just created giving its slug
 		 * If false, prints the message
 		 */
-		if (json.get("status").getAsBoolean() == true) {
+		if (json.get("status").getAsBoolean()) {
 			/**
 			 * Get the response form the API geting one company
 			 */
