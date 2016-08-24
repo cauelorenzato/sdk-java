@@ -10,7 +10,7 @@ public class Config {
      * Company's private key
      */
 
-    public static String companyKey = "";
+    public static String privateKey = "";
 
     public static String issuerPublicKey = "";
 

@@ -17,6 +17,10 @@ public class CredentialsSamples {
          */
         JsonObject parsed = null;
 
+        /**
+         * Token generated using the issuer credential public key and subject
+         * credential public key key assigned with a issuer private key
+         */
         String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
 
         /**
@@ -77,7 +81,6 @@ public class CredentialsSamples {
         /**
          * Gets the new public key
          */
-        System.out.println(publicKey);
         publicKey = json.get("data").getAsJsonObject().get("public").getAsString();
 
         /**

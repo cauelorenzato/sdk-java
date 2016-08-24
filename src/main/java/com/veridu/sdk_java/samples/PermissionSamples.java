@@ -18,20 +18,21 @@ public class PermissionSamples {
         JsonObject parsed = null;
 
         /**
-         * CompanyFactory is a class that instantiate all endpoints as their
-         * methods (getEndpointName) are called. The endpoints don't need to be
-         * instantiated one by one. You just need to call the
-         * factory.getEndpoint and its going to be instantiated and available to
-         * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * CompanyFactory is a class that instantiate all endpoints (related to
+         * /companies) as their methods (getEndpointName) are called. The
+         * endpoints don't need to be instantiated one by one. You just need to
+         * call the factory.getEndpoint and its going to be instantiated and
+         * available to call its methods. In other words, it means that all
+         * endpoints is going to pass by an Factory Class, and accessed through
+         * this object
          * 
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        CompanyFactory companyFactory = new CompanyFactory(Config.companyKey);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey);
 
         /**
-         * Gets the response from the API listing all companies
+         * Gets the response from the API listing all permissions
          */
         JsonObject json = companyFactory.getPermission().listAll("veridu-ltd");
 
@@ -46,8 +47,8 @@ public class PermissionSamples {
         json = companyFactory.permission.create("veridu-ltd", "hi:world");
 
         /**
-         * Gets the status of the response If true, gets the company that was
-         * just created giving its slug If false, prints the message
+         * Gets the status of the response If true, gets the permission that was
+         * just created giving its slug. If false, prints the message
          */
         if (json.get("status").getAsBoolean()) {
             /**
@@ -64,7 +65,8 @@ public class PermissionSamples {
         }
 
         /**
-         * Deletes the company that was just created giving its slug
+         * Deletes the permission that was just created giving its slug and
+         * route name
          * 
          */
         json = companyFactory.permission.delete("veridu-ltd", "hi:world");

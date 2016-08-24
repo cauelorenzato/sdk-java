@@ -28,7 +28,7 @@ public class CompanySamples {
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        CompanyFactory companyFactory = new CompanyFactory(Config.companyKey);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey);
 
         /**
          * Gets the response from the API listing all companies
