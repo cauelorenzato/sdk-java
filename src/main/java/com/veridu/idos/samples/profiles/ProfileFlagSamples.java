@@ -1,16 +1,14 @@
-package com.veridu.idos.samples;
-
-import java.io.UnsupportedEncodingException;
+package com.veridu.idos.samples.profiles;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.Factory;
-import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
-public class FeatureSamples {
-    public static void main(String[] args) throws InvalidToken, SDKException, UnsupportedEncodingException {
+public class ProfileFlagSamples {
+
+    public static void main(String[] args) throws SDKException {
         /**
          * JsonObject used to parse the response
          * 
@@ -34,9 +32,9 @@ public class FeatureSamples {
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
 
         /**
-         * Gets the response from the API listing all features
+         * Gets the response from the API listing all flags
          */
-        JsonObject json = factory.getFeature().listAll(username);
+        JsonObject json = factory.getFlag().listAll(username);
 
         /**
          * Prints the json
@@ -44,14 +42,14 @@ public class FeatureSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new feature
+         * Gets the response from the API trying to create a new flag
          */
-        json = factory.feature.create(username, "Name", "value");
+        json = factory.flag.create(username, "flagName");
 
         /**
-         * Get the response form the API getting one feature
+         * Get the response form the API getting one flag
          */
-        json = factory.feature.getOne(username, "feature-slug");
+        json = factory.flag.getOne(username, "flagName");
 
         /**
          * Prints the array response
@@ -59,19 +57,9 @@ public class FeatureSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Updates the feature giving the feature-slug
+         * Deletes the flag created giving the flag name
          */
-        json = factory.feature.update(username, "feature-slug", "new name", "new value");
-
-        /**
-         * Prints the json response
-         */
-        System.out.println(json);
-
-        /**
-         * Deletes the credential created giving the feature name
-         */
-        json = factory.feature.delete(username, "feature-slug");
+        json = factory.flag.delete(username, "flagName");
 
         /**
          * Prints the status of the request
@@ -79,13 +67,24 @@ public class FeatureSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all features
+         * Deletes all profile flags related to the username
          */
-        json = factory.feature.deleteAll(username);
+        json = factory.flag.deleteAll(username);
 
         /**
-         * Prints the number of deleted features
+         * Prints the number of deleted flags
+         */
+        System.out.println(json.get("deleted").getAsInt());
+
+        /**
+         * Deletes all profile flags related to the username
+         */
+        json = factory.flag.deleteAll(username);
+
+        /**
+         * Prints the number of deleted flags
          */
         System.out.println(json.get("deleted").getAsInt());
     }
+
 }

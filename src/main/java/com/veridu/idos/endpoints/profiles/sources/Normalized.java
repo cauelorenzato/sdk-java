@@ -1,9 +1,10 @@
-package com.veridu.idos.endpoints;
+package com.veridu.idos.endpoints.profiles.sources;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
 
 /**
@@ -12,12 +13,12 @@ import com.veridu.idos.exceptions.SDKException;
  * @version 2.0
  *
  */
-public class Mapped extends AbstractEndpoint {
+public class Normalized extends AbstractEndpoint {
 
     /**
      * Class constructor
      */
-    public Mapped() {
+    public Normalized() {
 
     }
 

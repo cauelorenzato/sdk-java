@@ -1,17 +1,18 @@
-package com.veridu.idos.endpoints;
+package com.veridu.idos.endpoints.profiles.sources;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
 
-public class Features extends AbstractEndpoint {
+public class ProfileFeatures extends AbstractEndpoint {
 
     /**
      * Class constructor
      */
-    public Features() {
+    public ProfileFeatures() {
     }
 
     /**

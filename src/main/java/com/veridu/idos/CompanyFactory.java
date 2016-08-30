@@ -1,7 +1,7 @@
 package com.veridu.idos;
 
-import com.veridu.idos.endpoints.Companies;
-import com.veridu.idos.endpoints.Permissions;
+import com.veridu.idos.endpoints.companies.Companies;
+import com.veridu.idos.endpoints.companies.Permissions;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 
 /**

@@ -1,17 +1,14 @@
-package com.veridu.idos.samples;
-
-import java.io.UnsupportedEncodingException;
+package com.veridu.idos.samples.profiles;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.Factory;
-import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
-public class MappedSamples {
+public class ProfileGateSamples {
 
-    public static void main(String[] args) throws InvalidToken, SDKException, UnsupportedEncodingException {
+    public static void main(String[] args) throws SDKException {
         /**
          * JsonObject used to parse the response
          * 
@@ -31,13 +28,13 @@ public class MappedSamples {
 
         Factory factory = new Factory(token);
 
+        /* Username necessary for all requests of this endpoint */
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
-        int source = 3;
 
         /**
-         * Gets the response from the API listing all mapped data
+         * Gets the response from the API listing all gates
          */
-        JsonObject json = factory.getMapped().listAll(username, source);
+        JsonObject json = factory.getGate().listAll(username);
 
         /**
          * Prints the json
@@ -45,14 +42,14 @@ public class MappedSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new mapped data
+         * Gets the response from the API trying to create a new gate
          */
-        json = factory.mapped.create(username, source, "Name", "value");
+        json = factory.gate.create(username, "gateName");
 
         /**
-         * Get the response form the API getting one mapped data
+         * Get the response form the API getting one gate
          */
-        json = factory.mapped.getOne(username, source, "source-3-mapped-1");
+        json = factory.gate.getOne(username, "gateName");
 
         /**
          * Prints the array response
@@ -60,19 +57,9 @@ public class MappedSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Updates the mapped data giving the mappedName
+         * Deletes the gate created giving the gate name
          */
-        json = factory.mapped.update(username, source, "mapped-name", "new name", "new value");
-
-        /**
-         * Prints the json response
-         */
-        System.out.println(json);
-
-        /**
-         * Deletes the credential created giving the mapped name
-         */
-        json = factory.mapped.delete(username, source, "mapped-name");
+        json = factory.gate.delete(username, "gateName");
 
         /**
          * Prints the status of the request
@@ -80,12 +67,12 @@ public class MappedSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all mapped data
+         * Deletes all profile gates related to the username
          */
-        json = factory.mapped.deleteAll(username, source);
+        json = factory.gate.deleteAll(username);
 
         /**
-         * Prints the number of deleted features
+         * Prints the number of deleted gates
          */
         System.out.println(json.get("deleted").getAsInt());
 

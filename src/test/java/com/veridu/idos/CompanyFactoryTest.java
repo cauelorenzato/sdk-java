@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.veridu.idos.CompanyFactory;
-import com.veridu.idos.endpoints.Companies;
-import com.veridu.idos.endpoints.Permissions;
+import com.veridu.idos.endpoints.companies.Companies;
+import com.veridu.idos.endpoints.companies.Permissions;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 
 public class CompanyFactoryTest {

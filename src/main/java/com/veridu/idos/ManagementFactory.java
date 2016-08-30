@@ -1,9 +1,9 @@
 package com.veridu.idos;
 
-import com.veridu.idos.endpoints.Credentials;
-import com.veridu.idos.endpoints.Hooks;
-import com.veridu.idos.endpoints.Members;
-import com.veridu.idos.endpoints.Settings;
+import com.veridu.idos.endpoints.management.Credentials;
+import com.veridu.idos.endpoints.management.Hooks;
+import com.veridu.idos.endpoints.management.Members;
+import com.veridu.idos.endpoints.management.Settings;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
 

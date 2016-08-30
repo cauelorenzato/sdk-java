@@ -1,9 +1,10 @@
-package com.veridu.idos.endpoints;
+package com.veridu.idos.endpoints.management;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
 
 /**

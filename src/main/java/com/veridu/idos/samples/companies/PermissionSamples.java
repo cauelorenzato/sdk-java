@@ -1,4 +1,4 @@
-package com.veridu.idos.samples;
+package com.veridu.idos.samples.companies;
 
 import java.io.UnsupportedEncodingException;
 

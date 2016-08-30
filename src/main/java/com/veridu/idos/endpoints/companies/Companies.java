@@ -1,8 +1,9 @@
-package com.veridu.idos.endpoints;
+package com.veridu.idos.endpoints.companies;
 
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 import com.veridu.idos.exceptions.SDKException;
 
