@@ -8,7 +8,7 @@ import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
 
 /**
- * Factory Endpoint creates all Endpoints
+ * ProfileFactory Endpoint creates all Endpoints
  *
  */
 public class ManagementFactory {

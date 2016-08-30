@@ -1,5 +1,7 @@
 package com.veridu.idos.endpoints.profiles;
 
+import java.io.UnsupportedEncodingException;
+
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
@@ -47,9 +49,9 @@ public class Profiles extends AbstractEndpoint {
      * @param newUsername
      * @return JsonObject response
      * @throws SDKException
+     * @throws UnsupportedEncodingException
      */
-    @FIXME
-    public JsonObject update(String username, String newUsername) throws SDKException {
+    public JsonObject update(String username, String newUsername) throws SDKException, UnsupportedEncodingException {
         return this.fetch("PUT", "profiles/" + username, this.queryBuilder("name", newUsername));
     }
 

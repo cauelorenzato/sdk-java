@@ -23,7 +23,7 @@ public class PermissionSamples {
          * endpoints don't need to be instantiated one by one. You just need to
          * call the factory.getEndpoint and its going to be instantiated and
          * available to call its methods. In other words, it means that all
-         * endpoints is going to pass by an Factory Class, and accessed through
+         * endpoints is going to pass by an ProfileFactory Class, and accessed through
          * this object
          * 
          * @param privateKey

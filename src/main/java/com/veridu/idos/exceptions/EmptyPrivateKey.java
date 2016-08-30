@@ -10,7 +10,7 @@ public class EmptyPrivateKey extends SDKException {
     private static final long serialVersionUID = 1L;
 
     public EmptyPrivateKey() {
-        super("Empty Private Key! Please, give a valid private key, passing trough the Factory constructor");
+        super("Empty Private Key! Please, give a valid private key, passing trough the ProfileFactory constructor");
     }
 
     /**

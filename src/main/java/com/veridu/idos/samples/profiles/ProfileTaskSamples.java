@@ -6,8 +6,7 @@ import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
-public class ProfileGateSamples {
-
+public class ProfileTaskSamples {
     public static void main(String[] args) throws SDKException {
         /**
          * JsonObject used to parse the response
@@ -16,12 +15,13 @@ public class ProfileGateSamples {
          */
         JsonObject parsed = null;
         /**
-         * ProfileFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * ProfileFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an ProfileFactory Class, and accessed through this
+         * object
          * 
          */
         String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
@@ -32,9 +32,9 @@ public class ProfileGateSamples {
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
 
         /**
-         * Gets the response from the API listing all gates
+         * Gets the response from the API listing all tasks
          */
-        JsonObject json = profileFactory.getGate().listAll(username);
+        JsonObject json = profileFactory.getTask().listAll(username);
 
         /**
          * Prints the json
@@ -42,39 +42,15 @@ public class ProfileGateSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new gate
+         * Get the response form the API getting one task
          */
-        json = profileFactory.gate.create(username, "gateName");
-
-        /**
-         * Get the response form the API getting one gate
-         */
-        json = profileFactory.gate.getOne(username, "gateName");
+        json = profileFactory.task.getOne(username, 1);
 
         /**
          * Prints the array response
          */
         System.out.println(json.get("data").getAsJsonObject());
 
-        /**
-         * Deletes the gate created giving the gate name
-         */
-        json = profileFactory.gate.delete(username, "gateName");
-
-        /**
-         * Prints the status of the request
-         */
-        System.out.println(json.get("status").getAsBoolean());
-
-        /**
-         * Deletes all profile gates related to the username
-         */
-        json = profileFactory.gate.deleteAll(username);
-
-        /**
-         * Prints the number of deleted gates
-         */
-        System.out.println(json.get("deleted").getAsInt());
-
     }
+
 }

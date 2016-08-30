@@ -1,7 +1,7 @@
 package com.veridu.idos.samples.profiles;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.ProfileFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
@@ -16,17 +16,17 @@ public class ProfileReferenceSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * ProfileFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an ProfileFactory Class, and accessed through this object
          * 
          */
         String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
 
-        Factory factory = new Factory(token);
+        ProfileFactory profileFactory = new ProfileFactory(token);
 
         /* Username necessary for all requests of this endpoint */
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
@@ -34,7 +34,7 @@ public class ProfileReferenceSamples {
         /**
          * Gets the response from the API listing all references
          */
-        JsonObject json = factory.getReference().listAll(username);
+        JsonObject json = profileFactory.getReference().listAll(username);
 
         /**
          * Prints the json
@@ -44,12 +44,12 @@ public class ProfileReferenceSamples {
         /**
          * Gets the response from the API trying to create a new reference
          */
-        json = factory.reference.create(username, "attributeName");
+        json = profileFactory.reference.create(username, "attributeName");
 
         /**
          * Get the response form the API getting one reference
          */
-        json = factory.reference.getOne(username, "attributeName");
+        json = profileFactory.reference.getOne(username, "attributeName");
 
         /**
          * Prints the array response
@@ -59,7 +59,7 @@ public class ProfileReferenceSamples {
         /**
          * Deletes the reference created giving the reference name
          */
-        json = factory.reference.delete(username, "attributeName");
+        json = profileFactory.reference.delete(username, "attributeName");
 
         /**
          * Prints the status of the request
@@ -69,7 +69,7 @@ public class ProfileReferenceSamples {
         /**
          * Deletes all profile references related to the username
          */
-        json = factory.reference.deleteAll(username);
+        json = profileFactory.reference.deleteAll(username);
 
         /**
          * Prints the number of deleted references

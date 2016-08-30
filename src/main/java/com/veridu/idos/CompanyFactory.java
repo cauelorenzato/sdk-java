@@ -5,7 +5,7 @@ import com.veridu.idos.endpoints.companies.Permissions;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 
 /**
- * Factory Endpoint creates all Endpoints
+ * ProfileFactory Endpoint creates all Endpoints
  *
  */
 public class CompanyFactory {

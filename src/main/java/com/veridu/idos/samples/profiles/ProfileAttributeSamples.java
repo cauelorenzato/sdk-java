@@ -1,14 +1,15 @@
 package com.veridu.idos.samples.profiles;
 
+import java.io.UnsupportedEncodingException;
+
 import com.google.gson.JsonObject;
 import com.veridu.idos.ProfileFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
-public class ProfileGateSamples {
-
-    public static void main(String[] args) throws SDKException {
+public class ProfileAttributeSamples {
+    public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
         /**
          * JsonObject used to parse the response
          * 
@@ -16,12 +17,13 @@ public class ProfileGateSamples {
          */
         JsonObject parsed = null;
         /**
-         * ProfileFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * ProfileFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an ProfileFactory Class, and accessed through this
+         * object
          * 
          */
         String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
@@ -32,9 +34,9 @@ public class ProfileGateSamples {
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
 
         /**
-         * Gets the response from the API listing all gates
+         * Gets the response from the API listing all attributes
          */
-        JsonObject json = profileFactory.getGate().listAll(username);
+        JsonObject json = profileFactory.getAttribute().listAll(username);
 
         /**
          * Prints the json
@@ -42,14 +44,14 @@ public class ProfileGateSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new gate
+         * Gets the response from the API trying to create a new attribute
          */
-        json = profileFactory.gate.create(username, "gateName");
+        json = profileFactory.attribute.create(username, "attributeName", "attributeValue");
 
         /**
-         * Get the response form the API getting one gate
+         * Get the response form the API getting one attribute
          */
-        json = profileFactory.gate.getOne(username, "gateName");
+        json = profileFactory.attribute.getOne(username, "attributeName");
 
         /**
          * Prints the array response
@@ -57,9 +59,9 @@ public class ProfileGateSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Deletes the gate created giving the gate name
+         * Deletes the attribute created giving the attribute name
          */
-        json = profileFactory.gate.delete(username, "gateName");
+        json = profileFactory.attribute.delete(username, "attributeName");
 
         /**
          * Prints the status of the request
@@ -67,14 +69,14 @@ public class ProfileGateSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all profile gates related to the username
+         * Deletes all profile attributes related to the username
          */
-        json = profileFactory.gate.deleteAll(username);
+        json = profileFactory.attribute.deleteAll(username);
 
         /**
-         * Prints the number of deleted gates
+         * Prints the number of deleted attributes
          */
         System.out.println(json.get("deleted").getAsInt());
-
     }
+
 }

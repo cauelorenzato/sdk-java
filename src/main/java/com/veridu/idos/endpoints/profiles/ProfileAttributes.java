@@ -1,5 +1,8 @@
 package com.veridu.idos.endpoints.profiles;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
@@ -11,9 +14,6 @@ import com.veridu.idos.exceptions.SDKException;
  *
  */
 public class ProfileAttributes extends AbstractEndpoint {
-    @FIXME (not implemented all
-    methods yet)
-
     /**
      * Class Constructor
      */
@@ -49,11 +49,17 @@ public class ProfileAttributes extends AbstractEndpoint {
      * 
      * @param username
      * @param attributeName
+     * @param attributeValue
      * @return JsonObject response
      * @throws SDKException
+     * @throws UnsupportedEncodingException
      */
-    public JsonObject create(String username, String attributeName) throws SDKException {
-        return this.fetch("POST", "profiles/" + username + "/attributes/" + attributeName);
+    public JsonObject create(String username, String attributeName, String attributeValue)
+            throws SDKException, UnsupportedEncodingException {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", attributeName);
+        data.put("value", attributeValue);
+        return this.fetch("POST", "profiles/" + username + "/attributes", this.queryBuilder(data));
     }
 
     /**
@@ -66,6 +72,17 @@ public class ProfileAttributes extends AbstractEndpoint {
      */
     public JsonObject delete(String username, String attributeName) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName);
+    }
+
+    /**
+     * Deletes all attributes related to the given username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/attributes");
     }
 
 }

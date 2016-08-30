@@ -30,25 +30,17 @@ public class ProfileSources extends AbstractEndpoint {
         return this.fetch("GET", "profiles/" + username + "/sources");
     }
 
-    @FIXME
     /**
-     * (não vai existir esse endpoint
+     * Retrieves a source given its source name
      *
-     * getOne() ?)
+     * @param username
+     * @param sourceName
+     * @return JsonObject response
+     * @throws SDKException
      */
-    // /**
-    // * Retrieves a source given its source name
-    // *
-    // * @param username
-    // * @param sourceName
-    // * @return JsonObject response
-    // * @throws SDKException
-    // */
-    // public JsonObject getOne(String username, String sourceName) throws
-    // SDKException {
-    // return this.fetch("GET", "profiles/" + username + "/sources/" +
-    // sourceName);
-    // }
+    public JsonObject getOne(String username, String sourceName) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceName);
+    }
 
     /**
      * Creates a source passing the source name

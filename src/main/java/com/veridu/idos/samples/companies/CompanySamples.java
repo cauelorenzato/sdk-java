@@ -23,7 +23,8 @@ public class CompanySamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an ProfileFactory Class, and accessed through this
+         * object
          * 
          * @param privateKey
          *            The company public key that authorizes requests to the API
@@ -53,7 +54,7 @@ public class CompanySamples {
             /**
              * Get the response form the API geting one company
              */
-            json = companyFactory.getCompany().getOne("sample-company");
+            json = companyFactory.company.getOne("sample-company");
 
             /**
              * Prints the array response
@@ -67,7 +68,7 @@ public class CompanySamples {
          * Deletes the company that was just created giving its slug
          * 
          */
-        json = companyFactory.getCompany().delete("sample-company");
+        json = companyFactory.company.delete("sample-company");
 
         /**
          * Prints the status of the request

@@ -1,14 +1,16 @@
 package com.veridu.idos.samples.profiles;
 
+import java.io.UnsupportedEncodingException;
+
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.ProfileFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
 public class ProfileSamples {
 
-    public static void main(String[] args) throws SDKException {
+    public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
         /**
          * JsonObject used to parse the response
          * 
@@ -16,24 +18,25 @@ public class ProfileSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * ProfileFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an ProfileFactory Class, and accessed through this
+         * object
          * 
          */
         String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
 
-        Factory factory = new Factory(token);
+        ProfileFactory profileFactory = new ProfileFactory(token);
 
         String username = "9fd9f63e0d6487537569075da85a0c7f2";
 
         /**
          * Gets the response from the API listing all profiles
          */
-        JsonObject json = factory.getProfile().listAll();
+        JsonObject json = profileFactory.getProfile().listAll();
 
         /**
          * Prints the json
@@ -43,7 +46,7 @@ public class ProfileSamples {
         /**
          * Get the response form the API getting a profile
          */
-        json = factory.profile.getOne(username);
+        json = profileFactory.profile.getOne(username);
 
         /**
          * Prints the array response
@@ -53,7 +56,7 @@ public class ProfileSamples {
         /**
          * Updates the profile data giving the username
          */
-        json = factory.profile.update(username, "new name");
+        json = profileFactory.profile.update(username, "new name");
 
         /**
          * Prints the json response
@@ -63,7 +66,7 @@ public class ProfileSamples {
         /**
          * Deletes a profile giving the username
          */
-        json = factory.profile.delete(username);
+        json = profileFactory.profile.delete(username);
 
         /**
          * Prints the status of the request

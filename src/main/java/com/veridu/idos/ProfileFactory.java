@@ -1,10 +1,12 @@
 package com.veridu.idos;
 
+import com.veridu.idos.endpoints.profiles.ProfileAttributes;
 import com.veridu.idos.endpoints.profiles.ProfileFlags;
 import com.veridu.idos.endpoints.profiles.ProfileGates;
 import com.veridu.idos.endpoints.profiles.ProfileReferences;
 import com.veridu.idos.endpoints.profiles.ProfileSources;
 import com.veridu.idos.endpoints.profiles.ProfileTags;
+import com.veridu.idos.endpoints.profiles.ProfileTasks;
 import com.veridu.idos.endpoints.profiles.Profiles;
 import com.veridu.idos.endpoints.profiles.sources.Normalized;
 import com.veridu.idos.endpoints.profiles.sources.ProfileFeatures;
@@ -12,10 +14,10 @@ import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
 
 /**
- * Factory Endpoint creates all Endpoints
+ * ProfileFactory Endpoint creates all Endpoints
  *
  */
-public class Factory {
+public class ProfileFactory {
 
     /**
      * Necessary token to make requests to the api
@@ -62,18 +64,28 @@ public class Factory {
     public ProfileTags tag;
 
     /**
+     * ProfileTasks Endpoint object
+     */
+    public ProfileTasks task;
+
+    /**
+     * ProfileAttributes Endpoint object
+     */
+    public ProfileAttributes attribute;
+
+    /**
      * Constructor Class
      * 
      * @param issuerPublicKey
      * @param issuerPrivateKey
      * @param subjectPublicKey
      */
-    public Factory(String issuerPublicKey, String issuerPrivateKey, String subjectPublicKey) {
-        Factory.token = Utils.generateToken(issuerPublicKey, issuerPrivateKey, subjectPublicKey);
+    public ProfileFactory(String issuerPublicKey, String issuerPrivateKey, String subjectPublicKey) {
+        ProfileFactory.token = Utils.generateToken(issuerPublicKey, issuerPrivateKey, subjectPublicKey);
     }
 
-    public Factory(String token) {
-        Factory.token = token;
+    public ProfileFactory(String token) {
+        ProfileFactory.token = token;
     }
 
     /**
@@ -87,6 +99,19 @@ public class Factory {
             this.profile = new Profiles();
         }
         return this.profile;
+    }
+
+    /**
+     * Instantiates Attribute endpoint
+     * 
+     * @return ProfileAttribute instance
+     * @throws InvalidToken
+     */
+    public ProfileAttributes getAttribute() throws InvalidToken {
+        if (!(this.attribute instanceof ProfileAttributes)) {
+            this.attribute = new ProfileAttributes();
+        }
+        return this.attribute;
     }
 
     /**
@@ -165,5 +190,18 @@ public class Factory {
             this.tag = new ProfileTags();
         }
         return this.tag;
+    }
+
+    /**
+     * Instantiates Task endpoint
+     * 
+     * @return ProfileTasks instance
+     * @throws Invalidtoken
+     */
+    public ProfileTasks getTask() throws InvalidToken {
+        if (!(this.task instanceof ProfileTasks)) {
+            this.task = new ProfileTasks();
+        }
+        return this.task;
     }
 }
