@@ -16,7 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.veridu.idos.CompanyFactory;
-import com.veridu.idos.ManagementFactory;
+import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 
@@ -89,18 +89,6 @@ public abstract class AbstractEndpoint {
             url = url.concat(data);
         }
 
-        if (url.contains("?"))
-            url = url.concat("&");
-        else
-            url = url.concat("?");
-
-        if (this.getClass().getSimpleName().equals("Companies")
-                || (this.getClass().getSimpleName().equals("Permissions"))) {
-            url = url.concat("companyPrivKey=" + CompanyFactory.privateKey);
-        } else {
-            url = url.concat("credentialToken=" + ManagementFactory.token);
-        }
-
         return url;
     }
 
@@ -168,6 +156,18 @@ public abstract class AbstractEndpoint {
             connection.setReadTimeout(10000);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
+            String tokenType = this.getEndpointName();
+
+            if (tokenType == "companies") {
+                connection.setRequestProperty("Authorization", "CompanyToken " + CompanyFactory.token);
+            } else if (tokenType == "users") {
+                connection.setRequestProperty("Authorization", "CredentialToken " + CredentialFactory.token);
+            }
+            // else {
+            // connection.setRequestProperty("Authorization", "CredentialToken "
+            // + ManagementFactory.token);
+            // }
+
             if ((method.compareTo("GET") != 0) && (data != null) && (!data.isEmpty())) {
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
@@ -210,5 +210,23 @@ public abstract class AbstractEndpoint {
         JsonObject json = response.getAsJsonObject();
 
         return json;
+    }
+
+    protected String getEndpointName() {
+        String packageName = this.getClass().getPackage().getName();
+        String tokenType = null;
+        switch (packageName) {
+        case "com.veridu.idos.endpoints.companies":
+            tokenType = "companies";
+            break;
+        case "com.veridu.idos.endpoints.management":
+            tokenType = "credentials";
+            break;
+        case "com.veridu.idos.endpoints.profiles":
+            tokenType = "users";
+            break;
+        }
+
+        return tokenType;
     }
 }

@@ -6,8 +6,9 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
+import com.veridu.idos.utils.Utils;
 
-public class ProfileReferenceSamples {
+public class ProfileScoreSamples {
 
     public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
         /**
@@ -26,16 +27,21 @@ public class ProfileReferenceSamples {
          * object
          * 
          */
-        CredentialFactory credentialFactory = new CredentialFactory(Config.issuerPrivateKey, Config.issuerPublicKey,
-                Config.credentialPublicKey);
+        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+
+        CredentialFactory credentialFactory = new CredentialFactory(token);
 
         /* Username necessary for all requests of this endpoint */
-        String username = "fd1fde2f31535a266ea7f70fdf224079";
+        String username = "f67b96dcf96b49d713a520ce9f54053c";
 
         /**
-         * Gets the response from the API listing all references
+         * Creates a new attribute to make requests for the attribute' scores
          */
-        JsonObject json = credentialFactory.getReference().listAll(username);
+        JsonObject json = credentialFactory.getAttribute().create(username, "attributeName", "attributeValue");
+        /**
+         * // * Gets the response from the API listing all scores //
+         */
+        json = credentialFactory.getScore().listAll(username, "user1attribute1");
 
         /**
          * Prints the json
@@ -43,14 +49,15 @@ public class ProfileReferenceSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new reference
+         * Gets the response from the API trying to create a new score
          */
-        json = credentialFactory.reference.create(username, "attributeName", "attributeValue");
+        // json = profileFactory.score.create(username, "user1Attribute1",
+        // "name-test", 0.6);
 
         /**
-         * Get the response form the API getting one reference
+         * Get the response form the API getting one score
          */
-        json = credentialFactory.reference.getOne(username, "attributeName");
+        json = credentialFactory.score.getOne(username, "atributeName", "scoreName");
 
         /**
          * Prints the array response
@@ -58,9 +65,9 @@ public class ProfileReferenceSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Deletes the reference created giving the reference name
+         * Deletes the score created giving the score name
          */
-        json = credentialFactory.reference.delete(username, "attributeName");
+        json = credentialFactory.score.delete(username, "scoreAttribute", "scoreName");
 
         /**
          * Prints the status of the request
@@ -68,15 +75,14 @@ public class ProfileReferenceSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all profile references related to the username
+         * Deletes all attribute scores related to the username
          */
-        json = credentialFactory.reference.deleteAll(username);
+        json = credentialFactory.score.deleteAll(username, "attributeName");
 
         /**
-         * Prints the number of deleted references
+         * Prints the number of deleted scores
          */
         System.out.println(json.get("deleted").getAsInt());
-
     }
 
 }

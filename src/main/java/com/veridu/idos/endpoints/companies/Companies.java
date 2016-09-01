@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 
 /**
@@ -19,7 +20,7 @@ public class Companies extends AbstractEndpoint {
      * 
      * @throws EmptyPrivateKey
      */
-    public Companies() throws EmptyPrivateKey {
+    public Companies() throws InvalidToken {
         super();
     }
 

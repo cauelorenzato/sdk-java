@@ -1,4 +1,4 @@
-package com.veridu.idos.endpoints.profiles.sources;
+package com.veridu.idos.endpoints.profiles;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -13,40 +13,40 @@ import com.veridu.idos.exceptions.SDKException;
  * @version 2.0
  *
  */
-public class Normalized extends AbstractEndpoint {
+public class Normalised extends AbstractEndpoint {
 
     /**
      * Class constructor
      */
-    public Normalized() {
+    public Normalised() {
 
     }
 
     /**
-     * Lists all data mapped by a given source
+     * Lists all data normalised by a given source
      * 
      * @return JsonObject response
      * @throws SDKException
      */
     public JsonObject listAll(String username, int sourceId) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/mapped");
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised");
     }
 
     /**
-     * Retrieves a mapped data from a given source.
+     * Retrieves a normalised data from a given source.
      * 
      * @param username
      * @param sourceId
-     * @param mappedName
+     * @param normalisedName
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, int sourceId, String mappedName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/mapped/" + mappedName);
+    public JsonObject getOne(String username, int sourceId, String normalisedName) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised/" + normalisedName);
     }
 
     /**
-     * Creates a new mapped data for the given source
+     * Creates a new normalised data for the given source
      * 
      * @param username
      * @param sourceId
@@ -62,46 +62,47 @@ public class Normalized extends AbstractEndpoint {
         data.put("name", name);
         data.put("value", value);
 
-        return this.fetch("POST", "profiles/" + username + "/sources/" + sourceId + "/mapped", this.queryBuilder(data));
+        return this.fetch("POST", "profiles/" + username + "/sources/" + sourceId + "/normalised",
+                this.queryBuilder(data));
     }
 
     /**
-     * Updates a mapped data in the given source.
+     * Updates a normalised data in the given source.
      * 
      * @param username
      * @param sourceId
-     * @param mappedName
+     * @param normalisedName
      * @param name
      * @param value
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
-    public JsonObject update(String username, int sourceId, String mappedName, String name, String value)
+    public JsonObject update(String username, int sourceId, String normalisedName, String name, String value)
             throws SDKException, UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
         data.put("name", name);
         data.put("value", value);
 
-        return this.fetch("PUT", "profiles/" + username + "/sources/" + sourceId + "/mapped/" + mappedName,
+        return this.fetch("PUT", "profiles/" + username + "/sources/" + sourceId + "/normalised/" + normalisedName,
                 this.queryBuilder(data));
     }
 
     /**
-     * Deletes a mapped data from the given source.
+     * Deletes a normalised data from the given source.
      * 
      * @param username
      * @param sourceId
-     * @param mappedName
+     * @param normalisedName
      * @return
      * @throws SDKException
      */
-    public JsonObject delete(String username, int sourceId, String mappedName) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/mapped/" + mappedName);
+    public JsonObject delete(String username, int sourceId, String normalisedName) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/normalised/" + normalisedName);
     }
 
     /**
-     * Deletes all mapped data from the given source.
+     * Deletes all normalised data from the given source.
      * 
      * @param username
      * @param sourceId
@@ -109,7 +110,7 @@ public class Normalized extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject deleteAll(String username, int sourceId) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/mapped");
+        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/normalised");
     }
 
 }

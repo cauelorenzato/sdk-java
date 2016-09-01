@@ -12,7 +12,7 @@ public class CompanySamples {
     public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
         /**
          * JsonObject used to parse the response
-         * 
+         *
          * @see https://github.com/google/gson
          */
         JsonObject parsed = null;
@@ -23,13 +23,13 @@ public class CompanySamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this
+         * going to pass by an CredentialFactory Class, and accessed through this
          * object
-         * 
+         *
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
         /**
          * Gets the response from the API listing all companies
@@ -44,7 +44,7 @@ public class CompanySamples {
         /**
          * Gets the response from the API trying to create a new company
          */
-        json = companyFactory.company.create("Sample Company");
+        json = companyFactory.company.create("A Company");
 
         /**
          * Gets the status of the response If true, gets the company that was
@@ -54,7 +54,7 @@ public class CompanySamples {
             /**
              * Get the response form the API geting one company
              */
-            json = companyFactory.company.getOne("sample-company");
+            json = companyFactory.company.getOne("a-company");
 
             /**
              * Prints the array response
@@ -68,7 +68,7 @@ public class CompanySamples {
          * Deletes the company that was just created giving its slug
          * 
          */
-        json = companyFactory.company.delete("sample-company");
+        json = companyFactory.company.delete("a-company");
 
         /**
          * Prints the status of the request

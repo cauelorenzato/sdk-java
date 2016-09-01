@@ -1,7 +1,7 @@
 package com.veridu.idos.samples.profiles;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.ProfileFactory;
+import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
@@ -16,25 +16,26 @@ public class ProfileFlagSamples {
          */
         JsonObject parsed = null;
         /**
-         * ProfileFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * CredentialFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an CredentialFactory Class, and accessed through this
+         * object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
+        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
 
-        ProfileFactory profileFactory = new ProfileFactory(token);
+        CredentialFactory credentialFactory = new CredentialFactory(token);
 
         /* Username necessary for all requests of this endpoint */
-        String username = "9fd9f63e0d6487537569075da85a0c7f2";
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
 
         /**
          * Gets the response from the API listing all flags
          */
-        JsonObject json = profileFactory.getFlag().listAll(username);
+        JsonObject json = credentialFactory.getFlag().listAll(username);
 
         /**
          * Prints the json
@@ -44,12 +45,12 @@ public class ProfileFlagSamples {
         /**
          * Gets the response from the API trying to create a new flag
          */
-        json = profileFactory.flag.create(username, "flagName");
+        json = credentialFactory.flag.create(username, "flagName");
 
         /**
          * Get the response form the API getting one flag
          */
-        json = profileFactory.flag.getOne(username, "flagName");
+        json = credentialFactory.flag.getOne(username, "flagName");
 
         /**
          * Prints the array response
@@ -59,7 +60,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes the flag created giving the flag name
          */
-        json = profileFactory.flag.delete(username, "flagName");
+        json = credentialFactory.flag.delete(username, "flagName");
 
         /**
          * Prints the status of the request
@@ -69,7 +70,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes all profile flags related to the username
          */
-        json = profileFactory.flag.deleteAll(username);
+        json = credentialFactory.flag.deleteAll(username);
 
         /**
          * Prints the number of deleted flags
@@ -79,7 +80,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes all profile flags related to the username
          */
-        json = profileFactory.flag.deleteAll(username);
+        json = credentialFactory.flag.deleteAll(username);
 
         /**
          * Prints the number of deleted flags

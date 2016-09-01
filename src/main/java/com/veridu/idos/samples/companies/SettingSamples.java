@@ -1,12 +1,11 @@
-package com.veridu.idos.samples.management;
+package com.veridu.idos.samples.companies;
 
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.ManagementFactory;
+import com.veridu.idos.CompanyFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
 
 public class SettingSamples {
 
@@ -18,24 +17,24 @@ public class SettingSamples {
          */
         JsonObject parsed = null;
 
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
         /**
-         * ManagementFactory is a class that instantiate all endpoints as their
+         * CompanyFactory is a class that instantiate all endpoints as their
          * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an CredentialFactory Class, and accessed through this
+         * object
          * 
          * @param token
          *            The credential token that authorizes requests to the API
          */
-        ManagementFactory management = new ManagementFactory(token);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
         /**
          * Gets the response from the API listing all settings
          */
-        JsonObject json = management.getSetting().listAll();
+        JsonObject json = companyFactory.getSetting().listAll();
         /**
          * Prints the json
          */
@@ -44,7 +43,7 @@ public class SettingSamples {
         /**
          * Gets the response from the API trying to create a new setting
          */
-        json = management.setting.create("SectionEx", "PropertyEx", "ValueEx");
+        json = companyFactory.setting.create("SectionEx", "PropertyEx", "ValueEx");
 
         /**
          * Gets the id of the created setting
@@ -54,7 +53,7 @@ public class SettingSamples {
         /**
          * Get the response from the API getting one setting
          */
-        json = management.setting.getOne(id);
+        json = companyFactory.setting.getOne(id);
 
         /**
          * Prints the array response
@@ -70,7 +69,7 @@ public class SettingSamples {
          * Deletes the setting that was just created giving its slug
          *
          */
-        json = management.setting.delete(id);
+        json = companyFactory.setting.delete(id);
 
         /**
          * Prints the status of the request
@@ -80,7 +79,7 @@ public class SettingSamples {
         /**
          * Deletes all settings for the given token
          */
-        json = management.setting.deleteAll();
+        json = companyFactory.setting.deleteAll();
 
         /**
          * prints the number of deleted settings

@@ -1,15 +1,13 @@
-package com.veridu.idos.samples.management;
+package com.veridu.idos.samples.companies;
 
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.ManagementFactory;
+import com.veridu.idos.CompanyFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
 
-public class MemberSamples {
-
+public class HookSamples {
     public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
 
         /**
@@ -18,26 +16,25 @@ public class MemberSamples {
          * @see https://github.com/google/gson
          */
         JsonObject parsed = null;
-
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
-
         /**
-         * ManagementFactory is a class that instantiate all endpoints as their
+         * CompanyFactory is a class that instantiate all endpoints as their
          * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an CredentialFactory Class, and accessed through this
+         * object
          * 
          * @param privateKey
          *            The token that authorizes requests to the API
          */
-        ManagementFactory managementFactory = new ManagementFactory(token);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
         /**
-         * Gets the response from the API listing all members
+         * Gets the response from the API listing all Hooks (passing the
+         * credential Public Key)
          */
-        JsonObject json = managementFactory.getMember().listAll();
+        JsonObject json = companyFactory.getHook().listAll(Config.credentialPublicKey);
 
         /**
          * Prints the json
@@ -45,18 +42,18 @@ public class MemberSamples {
         System.out.println(json);
 
         /**
-         * Gets the response from the API trying to create a new member
+         * Gets the response from the API trying to create a new hook
          */
-        json = managementFactory.member.create(Config.issuerPublicKey, "User", "member");
+        json = companyFactory.hook.create(Config.credentialPublicKey, "trigger", "https://google.com", false);
         /**
-         * Gets the id of the created member to retrieve the member by the id
+         * Gets the id of the created hook to retrieve the hook by the id
          */
         int id = json.get("data").getAsJsonObject().get("id").getAsInt();
 
         /**
-         * Get the response form the API geting one member
+         * Get the response form the API geting one hook
          */
-        json = managementFactory.member.getOne(id);
+        json = companyFactory.hook.getOne(Config.credentialPublicKey, id);
 
         /**
          * Prints the array response
@@ -64,9 +61,9 @@ public class MemberSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Updates the member giving the id and changing the role
+         * Updates the hook giving the id
          */
-        json = managementFactory.member.update(id, "admin");
+        json = companyFactory.hook.update(Config.credentialPublicKey, id, "trigger", "https://google.com", true);
 
         /**
          * Prints the json response
@@ -79,9 +76,9 @@ public class MemberSamples {
         id = json.get("data").getAsJsonObject().get("id").getAsInt();
 
         /**
-         * Deletes the member created giving the id
+         * Deletes the hook created giving the id
          */
-        json = managementFactory.member.delete(id);
+        json = companyFactory.hook.delete(Config.credentialPublicKey, id);
 
         /**
          * Prints the status of the request
@@ -89,13 +86,13 @@ public class MemberSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all members for the credential
+         * Deletes all hooks for the given credential public key
          */
-        json = managementFactory.member.deleteAll();
+        json = companyFactory.hook.deleteAll(Config.credentialPublicKey);
 
         /**
          * Prints the number of deleted files
          */
-        System.out.println(json.get("data").getAsJsonObject().get("deleted").getAsInt());
+        System.out.println(json.get("deleted").getAsInt());
     }
 }

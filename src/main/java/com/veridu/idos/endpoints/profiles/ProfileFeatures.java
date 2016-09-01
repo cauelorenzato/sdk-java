@@ -1,4 +1,4 @@
-package com.veridu.idos.endpoints.profiles.sources;
+package com.veridu.idos.endpoints.profiles;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;

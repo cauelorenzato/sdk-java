@@ -1,14 +1,16 @@
 package com.veridu.idos.samples.profiles;
 
+import java.io.UnsupportedEncodingException;
+
 import com.google.gson.JsonObject;
-import com.veridu.idos.ProfileFactory;
+import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
 
 public class ProfileGateSamples {
 
-    public static void main(String[] args) throws SDKException {
+    public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
         /**
          * JsonObject used to parse the response
          * 
@@ -16,25 +18,26 @@ public class ProfileGateSamples {
          */
         JsonObject parsed = null;
         /**
-         * ProfileFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * CredentialFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an CredentialFactory Class, and accessed through this
+         * object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
+        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
 
-        ProfileFactory profileFactory = new ProfileFactory(token);
+        CredentialFactory credentialFactory = new CredentialFactory(token);
 
         /* Username necessary for all requests of this endpoint */
-        String username = "9fd9f63e0d6487537569075da85a0c7f2";
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
 
         /**
          * Gets the response from the API listing all gates
          */
-        JsonObject json = profileFactory.getGate().listAll(username);
+        JsonObject json = credentialFactory.getGate().listAll(username);
 
         /**
          * Prints the json
@@ -44,22 +47,26 @@ public class ProfileGateSamples {
         /**
          * Gets the response from the API trying to create a new gate
          */
-        json = profileFactory.gate.create(username, "gateName");
+        json = credentialFactory.gate.create(username, "Gate Name", false);
 
         /**
          * Get the response form the API getting one gate
          */
-        json = profileFactory.gate.getOne(username, "gateName");
+        json = credentialFactory.gate.getOne(username, "gate-name");
 
+        /**
+         * Updates the gate password
+         */
+        json = credentialFactory.gate.update(username, "gate-name", true);
         /**
          * Prints the array response
          */
-        System.out.println(json.get("data").getAsJsonObject());
+        System.out.println(json);
 
         /**
          * Deletes the gate created giving the gate name
          */
-        json = profileFactory.gate.delete(username, "gateName");
+        json = credentialFactory.gate.delete(username, "gate-name");
 
         /**
          * Prints the status of the request
@@ -69,7 +76,7 @@ public class ProfileGateSamples {
         /**
          * Deletes all profile gates related to the username
          */
-        json = profileFactory.gate.deleteAll(username);
+        json = credentialFactory.gate.deleteAll(username);
 
         /**
          * Prints the number of deleted gates

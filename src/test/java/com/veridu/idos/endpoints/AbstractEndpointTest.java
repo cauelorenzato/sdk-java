@@ -22,8 +22,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.CompanyFactory;
-import com.veridu.idos.ManagementFactory;
-import com.veridu.idos.endpoints.AbstractEndpoint;
+import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
@@ -65,13 +64,9 @@ public class AbstractEndpointTest {
     public void testTransformURLGETMethod() throws InvalidToken, EmptyPrivateKey {
         // passing the token trough the constructor so it can be stored in the
         // token String and used in the trasnformURL() method.
-        ManagementFactory factory = new ManagementFactory("token");
-        assertEquals("http://localhost:8000/index.php/1.0/management/credentials?credentialToken=token",
-                factory.getCredential().transformURL("GET", "management/credentials", ""));
-        assertEquals("http://localhost:8000/index.php/1.0/management/settings?credentialToken=token",
-                factory.getSetting().transformURL("GET", "management/settings", ""));
-        assertEquals("http://localhost:8000/index.php/1.0/management/members?credentialToken=token",
-                factory.getMember().transformURL("GET", "management/members", ""));
+        CredentialFactory factory = new CredentialFactory("token");
+        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes?credentialToken=token",
+                factory.getAttribute().transformURL("GET", "profile/attributes", ""));
         CompanyFactory cfactory = new CompanyFactory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies?companyPrivKey=privKey",
                 cfactory.getCompany().transformURL("GET", "companies", ""));
@@ -81,13 +76,9 @@ public class AbstractEndpointTest {
 
     @Test
     public void testTransformURLPOSTMethod() throws InvalidToken, EmptyPrivateKey {
-        ManagementFactory factory = new ManagementFactory("token");
-        assertEquals("http://localhost:8000/index.php/1.0/management/settings?credentialToken=token",
-                factory.getSetting().transformURL("POST", "management/settings", "data"));
-        assertEquals("http://localhost:8000/index.php/1.0/management/settings?credentialToken=token",
-                factory.getSetting().transformURL("POST", "management/settings", "data"));
-        assertEquals("http://localhost:8000/index.php/1.0/management/members?credentialToken=token",
-                factory.getMember().transformURL("POST", "management/members", "data"));
+        CredentialFactory factory = new CredentialFactory("token");
+        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes?credentialToken=token",
+                factory.getAttribute().transformURL("POST", "profile/attributes", "data"));
         CompanyFactory cfactory = new CompanyFactory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies?companyPrivKey=privKey",
                 cfactory.getCompany().transformURL("POST", "companies", "data"));

@@ -6,36 +6,35 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.veridu.idos.CompanyFactory;
 import com.veridu.idos.endpoints.companies.Companies;
 import com.veridu.idos.endpoints.companies.Permissions;
-import com.veridu.idos.exceptions.EmptyPrivateKey;
+import com.veridu.idos.exceptions.InvalidToken;
 
 public class CompanyFactoryTest {
 
-    @Test(expected = EmptyPrivateKey.class)
-    public void testCompanyFactoryStringThrowsException() throws EmptyPrivateKey {
+    @Test(expected = InvalidToken.class)
+    public void testCompanyFactoryStringThrowsException() throws InvalidToken {
         CompanyFactory factory = new CompanyFactory("");
     }
 
     @Test
-    public void testCompanyFactoryPrivateKey() throws EmptyPrivateKey {
-        assertNull(CompanyFactory.privateKey);
-        CompanyFactory factory = new CompanyFactory("privateKey");
-        assertSame("privateKey", CompanyFactory.privateKey);
+    public void testCompanyFactoryToken() throws InvalidToken {
+        assertNull(CompanyFactory.token);
+        CompanyFactory factory = new CompanyFactory("token");
+        assertSame("token", CompanyFactory.token);
     }
 
     @Test
-    public void testGetCompany() throws EmptyPrivateKey {
-        CompanyFactory factory = new CompanyFactory("privateKey");
+    public void testGetCompany() throws InvalidToken {
+        CompanyFactory factory = new CompanyFactory("token");
         assertNull(factory.company);
         factory.getCompany();
         assertTrue(factory.company instanceof Companies);
     }
 
     @Test
-    public void testGetPermission() throws EmptyPrivateKey {
-        CompanyFactory factory = new CompanyFactory("privateKey");
+    public void testGetPermission() throws InvalidToken {
+        CompanyFactory factory = new CompanyFactory("token");
         assertNull(factory.permission);
         factory.getPermission();
         assertTrue(factory.permission instanceof Permissions);

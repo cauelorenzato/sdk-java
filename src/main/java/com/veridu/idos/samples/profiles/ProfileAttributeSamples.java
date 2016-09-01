@@ -3,7 +3,7 @@ package com.veridu.idos.samples.profiles;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.ProfileFactory;
+import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.Utils;
@@ -17,26 +17,26 @@ public class ProfileAttributeSamples {
          */
         JsonObject parsed = null;
         /**
-         * ProfileFactory is a class that instantiate all endpoints as their
+         * CredentialFactory is a class that instantiate all endpoints as their
          * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this
+         * going to pass by an CredentialFactory Class, and accessed through this
          * object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
+        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
 
-        ProfileFactory profileFactory = new ProfileFactory(token);
+        CredentialFactory credentialFactory = new CredentialFactory(token);
 
         /* Username necessary for all requests of this endpoint */
-        String username = "9fd9f63e0d6487537569075da85a0c7f2";
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
 
         /**
          * Gets the response from the API listing all attributes
          */
-        JsonObject json = profileFactory.getAttribute().listAll(username);
+        JsonObject json = credentialFactory.getAttribute().listAll(username);
 
         /**
          * Prints the json
@@ -46,12 +46,12 @@ public class ProfileAttributeSamples {
         /**
          * Gets the response from the API trying to create a new attribute
          */
-        json = profileFactory.attribute.create(username, "attributeName", "attributeValue");
+        json = credentialFactory.attribute.create(username, "attributeName", "attributeValue");
 
         /**
          * Get the response form the API getting one attribute
          */
-        json = profileFactory.attribute.getOne(username, "attributeName");
+        json = credentialFactory.attribute.getOne(username, "attributeName");
 
         /**
          * Prints the array response
@@ -61,7 +61,7 @@ public class ProfileAttributeSamples {
         /**
          * Deletes the attribute created giving the attribute name
          */
-        json = profileFactory.attribute.delete(username, "attributeName");
+        json = credentialFactory.attribute.delete(username, "attributeName");
 
         /**
          * Prints the status of the request
@@ -71,7 +71,7 @@ public class ProfileAttributeSamples {
         /**
          * Deletes all profile attributes related to the username
          */
-        json = profileFactory.attribute.deleteAll(username);
+        json = credentialFactory.attribute.deleteAll(username);
 
         /**
          * Prints the number of deleted attributes

@@ -1,12 +1,11 @@
-package com.veridu.idos.samples.management;
+package com.veridu.idos.samples.companies;
 
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.ManagementFactory;
+import com.veridu.idos.CompanyFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
 
 public class CredentialsSamples {
     public static void main(String[] args) throws SDKException, UnsupportedEncodingException {
@@ -16,31 +15,25 @@ public class CredentialsSamples {
          * @see https://github.com/google/gson
          */
         JsonObject parsed = null;
-
         /**
-         * Token generated using the issuer credential public key and subject
-         * credential public key key assigned with a issuer private key
-         */
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
-
-        /**
-         * ManagementFactory is a class that instantiate all endpoints as their
+         * CompanyFactory is a class that instantiate all endpoints as their
          * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an ProfileFactory Class, and accessed through this object
+         * going to pass by an CredentialFactory Class, and accessed through this
+         * object
          * 
          * @param token
          *            The jwt token generated that authorizes requests to the
          *            API
          */
-        ManagementFactory managementFactory = new ManagementFactory(token);
+        CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
         /**
          * Gets the response from the API listing all credentials
          */
-        JsonObject json = managementFactory.getCredential().listAll();
+        JsonObject json = companyFactory.getCredential().listAll();
 
         /**
          * Prints the json
@@ -50,7 +43,7 @@ public class CredentialsSamples {
         /**
          * Gets the response from the API trying to create a new credential
          */
-        json = managementFactory.credential.create("Very Secure", "false");
+        json = companyFactory.credential.create("Very Secure", "false");
 
         /**
          * Gets the public key of the created credential to retrieve the
@@ -61,7 +54,7 @@ public class CredentialsSamples {
         /**
          * Get the response form the API geting one company
          */
-        json = managementFactory.credential.getOne(publicKey);
+        json = companyFactory.credential.getOne(publicKey);
 
         /**
          * Prints the array response
@@ -71,7 +64,7 @@ public class CredentialsSamples {
         /**
          * Updates the credential giving the public Key and a new name for it
          */
-        json = managementFactory.credential.update("New Name", publicKey);
+        json = companyFactory.credential.update("New Name", publicKey);
 
         /**
          * Prints the json response
@@ -86,7 +79,7 @@ public class CredentialsSamples {
         /**
          * Deletes the credential created giving the public key
          */
-        json = managementFactory.credential.delete(publicKey);
+        json = companyFactory.credential.delete(publicKey);
 
         /**
          * Prints the status of the request

@@ -1,23 +1,22 @@
 package com.veridu.idos;
 
+import com.veridu.idos.endpoints.profiles.Normalised;
 import com.veridu.idos.endpoints.profiles.ProfileAttributes;
+import com.veridu.idos.endpoints.profiles.ProfileFeatures;
 import com.veridu.idos.endpoints.profiles.ProfileFlags;
 import com.veridu.idos.endpoints.profiles.ProfileGates;
 import com.veridu.idos.endpoints.profiles.ProfileReferences;
+import com.veridu.idos.endpoints.profiles.ProfileScores;
 import com.veridu.idos.endpoints.profiles.ProfileSources;
-import com.veridu.idos.endpoints.profiles.ProfileTags;
 import com.veridu.idos.endpoints.profiles.ProfileTasks;
-import com.veridu.idos.endpoints.profiles.Profiles;
-import com.veridu.idos.endpoints.profiles.sources.Normalized;
-import com.veridu.idos.endpoints.profiles.sources.ProfileFeatures;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
 
 /**
- * ProfileFactory Endpoint creates all Endpoints
+ * CredentialFactory Endpoint creates all Endpoints
  *
  */
-public class ProfileFactory {
+public class CredentialFactory {
 
     /**
      * Necessary token to make requests to the api
@@ -26,12 +25,7 @@ public class ProfileFactory {
     /**
      * Mapped Endpoint object
      */
-    public Normalized normalized;
-
-    /**
-     * Profiles Endpoint object
-     */
-    public Profiles profile;
+    public Normalised normalised;
 
     /**
      * ProfileFeatures Endpoint object
@@ -59,11 +53,6 @@ public class ProfileFactory {
     public ProfileSources source;
 
     /**
-     * ProfileTags Endpoint object
-     */
-    public ProfileTags tag;
-
-    /**
      * ProfileTasks Endpoint object
      */
     public ProfileTasks task;
@@ -74,31 +63,23 @@ public class ProfileFactory {
     public ProfileAttributes attribute;
 
     /**
+     * ProfileScores Endpoint object
+     */
+    public ProfileScores score;
+
+    /**
      * Constructor Class
      * 
      * @param issuerPublicKey
      * @param issuerPrivateKey
      * @param subjectPublicKey
      */
-    public ProfileFactory(String issuerPublicKey, String issuerPrivateKey, String subjectPublicKey) {
-        ProfileFactory.token = Utils.generateToken(issuerPublicKey, issuerPrivateKey, subjectPublicKey);
+    public CredentialFactory(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
+        CredentialFactory.token = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
     }
 
-    public ProfileFactory(String token) {
-        ProfileFactory.token = token;
-    }
-
-    /**
-     * Instantiates Profile endpoint
-     * 
-     * @return Profile instance
-     * @throws InvalidToken
-     */
-    public Profiles getProfile() throws InvalidToken {
-        if (!(this.profile instanceof Profiles)) {
-            this.profile = new Profiles();
-        }
-        return this.profile;
+    public CredentialFactory(String token) {
+        CredentialFactory.token = token;
     }
 
     /**
@@ -115,16 +96,16 @@ public class ProfileFactory {
     }
 
     /**
-     * Instantiates Normalized endpoint
+     * Instantiates Normalised endpoint
      * 
      * @return Nornalized instance
      * @throws InvalidToken
      */
-    public Normalized getNormalized() throws InvalidToken {
-        if (!(this.normalized instanceof Normalized)) {
-            this.normalized = new Normalized();
+    public Normalised getNormalized() throws InvalidToken {
+        if (!(this.normalised instanceof Normalised)) {
+            this.normalised = new Normalised();
         }
-        return this.normalized;
+        return this.normalised;
     }
 
     /**
@@ -180,19 +161,6 @@ public class ProfileFactory {
     }
 
     /**
-     * Instantiates Tag endpoint
-     * 
-     * @return ProfileTags instance
-     * @throws InvalidToken
-     */
-    public ProfileTags getTag() throws InvalidToken {
-        if (!(this.tag instanceof ProfileTags)) {
-            this.tag = new ProfileTags();
-        }
-        return this.tag;
-    }
-
-    /**
      * Instantiates Task endpoint
      * 
      * @return ProfileTasks instance
@@ -203,5 +171,18 @@ public class ProfileFactory {
             this.task = new ProfileTasks();
         }
         return this.task;
+    }
+
+    /**
+     * Instantiates Score endpoint
+     * 
+     * @return ProfileScores endpoint
+     * @throws InvalidToken
+     */
+    public ProfileScores getScore() throws InvalidToken {
+        if (!(this.score instanceof ProfileScores)) {
+            this.score = new ProfileScores();
+        }
+        return this.score;
     }
 }

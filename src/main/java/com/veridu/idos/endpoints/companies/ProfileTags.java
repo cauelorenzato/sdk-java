@@ -1,4 +1,4 @@
-package com.veridu.idos.endpoints.profiles;
+package com.veridu.idos.endpoints.companies;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;

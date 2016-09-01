@@ -41,7 +41,7 @@ public class ProfileAttributes extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject getOne(String username, String attributeName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/attributes" + attributeName);
+        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName);
     }
 
     /**
