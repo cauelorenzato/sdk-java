@@ -9,7 +9,7 @@ public class Config {
     /**
      * Company's private key
      */
-    public static String privateKey = "4e37dae79456985ae0d27a67639cf335";
+    public static String privateKey = "";
     /**
      * Company's public key
      */
@@ -23,7 +23,7 @@ public class Config {
     /**
      * Issuer's private to assign credential tokens
      */
-    public static String issuerPrivateKey = "213b83392b80ee98c8eb2a9fed9bb84d";
+    public static String issuerPrivateKey = "";
 
     /**
      * Credential's public key
@@ -33,6 +33,6 @@ public class Config {
     /**
      * Credential's private key
      */
-    public static String credentialPrivateKey = "2c17c6393771ee3048ae34d6b380c5ec";
+    public static String credentialPrivateKey = "";
 
 }
