@@ -2,16 +2,13 @@ package com.veridu.idos.endpoints;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,73 +31,53 @@ public class AbstractEndpointTest {
     @Test
     public void testFetch() throws SDKException {
         AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class);
-        Mockito.when(abstractMock.transformURL("POST", "/companies", "name=Company"))
-                .thenReturn("http://localhost:8000/index.php/1.0/companies&companyPrivKey=privKey");
         JsonObject json = new JsonObject();
         json.addProperty("dummy", "value");
-        Mockito.when(abstractMock.request("POST",
-                "http://localhost:8000/index.php/1.0/companies&companyPrivKey=privKey", "name=Company"))
+        Mockito.when(abstractMock.transformURL("POST", "/companies"))
+                .thenReturn("http://localhost:8000/index.php/1.0/companies");
+        Mockito.when(abstractMock.request("POST", "http://localhost:8000/index.php/1.0/companies", json))
                 .thenReturn(json);
-        Mockito.when(abstractMock.fetch("POST", "/companies", "name=Company")).thenCallRealMethod();
-        assertTrue(abstractMock.fetch("POST", "/companies", "name=Company") instanceof JsonObject);
-        assertSame(json, abstractMock.fetch("POST", "/companies", "name=Company"));
+        Mockito.when(abstractMock.fetch("POST", "/companies", json)).thenCallRealMethod();
+        assertSame(json, abstractMock.fetch("POST", "/companies", json));
     }
 
     @Test
     public void testFetchEmptyData() throws SDKException {
         AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class);
         JsonObject json = new JsonObject();
-        json.addProperty("dummy", "value");
-        Mockito.when(abstractMock.transformURL("POST", "/companies", ""))
-                .thenReturn("http://localhost:8000/index.php/1.0/companies&companyPrivKey=privKey");
-        Mockito.when(abstractMock.request("POST",
-                "http://localhost:8000/index.php/1.0/companies&companyPrivKey=privKey", "")).thenReturn(json);
-        Mockito.when(abstractMock.fetch("POST", "/companies", "")).thenCallRealMethod();
-        assertTrue(abstractMock.fetch("POST", "/companies", "") instanceof JsonObject);
-        assertSame(json, abstractMock.fetch("POST", "/companies", ""));
+        Mockito.when(abstractMock.transformURL("POST", "/companies"))
+                .thenReturn("http://localhost:8000/index.php/1.0/companies");
+        Mockito.when(abstractMock.request("POST", "http://localhost:8000/index.php/1.0/companies", null))
+                .thenReturn(json);
+        Mockito.when(abstractMock.fetch("POST", "/companies", null)).thenCallRealMethod();
+        assertSame(json, abstractMock.fetch("POST", "/companies", null));
     }
 
     @Test
     public void testTransformURLGETMethod() throws InvalidToken, EmptyPrivateKey {
-        // passing the token trough the constructor so it can be stored in the
-        // token String and used in the trasnformURL() method.
-        CredentialFactory factory = new CredentialFactory("token");
-        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes?credentialToken=token",
-                factory.getAttribute().transformURL("GET", "profile/attributes", ""));
+        // passing the companyToken trough the constructor so it can be stored
+        // in the
+        // companyToken String and used in the trasnformURL() method.
+        CredentialFactory factory = new CredentialFactory("companyToken");
+        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
+                factory.getAttribute().transformURL("GET", "profile/attributes"));
         CompanyFactory cfactory = new CompanyFactory("privKey");
-        assertEquals("http://localhost:8000/index.php/1.0/companies?companyPrivKey=privKey",
-                cfactory.getCompany().transformURL("GET", "companies", ""));
-        assertEquals("http://localhost:8000/index.php/1.0/companies/permissions?companyPrivKey=privKey",
-                cfactory.getPermission().transformURL("GET", "companies/permissions", ""));
+        assertEquals("http://localhost:8000/index.php/1.0/companies",
+                cfactory.getCompany().transformURL("GET", "companies"));
+        assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",
+                cfactory.getPermission().transformURL("GET", "companies/permissions"));
     }
 
     @Test
     public void testTransformURLPOSTMethod() throws InvalidToken, EmptyPrivateKey {
-        CredentialFactory factory = new CredentialFactory("token");
-        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes?credentialToken=token",
-                factory.getAttribute().transformURL("POST", "profile/attributes", "data"));
+        CredentialFactory factory = new CredentialFactory("companyToken");
+        assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
+                factory.getAttribute().transformURL("POST", "profile/attributes"));
         CompanyFactory cfactory = new CompanyFactory("privKey");
-        assertEquals("http://localhost:8000/index.php/1.0/companies?companyPrivKey=privKey",
-                cfactory.getCompany().transformURL("POST", "companies", "data"));
-        assertEquals("http://localhost:8000/index.php/1.0/companies/permissions?companyPrivKey=privKey",
-                cfactory.getPermission().transformURL("POST", "companies/permissions", "data"));
-    }
-
-    @Test
-    public void testQueryBuilderHashMapOfStringString() throws UnsupportedEncodingException {
-        AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class, Mockito.CALLS_REAL_METHODS);
-        HashMap<String, String> data = new HashMap<String, String>();
-        data.put("key1", "value 1");
-        data.put("key2", "value 2");
-        data.put("key3", "value 3");
-        assertEquals("key1=value+1&key2=value+2&key3=value+3", abstractMock.queryBuilder(data));
-
-    }
-
-    @Test
-    public void testQueryBuilderStringString() throws UnsupportedEncodingException {
-        AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class, Mockito.CALLS_REAL_METHODS);
-        assertEquals("key=new+value", abstractMock.queryBuilder("key", "new value"));
+        assertEquals("http://localhost:8000/index.php/1.0/companies",
+                cfactory.getCompany().transformURL("POST", "companies"));
+        assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",
+                cfactory.getPermission().transformURL("POST", "companies/permissions"));
     }
 
     @Test
@@ -109,7 +86,7 @@ public class AbstractEndpointTest {
 
         String method = "GET";
         String url = "http://idos.api/companies/company-slug";
-        String data = "";
+        JsonObject data = new JsonObject();
 
         /**
          * We need PowerMockito because URL is a final Class
@@ -143,7 +120,8 @@ public class AbstractEndpointTest {
         AbstractEndpoint endpoint = Mockito.mock(AbstractEndpoint.class, Mockito.CALLS_REAL_METHODS);
         String method = "POST";
         String url = "http://idos.api/companies/company-slug";
-        String data = "name=New+ame";
+        JsonObject data = new JsonObject();
+        data.addProperty("name", "name");
 
         /**
          * We need PowerMockito because URL is a final Class

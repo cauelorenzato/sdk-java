@@ -30,8 +30,12 @@ public class NormalisedSamples {
         CredentialFactory credentialFactory = new CredentialFactory(Config.issuerPrivateKey, Config.issuerPublicKey,
                 Config.credentialPublicKey);
 
-        String username = "9fd9f63e0d6487537569075da85a0c7f2";
+        /* Username necessary for all requests of this endpoint */
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
+
+        /* source necessary for all requests of this endpoint */
         int source = 1860914067;
+
         /**
          * Gets the response from the API listing all normalised data
          */
@@ -45,12 +49,13 @@ public class NormalisedSamples {
         /**
          * Gets the response from the API trying to create a new normalised data
          */
-        json = credentialFactory.normalised.create(username, source, "Name", "value");
+        json = credentialFactory.normalised.create(username, source, "Name", "Value");
 
+        System.out.println(json);
         /**
          * Get the response form the API getting one normalised data
          */
-        json = credentialFactory.normalised.getOne(username, source, "source-3-normalised-1");
+        json = credentialFactory.normalised.getOne(username, source, "Name");
 
         /**
          * Prints the array response
@@ -60,7 +65,7 @@ public class NormalisedSamples {
         /**
          * Updates the normalised data giving the normalizedName
          */
-        json = credentialFactory.normalised.update(username, source, "normalised-name", "new name", "new value");
+        json = credentialFactory.normalised.update(username, source, "Name", "newName", "newValue");
 
         /**
          * Prints the json response
@@ -70,7 +75,7 @@ public class NormalisedSamples {
         /**
          * Deletes the credential created giving the normalised name
          */
-        json = credentialFactory.normalised.delete(username, source, "normalised-name");
+        json = credentialFactory.normalised.delete(username, source, "newName");
 
         /**
          * Prints the status of the request

@@ -7,7 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class Utils {
 
     /**
-     * Generates token necessary for many requests to the API
+     * Generates companyToken necessary for many requests to the API
      * 
      * @param issuerPublicKey
      *            The issuer credential public key
@@ -15,7 +15,7 @@ public class Utils {
      *            The issuer credential private key
      * @param subjectPublicKey
      *            The subject credential public key
-     * @return the generated token
+     * @return the generated companyToken
      */
     public static String generateToken(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
         byte[] apiKeySecretBytes = issuerPrivateKey.getBytes();
@@ -29,54 +29,54 @@ public class Utils {
     }
 
     /**
-     * Generates a company token when subject exists
+     * Generates a company companyToken when subject exists
      * 
      * @param privateKey
      * @param publicKey
      * @param subject
-     * @return String token
+     * @return String companyToken
      */
     public static String generateCompanyToken(String privateKey, String publicKey, String subject) {
         return Utils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
-     * Generates a company token without subject
+     * Generates a company companyToken without subject
      * 
      * @param privateKey
      * @param publicKey
-     * @return String token
+     * @return String companyToken
      */
     public static String generateCompanyToken(String privateKey, String publicKey) {
         return Utils.generateToken(privateKey, publicKey, "");
     }
 
     /**
-     * Generates a credential token when subject exists
+     * Generates a credential companyToken when subject exists
      * 
      * @param privateKey
      * @param publicKey
      * @param subject
-     * @return String token
+     * @return String companyToken
      */
     public static String generateCredentialToken(String privateKey, String publicKey, String subject) {
         return Utils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
-     * Generates a user token when subject exists
+     * Generates a user companyToken when subject exists
      * 
      * @param privateKey
      * @param publicKey
      * @param subject
-     * @return String token
+     * @return String companyToken
      */
     public static String generateUserToken(String privateKey, String publicKey, String subject) {
         return Utils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
-     * Generates a user token without subject
+     * Generates a user companyToken without subject
      * 
      * @param privateKey
      * @param publicKey

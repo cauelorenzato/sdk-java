@@ -19,14 +19,14 @@ public class CompanyFactoryTest {
 
     @Test
     public void testCompanyFactoryToken() throws InvalidToken {
-        assertNull(CompanyFactory.token);
-        CompanyFactory factory = new CompanyFactory("token");
-        assertSame("token", CompanyFactory.token);
+        assertNull(CompanyFactory.companyToken);
+        CompanyFactory factory = new CompanyFactory("companyToken");
+        assertSame("companyToken", CompanyFactory.companyToken);
     }
 
     @Test
     public void testGetCompany() throws InvalidToken {
-        CompanyFactory factory = new CompanyFactory("token");
+        CompanyFactory factory = new CompanyFactory("companyToken");
         assertNull(factory.company);
         factory.getCompany();
         assertTrue(factory.company instanceof Companies);
@@ -34,7 +34,7 @@ public class CompanyFactoryTest {
 
     @Test
     public void testGetPermission() throws InvalidToken {
-        CompanyFactory factory = new CompanyFactory("token");
+        CompanyFactory factory = new CompanyFactory("companyToken");
         assertNull(factory.permission);
         factory.getPermission();
         assertTrue(factory.permission instanceof Permissions);

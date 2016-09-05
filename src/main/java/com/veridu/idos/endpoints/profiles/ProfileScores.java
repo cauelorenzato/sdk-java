@@ -56,9 +56,10 @@ public class ProfileScores extends AbstractEndpoint {
      */
     public JsonObject create(String username, String attributeName, String scoreName, double value)
             throws SDKException, UnsupportedEncodingException {
-        String data = this.queryBuilder("name", scoreName);
-        return this.fetch("POST", "profiles/" + username + "/attributes/" + attributeName + "/scores",
-                data.concat("&value=" + value));
+        JsonObject data = new JsonObject();
+        data.addProperty("name", scoreName);
+        data.addProperty("value", value);
+        return this.fetch("POST", "profiles/" + username + "/attributes/" + attributeName + "/scores", data);
     }
 
     /**
@@ -74,9 +75,10 @@ public class ProfileScores extends AbstractEndpoint {
      */
     public JsonObject update(String username, String attributeName, String scoreName, double value)
             throws SDKException, UnsupportedEncodingException {
-        String data = this.queryBuilder("name", scoreName);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", scoreName);
         return this.fetch("PUT", "profiles/" + username + "/attributes/" + attributeName + "/scores/" + scoreName,
-                data.concat("&value=" + value));
+                data);
     }
 
     /**

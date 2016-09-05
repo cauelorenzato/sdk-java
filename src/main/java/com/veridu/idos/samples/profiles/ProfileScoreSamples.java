@@ -23,8 +23,8 @@ public class ProfileScoreSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
         String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
@@ -32,7 +32,7 @@ public class ProfileScoreSamples {
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
         /* Username necessary for all requests of this endpoint */
-        String username = "f67b96dcf96b49d713a520ce9f54053c";
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
 
         /**
          * Creates a new attribute to make requests for the attribute' scores
@@ -41,7 +41,7 @@ public class ProfileScoreSamples {
         /**
          * // * Gets the response from the API listing all scores //
          */
-        json = credentialFactory.getScore().listAll(username, "user1attribute1");
+        json = credentialFactory.getScore().listAll(username, "attributeName");
 
         /**
          * Prints the json
@@ -51,13 +51,12 @@ public class ProfileScoreSamples {
         /**
          * Gets the response from the API trying to create a new score
          */
-        // json = profileFactory.score.create(username, "user1Attribute1",
-        // "name-test", 0.6);
+        json = credentialFactory.score.create(username, "attributeName", "nameTest", 0.6);
 
         /**
          * Get the response form the API getting one score
          */
-        json = credentialFactory.score.getOne(username, "atributeName", "scoreName");
+        json = credentialFactory.score.getOne(username, "attributeName", "nameTest");
 
         /**
          * Prints the array response
@@ -67,7 +66,7 @@ public class ProfileScoreSamples {
         /**
          * Deletes the score created giving the score name
          */
-        json = credentialFactory.score.delete(username, "scoreAttribute", "scoreName");
+        json = credentialFactory.score.delete(username, "attributeName", "nameTest");
 
         /**
          * Prints the status of the request

@@ -24,8 +24,8 @@ public class CredentialsSamples {
          * going to pass by an CredentialFactory Class, and accessed through this
          * object
          * 
-         * @param token
-         *            The jwt token generated that authorizes requests to the
+         * @param companyToken
+         *            The jwt companyToken generated that authorizes requests to the
          *            API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);

@@ -26,7 +26,7 @@ public class HookSamples {
          * object
          * 
          * @param privateKey
-         *            The token that authorizes requests to the API
+         *            The companyToken that authorizes requests to the API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 

@@ -24,11 +24,11 @@ public class MemberSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          * @param privateKey
-         *            The token that authorizes requests to the API
+         *            The companyToken that authorizes requests to the API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
@@ -45,7 +45,7 @@ public class MemberSamples {
         /**
          * Gets the response from the API trying to create a new member
          */
-        json = companyFactory.member.create(Config.issuerPublicKey, "User", "member");
+        json = companyFactory.member.create(Config.credentialPublicKey, "fd1fde2f31535a266ea7f70fdf224079", "Employee");
         /**
          * Gets the id of the created member to retrieve the member by the id
          */
@@ -94,6 +94,6 @@ public class MemberSamples {
         /**
          * Prints the number of deleted files
          */
-        System.out.println(json.get("data").getAsJsonObject().get("deleted").getAsInt());
+        System.out.println(json.get("deleted").getAsInt());
     }
 }

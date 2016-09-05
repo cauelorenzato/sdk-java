@@ -26,8 +26,13 @@ public class Config {
     public static String issuerPrivateKey = "213b83392b80ee98c8eb2a9fed9bb84d";
 
     /**
-     * Credential public key
+     * Credential's public key
      */
     public static String credentialPublicKey = "4c9184f37cff01bcdc32dc486ec36961";
+
+    /**
+     * Credential's private key
+     */
+    public static String credentialPrivateKey = "2c17c6393771ee3048ae34d6b380c5ec";
 
 }

@@ -5,18 +5,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.veridu.idos.CompanyFactory;
 import com.veridu.idos.CredentialFactory;
+import com.veridu.idos.UserFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 
@@ -52,7 +49,7 @@ public abstract class AbstractEndpoint {
      *
      */
     public JsonObject fetch(String method, String resource) throws SDKException {
-        return fetch(method, resource, "");
+        return fetch(method, resource, null);
     }
 
     /**
@@ -63,73 +60,34 @@ public abstract class AbstractEndpoint {
      * @param resource
      *            String
      * @param data
-     *            String
+     *            JsonObject
      *
      * @throws SDKException
      *
      */
-    public JsonObject fetch(String method, String resource, String data) throws SDKException {
-        String url = this.transformURL(method, resource, data);
+    public JsonObject fetch(String method, String resource, JsonObject data) throws SDKException {
+        String url = this.transformURL(method, resource);
         JsonObject response = request(method, url, data);
 
         return response;
     }
 
-    public String transformURL(String method, String resource, String data) {
+    public String transformURL(String method, String resource) {
         String url = Config.BASE_URL;
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
 
-        if ((method.compareTo("GET") == 0) && (data != null) && (!data.isEmpty())) {
-            if (url.contains("?"))
-                url = url.concat("&");
-            else
-                url = url.concat("?");
-            url = url.concat(data);
-        }
+        // if ((method.compareTo("GET") == 0) && (data != null) &&
+        // (!data.isEmpty())) {
+        // if (url.contains("?"))
+        // url = url.concat("&");
+        // else
+        // url = url.concat("?");
+        // url = url.concat(data);
+        // }
 
         return url;
-    }
-
-    /**
-     * Method that converts Hash Table data to an encoded (UTF-8) String.
-     *
-     * @param data
-     *
-     * @return String dataAsString
-     */
-    protected String queryBuilder(HashMap<String, String> data) throws UnsupportedEncodingException {
-        if (data.isEmpty())
-            return "";
-        StringBuilder dataAsString = new StringBuilder();
-        for (Entry<String, String> entry : data.entrySet()) {
-            if (dataAsString.length() != 0) {
-                dataAsString.append("&");
-            }
-            dataAsString.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            dataAsString.append("=");
-            dataAsString.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-        return dataAsString.toString();
-    }
-
-    /**
-     * Method that converts Hash Table data to an encoded (UTF-8) String.
-     *
-     * @param key
-     * @param value
-     *
-     * @return String data
-     *
-     * @throws UnsupportedEncodingException
-     */
-    protected String queryBuilder(String key, String value) throws UnsupportedEncodingException {
-        String data = "";
-        data = data.concat(URLEncoder.encode(key, "UTF-8"));
-        data = data.concat("=");
-        data = data.concat(URLEncoder.encode(value, "UTF-8"));
-        return data;
     }
 
     /**
@@ -147,7 +105,7 @@ public abstract class AbstractEndpoint {
      * @throws RequestFailed
      *             Exception
      */
-    public JsonObject request(String method, String url, String data) {
+    public JsonObject request(String method, String url, JsonObject data) {
         try {
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
@@ -159,22 +117,23 @@ public abstract class AbstractEndpoint {
             String tokenType = this.getEndpointName();
 
             if (tokenType == "companies") {
-                connection.setRequestProperty("Authorization", "CompanyToken " + CompanyFactory.token);
-            } else if (tokenType == "users") {
-                connection.setRequestProperty("Authorization", "CredentialToken " + CredentialFactory.token);
+                connection.setRequestProperty("Authorization", "CompanyToken " + CompanyFactory.companyToken);
+            } else if (tokenType == "credentials") {
+                connection.setRequestProperty("Authorization", "CredentialToken " + CredentialFactory.credentialToken);
+            } else {
+                connection.setRequestProperty("Authorization", "UserToken " + UserFactory.userToken);
             }
-            // else {
-            // connection.setRequestProperty("Authorization", "CredentialToken "
-            // + ManagementFactory.token);
-            // }
 
-            if ((method.compareTo("GET") != 0) && (data != null) && (!data.isEmpty())) {
-                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
+            if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
+                // connection.setRequestProperty("Content-Type",
+                // "application/x-www-form-urlencoded");
+                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                connection.setRequestProperty("Content-Length", Integer.toString(data.size()));
                 connection.setRequestProperty("Cache-Control", "no-cache");
                 connection.setDoInput(true);
                 DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                wr.writeBytes(data);
+                String content = data.toString();
+                wr.writeBytes(content);
                 wr.flush();
                 wr.close();
             }
@@ -204,7 +163,14 @@ public abstract class AbstractEndpoint {
         return null;
     }
 
+    /**
+     * Converts string response to json
+     * 
+     * @param apiResponse
+     * @return JsonObject response
+     */
     protected JsonObject convertToJson(String apiResponse) {
+        // System.out.println(apiResponse);
         JsonParser parser = new JsonParser();
         JsonElement response = parser.parse(apiResponse);
         JsonObject json = response.getAsJsonObject();
@@ -212,6 +178,11 @@ public abstract class AbstractEndpoint {
         return json;
     }
 
+    /**
+     * Gets the endpoint name to set what authorization the request need to send
+     * 
+     * @return String name of authorization token
+     */
     protected String getEndpointName() {
         String packageName = this.getClass().getPackage().getName();
         String tokenType = null;
@@ -219,10 +190,10 @@ public abstract class AbstractEndpoint {
         case "com.veridu.idos.endpoints.companies":
             tokenType = "companies";
             break;
-        case "com.veridu.idos.endpoints.management":
+        case "com.veridu.idos.endpoints.profiles":
             tokenType = "credentials";
             break;
-        case "com.veridu.idos.endpoints.profiles":
+        case "com.veridu.idos.endpoints.users":
             tokenType = "users";
             break;
         }

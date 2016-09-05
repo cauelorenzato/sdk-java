@@ -1,5 +1,7 @@
 package com.veridu.idos.endpoints.companies;
 
+import java.util.HashMap;
+
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
@@ -47,11 +49,15 @@ public class ProfileTags extends AbstractEndpoint {
      * 
      * @param username
      * @param tagName
+     * @param slug
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject create(String username, String tagName) throws SDKException {
-        return this.fetch("POST", "profiles/" + username + "/tags/" + tagName);
+    public JsonObject create(String username, String tagName, String slug) throws SDKException {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", tagName);
+        data.put("slug", slug);
+        return this.fetch("POST", "profiles/" + username + "/tags");
     }
 
     /**

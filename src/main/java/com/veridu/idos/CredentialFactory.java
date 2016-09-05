@@ -1,5 +1,6 @@
 package com.veridu.idos;
 
+import com.veridu.idos.endpoints.profiles.Digested;
 import com.veridu.idos.endpoints.profiles.Normalised;
 import com.veridu.idos.endpoints.profiles.ProfileAttributes;
 import com.veridu.idos.endpoints.profiles.ProfileFeatures;
@@ -13,15 +14,15 @@ import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
 
 /**
- * CredentialFactory Endpoint creates all Endpoints
+ * CredentialFactory Class creates all Endpoints
  *
  */
 public class CredentialFactory {
 
     /**
-     * Necessary token to make requests to the api
+     * Necessary companyToken to make requests to the api
      */
-    public static String token;
+    public static String credentialToken;
     /**
      * Mapped Endpoint object
      */
@@ -68,6 +69,11 @@ public class CredentialFactory {
     public ProfileScores score;
 
     /**
+     * Digested Endpoint object
+     */
+    public Digested digested;
+
+    /**
      * Constructor Class
      * 
      * @param issuerPublicKey
@@ -75,11 +81,11 @@ public class CredentialFactory {
      * @param subjectPublicKey
      */
     public CredentialFactory(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
-        CredentialFactory.token = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
+        CredentialFactory.credentialToken = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
     }
 
     public CredentialFactory(String token) {
-        CredentialFactory.token = token;
+        CredentialFactory.credentialToken = token;
     }
 
     /**
@@ -98,7 +104,7 @@ public class CredentialFactory {
     /**
      * Instantiates Normalised endpoint
      * 
-     * @return Nornalized instance
+     * @return Normalised instance
      * @throws InvalidToken
      */
     public Normalised getNormalized() throws InvalidToken {
@@ -176,7 +182,7 @@ public class CredentialFactory {
     /**
      * Instantiates Score endpoint
      * 
-     * @return ProfileScores endpoint
+     * @return ProfileScores instance
      * @throws InvalidToken
      */
     public ProfileScores getScore() throws InvalidToken {
@@ -184,5 +190,18 @@ public class CredentialFactory {
             this.score = new ProfileScores();
         }
         return this.score;
+    }
+
+    /**
+     * Instantiates Digested endpoint
+     * 
+     * @return Digested instance
+     * @throws InvalidToken
+     */
+    public Digested getDigested() throws InvalidToken {
+        if (!(this.digested instanceof Digested)) {
+            this.digested = new Digested();
+        }
+        return this.digested;
     }
 }

@@ -1,7 +1,6 @@
 package com.veridu.idos.endpoints.companies;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
@@ -56,11 +55,11 @@ public class Credentials extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject create(String name, String production) throws UnsupportedEncodingException, SDKException {
-        HashMap<String, String> data = new HashMap<String, String>();
-        data.put("name", name);
-        data.put("production", production);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("production", production);
 
-        return this.fetch("POST", "management/credentials", this.queryBuilder(data));
+        return this.fetch("POST", "management/credentials", data);
     }
 
     /**
@@ -74,7 +73,9 @@ public class Credentials extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject update(String name, String publicKey) throws UnsupportedEncodingException, SDKException {
-        return this.fetch("PUT", "management/credentials/" + publicKey, this.queryBuilder("name", name));
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        return this.fetch("PUT", "management/credentials/" + publicKey, data);
     }
 
     /**

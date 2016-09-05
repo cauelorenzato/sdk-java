@@ -1,7 +1,6 @@
 package com.veridu.idos.endpoints.companies;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
@@ -46,25 +45,24 @@ public class Hooks extends AbstractEndpoint {
 
     /**
      * Creates a new hook given the credential public key, the trigger, url and
-     * if is subscribed
+     * if is subscribedibed
      * 
      * @param credentialPubKey
      * @param trigger
      * @param url
-     * @param subscribed
+     * @param subscribedibed
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
     public JsonObject create(String credentialPubKey, String trigger, String url, boolean subscribed)
             throws SDKException, UnsupportedEncodingException {
-        String subscr = String.valueOf(subscribed);
-        HashMap<String, String> data = new HashMap<>();
-        data.put("trigger", trigger);
-        data.put("url", url);
-        data.put("subscribed", subscr);
+        JsonObject data = new JsonObject();
+        data.addProperty("trigger", trigger);
+        data.addProperty("url", url);
+        data.addProperty("subscribedibed", subscribed);
 
-        return this.fetch("POST", "management/credentials/" + credentialPubKey + "/hooks", this.queryBuilder(data));
+        return this.fetch("POST", "management/credentials/" + credentialPubKey + "/hooks", data);
     }
 
     /**
@@ -74,21 +72,19 @@ public class Hooks extends AbstractEndpoint {
      * @param id
      * @param trigger
      * @param url
-     * @param subscribed
+     * @param subscribedibed
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
     public JsonObject update(String credentialPubKey, int id, String trigger, String url, boolean subscribed)
             throws SDKException, UnsupportedEncodingException {
-        String subscr = String.valueOf(subscribed);
-        HashMap<String, String> data = new HashMap<>();
-        data.put("trigger", trigger);
-        data.put("url", url);
-        data.put("subscribed", subscr);
+        JsonObject data = new JsonObject();
+        data.addProperty("trigger", trigger);
+        data.addProperty("url", url);
+        data.addProperty("subscribedibed", subscribed);
 
-        return this.fetch("PUT", "management/credentials/" + credentialPubKey + "/hooks/" + id,
-                this.queryBuilder(data));
+        return this.fetch("PUT", "management/credentials/" + credentialPubKey + "/hooks/" + id, data);
     }
 
     /**

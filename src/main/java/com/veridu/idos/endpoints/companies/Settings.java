@@ -1,7 +1,6 @@
 package com.veridu.idos.endpoints.companies;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
@@ -22,7 +21,7 @@ public class Settings extends AbstractEndpoint {
     }
 
     /**
-     * Lists all Settings for the given credential token
+     * Lists all Settings for the given credential companyToken
      * 
      * @return JsonObject response
      * @throws SDKException
@@ -54,12 +53,12 @@ public class Settings extends AbstractEndpoint {
      */
     public JsonObject create(String section, String property, String value)
             throws SDKException, UnsupportedEncodingException {
-        HashMap<String, String> data = new HashMap<String, String>();
-        data.put("section", section);
-        data.put("property", property);
-        data.put("value", value);
+        JsonObject data = new JsonObject();
+        data.addProperty("section", section);
+        data.addProperty("property", property);
+        data.addProperty("value", value);
 
-        return this.fetch("POST", "management/settings", this.queryBuilder(data));
+        return this.fetch("POST", "management/settings", data);
     }
 
     /**
@@ -73,7 +72,9 @@ public class Settings extends AbstractEndpoint {
      * @throws UnsupportedEncodingException
      */
     public JsonObject update(String value, int id) throws SDKException, UnsupportedEncodingException {
-        return this.fetch("PUT", "management/settings/" + id, this.queryBuilder("value", value));
+        JsonObject data = new JsonObject();
+        data.addProperty("value", value);
+        return this.fetch("PUT", "management/settings/" + id, data);
     }
 
     /**
@@ -88,7 +89,7 @@ public class Settings extends AbstractEndpoint {
     }
 
     /**
-     * Deletes all settings associated with the credential token
+     * Deletes all settings associated with the credential companyToken
      * 
      * @return JsonObject response
      * @throws SDKException

@@ -1,7 +1,6 @@
 package com.veridu.idos.endpoints.profiles;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.endpoints.AbstractEndpoint;
@@ -50,11 +49,11 @@ public class ProfileFeatures extends AbstractEndpoint {
      */
     public JsonObject create(String username, String name, String value)
             throws SDKException, UnsupportedEncodingException {
-        HashMap<String, String> data = new HashMap<>();
-        data.put("name", name);
-        data.put("value", value);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
 
-        return this.fetch("POST", "profiles/" + username + "/features", this.queryBuilder(data));
+        return this.fetch("POST", "profiles/" + username + "/features", data);
     }
 
     /**
@@ -70,11 +69,11 @@ public class ProfileFeatures extends AbstractEndpoint {
      */
     public JsonObject update(String username, String featureSlug, String name, String value)
             throws SDKException, UnsupportedEncodingException {
-        HashMap<String, String> data = new HashMap<>();
-        data.put("name", name);
-        data.put("value", value);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
 
-        return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, this.queryBuilder(data));
+        return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, data);
     }
 
     /**

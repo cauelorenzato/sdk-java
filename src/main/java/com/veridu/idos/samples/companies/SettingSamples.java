@@ -26,8 +26,8 @@ public class SettingSamples {
          * going to pass by an CredentialFactory Class, and accessed through this
          * object
          * 
-         * @param token
-         *            The credential token that authorizes requests to the API
+         * @param companyToken
+         *            The credential companyToken that authorizes requests to the API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
@@ -77,7 +77,7 @@ public class SettingSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all settings for the given token
+         * Deletes all settings for the given companyToken
          */
         json = companyFactory.setting.deleteAll();
 

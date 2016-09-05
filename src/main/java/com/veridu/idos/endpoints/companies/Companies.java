@@ -60,33 +60,35 @@ public class Companies extends AbstractEndpoint {
      * @throws UnsupportedEncodingException
      */
     public JsonObject create(String name) throws SDKException, UnsupportedEncodingException {
-        String data = this.queryBuilder("name", name);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
         return this.fetch("POST", "companies", data);
     }
 
     /**
      * Updates an existing company given the companySlug
-     * 
+     *
      * @param name
      * @param companySlug
-     * 
+     *
      * @return String response
-     * 
+     *
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
     public JsonObject update(String name, String companySlug) throws SDKException, UnsupportedEncodingException {
-        String data = this.queryBuilder("name", name);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
         return this.fetch("PUT", "companies/" + companySlug, data);
     }
 
     /**
      * Deletes an existing company given the company slug
-     * 
+     *
      * @param companySlug
-     * 
+     *
      * @return String response
-     * 
+     *
      * @throws SDKException
      */
     public JsonObject delete(String companySlug) throws SDKException {

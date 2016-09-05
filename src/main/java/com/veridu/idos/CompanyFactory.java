@@ -6,6 +6,7 @@ import com.veridu.idos.endpoints.companies.Hooks;
 import com.veridu.idos.endpoints.companies.Members;
 import com.veridu.idos.endpoints.companies.Permissions;
 import com.veridu.idos.endpoints.companies.ProfileTags;
+import com.veridu.idos.endpoints.companies.Services;
 import com.veridu.idos.endpoints.companies.Settings;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.Utils;
@@ -16,34 +17,34 @@ import com.veridu.idos.utils.Utils;
  */
 public class CompanyFactory {
 
-    public static String token;
+    public static String companyToken;
 
     /**
-     * Companies instance
+     * Companies object
      */
     public Companies company;
     /**
-     * Permissions instance
+     * Permissions object
      */
     public Permissions permission;
 
     /**
-     * Credentials Endpoint instance
+     * Credentials Endpoint object
      */
     public Credentials credential;
 
     /**
-     * Settings Endpoint instance
+     * Settings Endpoint object
      */
     public Settings setting;
 
     /**
-     * Members Endpoint instance
+     * Members Endpoint object
      */
     public Members member;
 
     /**
-     * Hooks Endpoint instance
+     * Hooks Endpoint object
      */
     public Hooks hook;
 
@@ -53,9 +54,14 @@ public class CompanyFactory {
     public ProfileTags tag;
 
     /**
+     * Services Endpoint object
+     */
+    public Services service;
+
+    /**
      * Class constructor
      * 
-     * @param token
+     * @param companyToken
      * @throws Emptytoken
      */
 
@@ -64,15 +70,15 @@ public class CompanyFactory {
             throw new InvalidToken();
         }
 
-        CompanyFactory.token = token;
+        CompanyFactory.companyToken = token;
     }
 
     public CompanyFactory(String privateKey, String publicKey) {
-        CompanyFactory.token = Utils.generateCompanyToken(privateKey, publicKey);
+        CompanyFactory.companyToken = Utils.generateCompanyToken(privateKey, publicKey);
     }
 
     public CompanyFactory(String privateKey, String publicKey, String subject) {
-        CompanyFactory.token = Utils.generateCompanyToken(privateKey, publicKey, subject);
+        CompanyFactory.companyToken = Utils.generateCompanyToken(privateKey, publicKey, subject);
     }
 
     /**
@@ -166,6 +172,19 @@ public class CompanyFactory {
             this.tag = new ProfileTags();
         }
         return this.tag;
+    }
+
+    /**
+     * Instantiates Services endpoint
+     * 
+     * @return Services instance
+     * @throws InvalidToken
+     */
+    public Services getService() throws InvalidToken {
+        if (!(this.service instanceof Services)) {
+            this.service = new Services();
+        }
+        return this.service;
     }
 
 }
