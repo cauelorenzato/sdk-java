@@ -23,8 +23,8 @@ public class PermissionSamples {
          * endpoints don't need to be instantiated one by one. You just need to
          * call the factory.getEndpoint and its going to be instantiated and
          * available to call its methods. In other words, it means that all
-         * endpoints is going to pass by an CredentialFactory Class, and accessed
-         * through this object
+         * endpoints is going to pass by an CredentialFactory Class, and
+         * accessed through this object
          * 
          * @param privateKey
          *            The company public key that authorizes requests to the API
@@ -44,7 +44,7 @@ public class PermissionSamples {
         /**
          * Gets the response from the API trying to create a new permission
          */
-        json = companyFactory.permission.create("veridu-ltd", "hi:world");
+        json = companyFactory.getPermission().create("veridu-ltd", "hi:world");
 
         /**
          * Gets the status of the response If true, gets the permission that was
@@ -54,7 +54,7 @@ public class PermissionSamples {
             /**
              * Get the response form the API geting one company
              */
-            json = companyFactory.permission.getOne("veridu-ltd", "hi:world");
+            json = companyFactory.getPermission().getOne("veridu-ltd", "hi:world");
 
             /**
              * Prints the array response
@@ -69,7 +69,7 @@ public class PermissionSamples {
          * route name
          * 
          */
-        json = companyFactory.permission.delete("veridu-ltd", "hi:world");
+        json = companyFactory.getPermission().delete("veridu-ltd", "hi:world");
 
         /**
          * Prints the status of the request

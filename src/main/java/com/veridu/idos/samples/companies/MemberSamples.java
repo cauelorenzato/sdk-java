@@ -45,7 +45,8 @@ public class MemberSamples {
         /**
          * Gets the response from the API trying to create a new member
          */
-        json = companyFactory.member.create(Config.credentialPublicKey, "fd1fde2f31535a266ea7f70fdf224079", "Employee");
+        json = companyFactory.getMember().create(Config.credentialPublicKey, "fd1fde2f31535a266ea7f70fdf224079",
+                "Employee");
         /**
          * Gets the id of the created member to retrieve the member by the id
          */
@@ -54,7 +55,7 @@ public class MemberSamples {
         /**
          * Get the response form the API geting one member
          */
-        json = companyFactory.member.getOne(id);
+        json = companyFactory.getMember().getOne(id);
 
         /**
          * Prints the array response
@@ -64,7 +65,7 @@ public class MemberSamples {
         /**
          * Updates the member giving the id and changing the role
          */
-        json = companyFactory.member.update(id, "admin");
+        json = companyFactory.getMember().update(id, "admin");
 
         /**
          * Prints the json response
@@ -79,7 +80,7 @@ public class MemberSamples {
         /**
          * Deletes the member created giving the id
          */
-        json = companyFactory.member.delete(id);
+        json = companyFactory.getMember().delete(id);
 
         /**
          * Prints the status of the request
@@ -89,7 +90,7 @@ public class MemberSamples {
         /**
          * Deletes all members for the credential
          */
-        json = companyFactory.member.deleteAll();
+        json = companyFactory.getMember().deleteAll();
 
         /**
          * Prints the number of deleted files

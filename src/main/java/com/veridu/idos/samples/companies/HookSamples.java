@@ -22,8 +22,8 @@ public class HookSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          * @param privateKey
          *            The companyToken that authorizes requests to the API
@@ -44,7 +44,7 @@ public class HookSamples {
         /**
          * Gets the response from the API trying to create a new hook
          */
-        json = companyFactory.hook.create(Config.credentialPublicKey, "trigger", "https://google.com", false);
+        json = companyFactory.getHook().create(Config.credentialPublicKey, "trigger", "https://google.com", false);
         /**
          * Gets the id of the created hook to retrieve the hook by the id
          */
@@ -53,7 +53,7 @@ public class HookSamples {
         /**
          * Get the response form the API geting one hook
          */
-        json = companyFactory.hook.getOne(Config.credentialPublicKey, id);
+        json = companyFactory.getHook().getOne(Config.credentialPublicKey, id);
 
         /**
          * Prints the array response
@@ -63,7 +63,7 @@ public class HookSamples {
         /**
          * Updates the hook giving the id
          */
-        json = companyFactory.hook.update(Config.credentialPublicKey, id, "trigger", "https://google.com", true);
+        json = companyFactory.getHook().update(Config.credentialPublicKey, id, "trigger", "https://google.com", true);
 
         /**
          * Prints the json response
@@ -78,7 +78,7 @@ public class HookSamples {
         /**
          * Deletes the hook created giving the id
          */
-        json = companyFactory.hook.delete(Config.credentialPublicKey, id);
+        json = companyFactory.getHook().delete(Config.credentialPublicKey, id);
 
         /**
          * Prints the status of the request
@@ -88,7 +88,7 @@ public class HookSamples {
         /**
          * Deletes all hooks for the given credential public key
          */
-        json = companyFactory.hook.deleteAll(Config.credentialPublicKey);
+        json = companyFactory.getHook().deleteAll(Config.credentialPublicKey);
 
         /**
          * Prints the number of deleted files

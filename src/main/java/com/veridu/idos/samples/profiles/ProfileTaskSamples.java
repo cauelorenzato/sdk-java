@@ -20,8 +20,8 @@ public class ProfileTaskSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
         String token = IdOSUtils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
@@ -44,7 +44,7 @@ public class ProfileTaskSamples {
         /**
          * Get the response form the API getting one task
          */
-        json = credentialFactory.task.getOne(username, 1);
+        json = credentialFactory.getTask().getOne(username, 1);
 
         /**
          * Prints the array response

@@ -58,8 +58,8 @@ public class ServiceSamples {
         /**
          * Creates the service
          */
-        json = companyFactory.service.create("New service name", "http://service-url.com", true, 1, "idos", "secret",
-                listens, triggers);
+        json = companyFactory.getService().create("New service name", "http://service-url.com", true, 1, "idos",
+                "secret", listens, triggers);
 
         /**
          * Prints the json response
@@ -76,7 +76,7 @@ public class ServiceSamples {
         /**
          * Updates the service giving the service id created
          */
-        json = companyFactory.service.update(json.get("data").getAsJsonObject().get("id").getAsInt(), data);
+        json = companyFactory.getService().update(json.get("data").getAsJsonObject().get("id").getAsInt(), data);
 
         /**
          * Prints the json response
@@ -86,14 +86,14 @@ public class ServiceSamples {
         /**
          * Deletes the service giving the service id updated
          */
-        json = companyFactory.service.delete(json.get("data").getAsJsonObject().get("id").getAsInt());
+        json = companyFactory.getService().delete(json.get("data").getAsJsonObject().get("id").getAsInt());
 
         /**
          * Prints the json response
          */
         System.out.println(json);
 
-        json = companyFactory.service.deleteAll();
+        json = companyFactory.getService().deleteAll();
 
         System.out.println(json.get("deleted").getAsInt());
     }

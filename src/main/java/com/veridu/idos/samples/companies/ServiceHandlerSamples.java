@@ -57,7 +57,7 @@ public class ServiceHandlerSamples {
         /**
          * Creates the service
          */
-        json = companyFactory.serviceHandler.create(serviceId, listens);
+        json = companyFactory.getServiceHandler().create(serviceId, listens);
 
         /**
          * Prints the json response
@@ -77,7 +77,7 @@ public class ServiceHandlerSamples {
          * Updates the service giving the service handler id created
          */
 
-        json = companyFactory.serviceHandler.update(serviceHandlerId, listens);
+        json = companyFactory.getServiceHandler().update(serviceHandlerId, listens);
 
         /**
          * Prints the json response
@@ -87,7 +87,7 @@ public class ServiceHandlerSamples {
         /**
          * Deletes the service giving the service id updated
          */
-        json = companyFactory.serviceHandler.delete(serviceHandlerId);
+        json = companyFactory.getServiceHandler().delete(serviceHandlerId);
 
         /**
          * Prints the json response
@@ -97,7 +97,7 @@ public class ServiceHandlerSamples {
         /**
          * Deletes all service handlers
          */
-        json = companyFactory.serviceHandler.deleteAll();
+        json = companyFactory.getServiceHandler().deleteAll();
 
         System.out.println(json.get("deleted").getAsInt());
     }

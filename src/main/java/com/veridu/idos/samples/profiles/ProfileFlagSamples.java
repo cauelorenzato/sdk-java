@@ -21,11 +21,12 @@ public class ProfileFlagSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
-        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
+                Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
@@ -45,12 +46,12 @@ public class ProfileFlagSamples {
         /**
          * Gets the response from the API trying to create a new flag
          */
-        json = credentialFactory.flag.create(username, "flagName");
+        json = credentialFactory.getFlag().create(username, "flagName");
 
         /**
          * Get the response form the API getting one flag
          */
-        json = credentialFactory.flag.getOne(username, "flagName");
+        json = credentialFactory.getFlag().getOne(username, "flagName");
 
         /**
          * Prints the array response
@@ -60,7 +61,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes the flag created giving the flag name
          */
-        json = credentialFactory.flag.delete(username, "flagName");
+        json = credentialFactory.getFlag().delete(username, "flagName");
 
         /**
          * Prints the status of the request
@@ -70,7 +71,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes all profile flags related to the username
          */
-        json = credentialFactory.flag.deleteAll(username);
+        json = credentialFactory.getFlag().deleteAll(username);
 
         /**
          * Prints the number of deleted flags
@@ -80,7 +81,7 @@ public class ProfileFlagSamples {
         /**
          * Deletes all profile flags related to the username
          */
-        json = credentialFactory.flag.deleteAll(username);
+        json = credentialFactory.getFlag().deleteAll(username);
 
         /**
          * Prints the number of deleted flags

@@ -22,11 +22,12 @@ public class ProfileAttributeSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
-        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
+                Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
@@ -46,12 +47,12 @@ public class ProfileAttributeSamples {
         /**
          * Gets the response from the API trying to create a new attribute
          */
-        json = credentialFactory.attribute.create(username, "attributeName", "attributeValue");
+        json = credentialFactory.getAttribute().create(username, "attributeName", "attributeValue");
 
         /**
          * Get the response form the API getting one attribute
          */
-        json = credentialFactory.attribute.getOne(username, "attributeName");
+        json = credentialFactory.getAttribute().getOne(username, "attributeName");
 
         /**
          * Prints the array response
@@ -61,7 +62,7 @@ public class ProfileAttributeSamples {
         /**
          * Deletes the attribute created giving the attribute name
          */
-        json = credentialFactory.attribute.delete(username, "attributeName");
+        json = credentialFactory.getAttribute().delete(username, "attributeName");
 
         /**
          * Prints the status of the request
@@ -71,7 +72,7 @@ public class ProfileAttributeSamples {
         /**
          * Deletes all profile attributes related to the username
          */
-        json = credentialFactory.attribute.deleteAll(username);
+        json = credentialFactory.getAttribute().deleteAll(username);
 
         /**
          * Prints the number of deleted attributes

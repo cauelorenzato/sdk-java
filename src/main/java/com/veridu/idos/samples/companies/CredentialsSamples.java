@@ -21,12 +21,12 @@ public class CredentialsSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          * @param companyToken
-         *            The jwt companyToken generated that authorizes requests to the
-         *            API
+         *            The jwt companyToken generated that authorizes requests to
+         *            the API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
@@ -43,7 +43,7 @@ public class CredentialsSamples {
         /**
          * Gets the response from the API trying to create a new credential
          */
-        json = companyFactory.credential.create("Very Secure", "false");
+        json = companyFactory.getCredential().create("Very Secure", "false");
 
         /**
          * Gets the public key of the created credential to retrieve the
@@ -54,7 +54,7 @@ public class CredentialsSamples {
         /**
          * Get the response form the API geting one company
          */
-        json = companyFactory.credential.getOne(publicKey);
+        json = companyFactory.getCredential().getOne(publicKey);
 
         /**
          * Prints the array response
@@ -64,7 +64,7 @@ public class CredentialsSamples {
         /**
          * Updates the credential giving the public Key and a new name for it
          */
-        json = companyFactory.credential.update("New Name", publicKey);
+        json = companyFactory.getCredential().update("New Name", publicKey);
 
         /**
          * Prints the json response
@@ -79,7 +79,7 @@ public class CredentialsSamples {
         /**
          * Deletes the credential created giving the public key
          */
-        json = companyFactory.credential.delete(publicKey);
+        json = companyFactory.getCredential().delete(publicKey);
 
         /**
          * Prints the status of the request

@@ -13,12 +13,11 @@ import com.veridu.idos.exceptions.SDKException;
  * @version 2.0
  */
 public class ServiceHandlers extends AbstractEndpoint {
-
     /**
      * Constructor Class
      */
-    public ServiceHandlers() {
-
+    public ServiceHandlers(String token) {
+        super(token);
     }
 
     /**

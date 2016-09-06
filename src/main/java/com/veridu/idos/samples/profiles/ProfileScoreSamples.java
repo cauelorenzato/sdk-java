@@ -49,12 +49,12 @@ public class ProfileScoreSamples {
         /**
          * Gets the response from the API trying to create a new score
          */
-        json = credentialFactory.score.create(username, "attributeName", "nameTest", 0.6);
+        json = credentialFactory.getScore().create(username, "attributeName", "nameTest", 0.6);
 
         /**
          * Get the response form the API getting one score
          */
-        json = credentialFactory.score.getOne(username, "attributeName", "nameTest");
+        json = credentialFactory.getScore().getOne(username, "attributeName", "nameTest");
 
         /**
          * Prints the array response
@@ -64,7 +64,7 @@ public class ProfileScoreSamples {
         /**
          * Deletes the score created giving the score name
          */
-        json = credentialFactory.score.delete(username, "attributeName", "nameTest");
+        json = credentialFactory.getScore().delete(username, "attributeName", "nameTest");
 
         /**
          * Prints the status of the request
@@ -74,7 +74,7 @@ public class ProfileScoreSamples {
         /**
          * Deletes all attribute scores related to the username
          */
-        json = credentialFactory.score.deleteAll(username, "attributeName");
+        json = credentialFactory.getScore().deleteAll(username, "attributeName");
 
         /**
          * Prints the number of deleted scores

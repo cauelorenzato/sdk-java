@@ -42,12 +42,12 @@ public class ProfileTagSamples {
         /**
          * Gets the response from the API trying to create a new tag
          */
-        json = companyFactory.tag.create(username, "Tag Name", "tag-name");
+        json = companyFactory.getTag().create(username, "Tag Name", "tag-name");
 
         /**
          * Get the response form the API getting one tag
          */
-        json = companyFactory.tag.getOne(username, "tag-name");
+        json = companyFactory.getTag().getOne(username, "tag-name");
 
         /**
          * Prints the array response
@@ -57,7 +57,7 @@ public class ProfileTagSamples {
         /**
          * Deletes the tag created giving the tag name
          */
-        json = companyFactory.tag.delete(username, "tag-name");
+        json = companyFactory.getTag().delete(username, "tag-name");
 
         /**
          * Prints the status of the request
@@ -67,7 +67,7 @@ public class ProfileTagSamples {
         /**
          * Deletes all profile tags related to the username
          */
-        json = companyFactory.tag.deleteAll(username);
+        json = companyFactory.getTag().deleteAll(username);
 
         /**
          * Prints the number of deleted tags

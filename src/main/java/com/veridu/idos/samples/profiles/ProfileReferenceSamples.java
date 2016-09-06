@@ -22,8 +22,8 @@ public class ProfileReferenceSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
         CredentialFactory credentialFactory = new CredentialFactory(Config.issuerPrivateKey, Config.issuerPublicKey,
@@ -45,12 +45,12 @@ public class ProfileReferenceSamples {
         /**
          * Gets the response from the API trying to create a new reference
          */
-        json = credentialFactory.reference.create(username, "attributeName", "attributeValue");
+        json = credentialFactory.getReference().create(username, "attributeName", "attributeValue");
 
         /**
          * Get the response form the API getting one reference
          */
-        json = credentialFactory.reference.getOne(username, "attributeName");
+        json = credentialFactory.getReference().getOne(username, "attributeName");
 
         /**
          * Prints the array response
@@ -60,7 +60,7 @@ public class ProfileReferenceSamples {
         /**
          * Deletes the reference created giving the reference name
          */
-        json = credentialFactory.reference.delete(username, "attributeName");
+        json = credentialFactory.getReference().delete(username, "attributeName");
 
         /**
          * Prints the status of the request
@@ -70,7 +70,7 @@ public class ProfileReferenceSamples {
         /**
          * Deletes all profile references related to the username
          */
-        json = credentialFactory.reference.deleteAll(username);
+        json = credentialFactory.getReference().deleteAll(username);
 
         /**
          * Prints the number of deleted references

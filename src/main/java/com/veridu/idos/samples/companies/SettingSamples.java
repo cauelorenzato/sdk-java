@@ -23,11 +23,12 @@ public class SettingSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          * @param companyToken
-         *            The credential companyToken that authorizes requests to the API
+         *            The credential companyToken that authorizes requests to
+         *            the API
          */
         CompanyFactory companyFactory = new CompanyFactory(Config.privateKey, Config.publicKey);
 
@@ -43,7 +44,7 @@ public class SettingSamples {
         /**
          * Gets the response from the API trying to create a new setting
          */
-        json = companyFactory.setting.create("SectionEx", "PropertyEx", "ValueEx");
+        json = companyFactory.getSetting().create("SectionEx", "PropertyEx", "ValueEx");
 
         /**
          * Gets the id of the created setting
@@ -53,7 +54,7 @@ public class SettingSamples {
         /**
          * Get the response from the API getting one setting
          */
-        json = companyFactory.setting.getOne(id);
+        json = companyFactory.getSetting().getOne(id);
 
         /**
          * Prints the array response
@@ -69,7 +70,7 @@ public class SettingSamples {
          * Deletes the setting that was just created giving its slug
          *
          */
-        json = companyFactory.setting.delete(id);
+        json = companyFactory.getSetting().delete(id);
 
         /**
          * Prints the status of the request
@@ -79,7 +80,7 @@ public class SettingSamples {
         /**
          * Deletes all settings for the given companyToken
          */
-        json = companyFactory.setting.deleteAll();
+        json = companyFactory.getSetting().deleteAll();
 
         /**
          * prints the number of deleted settings

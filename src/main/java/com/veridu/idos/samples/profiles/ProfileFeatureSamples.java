@@ -23,11 +23,12 @@ public class ProfileFeatureSamples {
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an CredentialFactory Class, and accessed through this
-         * object
+         * going to pass by an CredentialFactory Class, and accessed through
+         * this object
          * 
          */
-        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
+                Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
@@ -47,12 +48,12 @@ public class ProfileFeatureSamples {
         /**
          * Gets the response from the API trying to create a new feature
          */
-        json = credentialFactory.feature.create(username, "Testing", "testing");
+        json = credentialFactory.getFeature().create(username, "Testing", "testing");
 
         /**
          * Get the response form the API getting one feature
          */
-        json = credentialFactory.feature.getOne(username, "testing");
+        json = credentialFactory.getFeature().getOne(username, "testing");
 
         /**
          * Prints the array response
@@ -62,7 +63,7 @@ public class ProfileFeatureSamples {
         /**
          * Updates the feature giving the feature-slug
          */
-        json = credentialFactory.feature.update(username, "testing", "New testing", "new value");
+        json = credentialFactory.getFeature().update(username, "testing", "New testing", "new value");
 
         /**
          * Prints the json response
@@ -72,7 +73,7 @@ public class ProfileFeatureSamples {
         /**
          * Deletes the credential feature giving the feature name
          */
-        json = credentialFactory.feature.delete(username, "new-testing");
+        json = credentialFactory.getFeature().delete(username, "new-testing");
 
         /**
          * Prints the status of the request
@@ -82,7 +83,7 @@ public class ProfileFeatureSamples {
         /**
          * Deletes all features
          */
-        json = credentialFactory.feature.deleteAll(username);
+        json = credentialFactory.getFeature().deleteAll(username);
 
         /**
          * Prints the number of deleted features

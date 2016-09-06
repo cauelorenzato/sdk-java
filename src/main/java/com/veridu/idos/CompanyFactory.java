@@ -6,6 +6,7 @@ import com.veridu.idos.endpoints.companies.Hooks;
 import com.veridu.idos.endpoints.companies.Members;
 import com.veridu.idos.endpoints.companies.Permissions;
 import com.veridu.idos.endpoints.companies.ProfileTags;
+import com.veridu.idos.endpoints.companies.ServiceHandlers;
 import com.veridu.idos.endpoints.companies.Services;
 import com.veridu.idos.endpoints.companies.Settings;
 import com.veridu.idos.exceptions.InvalidToken;
@@ -57,6 +58,11 @@ public class CompanyFactory {
      * Services Endpoint object
      */
     private Services service;
+
+    /**
+     * Service Handlers Endpoint object
+     */
+    private ServiceHandlers serviceHandler;
 
     /**
      * Class constructor
@@ -176,6 +182,12 @@ public class CompanyFactory {
         if (!(this.service instanceof Services))
             this.service = new Services(this.companyToken);
         return this.service;
+    }
+
+    public ServiceHandlers getServiceHandler() throws InvalidToken {
+        if (!(this.serviceHandler instanceof ServiceHandlers))
+            this.serviceHandler = new ServiceHandlers(this.companyToken);
+        return this.serviceHandler;
     }
 
 }

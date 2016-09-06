@@ -49,13 +49,13 @@ public class NormalisedSamples {
         /**
          * Gets the response from the API trying to create a new normalised data
          */
-        json = credentialFactory.normalised.create(username, source, "Name", "Value");
+        json = credentialFactory.getNormalised().create(username, source, "Name", "Value");
 
         System.out.println(json);
         /**
          * Get the response form the API getting one normalised data
          */
-        json = credentialFactory.normalised.getOne(username, source, "Name");
+        json = credentialFactory.getNormalised().getOne(username, source, "Name");
 
         /**
          * Prints the array response
@@ -65,7 +65,7 @@ public class NormalisedSamples {
         /**
          * Updates the normalised data giving the normalizedName
          */
-        json = credentialFactory.normalised.update(username, source, "Name", "newName", "newValue");
+        json = credentialFactory.getNormalised().update(username, source, "Name", "newName", "newValue");
 
         /**
          * Prints the json response
@@ -75,7 +75,7 @@ public class NormalisedSamples {
         /**
          * Deletes the credential created giving the normalised name
          */
-        json = credentialFactory.normalised.delete(username, source, "newName");
+        json = credentialFactory.getNormalised().delete(username, source, "newName");
 
         /**
          * Prints the status of the request
@@ -85,7 +85,7 @@ public class NormalisedSamples {
         /**
          * Deletes all normalised data
          */
-        json = credentialFactory.normalised.deleteAll(username, source);
+        json = credentialFactory.getNormalised().deleteAll(username, source);
 
         /**
          * Prints the number of deleted features

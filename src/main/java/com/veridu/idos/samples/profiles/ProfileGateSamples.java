@@ -27,7 +27,8 @@ public class ProfileGateSamples {
          * this object
          * 
          */
-        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
+                Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
@@ -47,17 +48,17 @@ public class ProfileGateSamples {
         /**
          * Gets the response from the API trying to create a new gate
          */
-        json = credentialFactory.gate.create(username, "Gate Name", false);
+        json = credentialFactory.getGate().create(username, "Gate Name", false);
 
         /**
          * Get the response form the API getting one gate
          */
-        json = credentialFactory.gate.getOne(username, "gate-name");
+        json = credentialFactory.getGate().getOne(username, "gate-name");
 
         /**
          * Updates the gate password
          */
-        json = credentialFactory.gate.update(username, "gate-name", true);
+        json = credentialFactory.getGate().update(username, "gate-name", true);
         /**
          * Prints the array response
          */
@@ -66,7 +67,7 @@ public class ProfileGateSamples {
         /**
          * Deletes the gate created giving the gate name
          */
-        json = credentialFactory.gate.delete(username, "gate-name");
+        json = credentialFactory.getGate().delete(username, "gate-name");
 
         /**
          * Prints the status of the request
@@ -76,7 +77,7 @@ public class ProfileGateSamples {
         /**
          * Deletes all profile gates related to the username
          */
-        json = credentialFactory.gate.deleteAll(username);
+        json = credentialFactory.getGate().deleteAll(username);
 
         /**
          * Prints the number of deleted gates

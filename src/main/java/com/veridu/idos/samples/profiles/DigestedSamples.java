@@ -49,12 +49,12 @@ public class DigestedSamples {
         /**
          * Gets the response from the API trying to create a new digested data
          */
-        json = credentialFactory.digested.create(username, source, "Name", "Value");
+        json = credentialFactory.getDigested().create(username, source, "Name", "Value");
 
         /**
          * Get the response form the API getting one digested data
          */
-        json = credentialFactory.digested.getOne(username, source, "Name");
+        json = credentialFactory.getDigested().getOne(username, source, "Name");
 
         /**
          * Prints the array response
@@ -64,7 +64,7 @@ public class DigestedSamples {
         /**
          * Updates the digested data giving the digested name
          */
-        json = credentialFactory.digested.update(username, source, "Name", "newValue");
+        json = credentialFactory.getDigested().update(username, source, "Name", "newValue");
 
         /**
          * Prints the json response
@@ -74,7 +74,7 @@ public class DigestedSamples {
         /**
          * Deletes the credential created giving the digested name
          */
-        json = credentialFactory.digested.delete(username, source, "Name");
+        json = credentialFactory.getDigested().delete(username, source, "Name");
 
         /**
          * Prints the status of the request
@@ -84,7 +84,7 @@ public class DigestedSamples {
         /**
          * Deletes all digested data
          */
-        json = credentialFactory.digested.deleteAll(username, source);
+        json = credentialFactory.getDigested().deleteAll(username, source);
 
         /**
          * Prints the number of deleted features
