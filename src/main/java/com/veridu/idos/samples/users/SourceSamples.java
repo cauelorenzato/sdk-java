@@ -31,7 +31,7 @@ public class SourceSamples {
         UserFactory userFactory = new UserFactory(Config.credentialPrivateKey, Config.credentialPublicKey, username);
 
         /**
-         * Gets the response from the API listing all flags
+         * Gets the response from the API listing all sources
          */
         JsonObject json = userFactory.getSource().listAll(username);
 
@@ -46,13 +46,13 @@ public class SourceSamples {
         // HashMap<String, String> tags = new HashMap<>();
         // tags.put("otp_check", "email");
         // /**
-        // * Gets the response from the API trying to create a new flag
+        // * Gets the response from the API trying to create a new source
         // */
         // json = userFactory.getSource().create(username, "email", tags);
 
         int sourceId = 1860914067;
         /**
-         * Get the response form the API getting one flag
+         * Get the response form the API getting one source
          */
         json = userFactory.getSource().getOne(username, sourceId);
 
@@ -62,7 +62,7 @@ public class SourceSamples {
         System.out.println(json.get("data").getAsJsonObject());
 
         /**
-         * Deletes the flag created giving the flag name
+         * Deletes the source created giving the source name
          */
         json = userFactory.getSource().delete(username, sourceId);
 
@@ -72,22 +72,22 @@ public class SourceSamples {
         System.out.println(json.get("status").getAsBoolean());
 
         /**
-         * Deletes all profile flags related to the username
+         * Deletes all profile sources related to the username
          */
         json = userFactory.getSource().deleteAll(username);
 
         /**
-         * Prints the number of deleted flags
+         * Prints the number of deleted sources
          */
         System.out.println(json.get("deleted").getAsInt());
 
         /**
-         * Deletes all profile flags related to the username
+         * Deletes all profile sources related to the username
          */
         json = userFactory.getSource().deleteAll(username);
 
         /**
-         * Prints the number of deleted flags
+         * Prints the number of deleted sources
          */
         System.out.println(json.get("deleted").getAsInt());
     }
