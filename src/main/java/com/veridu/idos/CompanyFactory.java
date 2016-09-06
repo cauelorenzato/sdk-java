@@ -17,46 +17,46 @@ import com.veridu.idos.utils.IdOSUtils;
  */
 public class CompanyFactory {
 
-    public String companyToken;
+    private String companyToken;
 
     /**
      * Companies object
      */
-    public Companies company;
+    private Companies company;
     /**
      * Permissions object
      */
-    public Permissions permission;
+    private Permissions permission;
 
     /**
      * Credentials Endpoint object
      */
-    public Credentials credential;
+    private Credentials credential;
 
     /**
      * Settings Endpoint object
      */
-    public Settings setting;
+    private Settings setting;
 
     /**
      * Members Endpoint object
      */
-    public Members member;
+    private Members member;
 
     /**
      * Hooks Endpoint object
      */
-    public Hooks hook;
+    private Hooks hook;
 
     /**
      * ProfileTags Endpoint object
      */
-    public ProfileTags tag;
+    private ProfileTags tag;
 
     /**
      * Services Endpoint object
      */
-    public Services service;
+    private Services service;
 
     /**
      * Class constructor

@@ -12,11 +12,11 @@ public class UserFactory {
     /**
      * Necessary userToken to make requests to the api
      */
-    public String userToken;
+    private String userToken;
     /**
      * Tokens Endpoint object
      */
-    public Token token;
+    private Token token;
 
     /**
      * Class constructor

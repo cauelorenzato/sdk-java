@@ -44,7 +44,7 @@ public class CompanySamples {
         /**
          * Gets the response from the API trying to create a new company
          */
-        json = companyFactory.company.create("A Company");
+        json = companyFactory.getCompany().create("A Company");
 
         /**
          * Gets the status of the response If true, gets the company that was
@@ -54,7 +54,7 @@ public class CompanySamples {
             /**
              * Get the response form the API geting one company
              */
-            json = companyFactory.company.getOne("a-company");
+            json = companyFactory.getCompany().getOne("a-company");
 
             /**
              * Prints the array response
@@ -68,7 +68,7 @@ public class CompanySamples {
          * Deletes the company that was just created giving its slug
          * 
          */
-        json = companyFactory.company.delete("a-company");
+        json = companyFactory.getCompany().delete("a-company");
 
         /**
          * Prints the status of the request
