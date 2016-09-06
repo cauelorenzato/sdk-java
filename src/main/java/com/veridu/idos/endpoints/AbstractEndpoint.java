@@ -29,6 +29,9 @@ public abstract class AbstractEndpoint {
      */
     private int lastCode;
 
+    /**
+     * Token necessary to make requests to the API
+     */
     private String token;
 
     /**
@@ -76,15 +79,6 @@ public abstract class AbstractEndpoint {
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
-
-        // if ((method.compareTo("GET") == 0) && (data != null) &&
-        // (!data.isEmpty())) {
-        // if (url.contains("?"))
-        // url = url.concat("&");
-        // else
-        // url = url.concat("?");
-        // url = url.concat(data);
-        // }
 
         return url;
     }
@@ -149,6 +143,7 @@ public abstract class AbstractEndpoint {
                 response.append(line);
                 response.append('\r');
             }
+
             rd.close();
             return this.convertToJson(response.toString());
 

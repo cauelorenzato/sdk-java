@@ -1,5 +1,6 @@
 package com.veridu.idos;
 
+import com.veridu.idos.endpoints.users.Sources;
 import com.veridu.idos.endpoints.users.Token;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.IdOSUtils;
@@ -17,6 +18,11 @@ public class UserFactory {
      * Tokens Endpoint object
      */
     private Token token;
+
+    /**
+     * Sources Endpoint object
+     */
+    private Sources source;
 
     /**
      * Class constructor
@@ -45,12 +51,24 @@ public class UserFactory {
     /**
      * Instantiates Token endpoint
      * 
-     * @return
+     * @return Token instance
      * @throws InvalidToken
      */
     public Token getToken() throws InvalidToken {
         if (!(this.token instanceof Token))
             this.token = new Token(this.userToken);
         return this.token;
+    }
+
+    /**
+     * Instantiates Source endpoint
+     * 
+     * @return Sources instasnce
+     * @throws InvalidToken
+     */
+    public Sources getSource() throws InvalidToken {
+        if (!(this.source instanceof Sources))
+            this.source = new Sources(this.userToken);
+        return this.source;
     }
 }
