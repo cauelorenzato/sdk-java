@@ -17,8 +17,8 @@ public class Digested extends AbstractEndpoint {
     /**
      * Constructor Class
      */
-    public Digested() {
-
+    public Digested(String token) {
+        super(token);
     }
 
     /**

@@ -12,8 +12,8 @@ import com.veridu.idos.exceptions.SDKException;
  */
 public class ProfileTasks extends AbstractEndpoint {
 
-    public ProfileTasks() {
-
+    public ProfileTasks(String token) {
+        super(token);
     }
 
     /**

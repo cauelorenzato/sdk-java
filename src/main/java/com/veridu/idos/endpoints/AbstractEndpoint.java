@@ -11,9 +11,6 @@ import java.net.URL;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.veridu.idos.CompanyFactory;
-import com.veridu.idos.CredentialFactory;
-import com.veridu.idos.UserFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 
@@ -32,11 +29,13 @@ public abstract class AbstractEndpoint {
      */
     private int lastCode;
 
+    private String token;
+
     /**
      * Class constructor
      */
-    public AbstractEndpoint() {
-
+    public AbstractEndpoint(String token) {
+        this.token = token;
     }
 
     /**
@@ -116,13 +115,12 @@ public abstract class AbstractEndpoint {
             connection.setDoOutput(true);
             String tokenType = this.getEndpointName();
 
-            if (tokenType == "companies") {
-                connection.setRequestProperty("Authorization", "CompanyToken " + CompanyFactory.companyToken);
-            } else if (tokenType == "credentials") {
-                connection.setRequestProperty("Authorization", "CredentialToken " + CredentialFactory.credentialToken);
-            } else {
-                connection.setRequestProperty("Authorization", "UserToken " + UserFactory.userToken);
-            }
+            if (tokenType == "companies")
+                connection.setRequestProperty("Authorization", "CompanyToken " + this.token);
+            else if (tokenType == "credentials")
+                connection.setRequestProperty("Authorization", "CredentialToken " + this.token);
+            else
+                connection.setRequestProperty("Authorization", "UserToken " + this.token);
 
             if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
                 // connection.setRequestProperty("Content-Type",

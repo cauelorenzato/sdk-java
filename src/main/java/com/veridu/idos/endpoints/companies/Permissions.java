@@ -18,8 +18,8 @@ public class Permissions extends AbstractEndpoint {
      * Class Constructor
      * 
      */
-    public Permissions() throws InvalidToken {
-        super();
+    public Permissions(String token) throws InvalidToken {
+        super(token);
     }
 
     /**

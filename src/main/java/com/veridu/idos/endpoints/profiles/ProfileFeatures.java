@@ -11,7 +11,8 @@ public class ProfileFeatures extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public ProfileFeatures() {
+    public ProfileFeatures(String token) {
+        super(token);
     }
 
     /**

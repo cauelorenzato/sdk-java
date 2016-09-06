@@ -16,8 +16,8 @@ public class ProfileGates extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public ProfileGates() {
-
+    public ProfileGates(String token) {
+        super(token);
     }
 
     /**

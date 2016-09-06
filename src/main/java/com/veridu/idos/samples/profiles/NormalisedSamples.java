@@ -39,7 +39,7 @@ public class NormalisedSamples {
         /**
          * Gets the response from the API listing all normalised data
          */
-        JsonObject json = credentialFactory.getNormalized().listAll(username, source);
+        JsonObject json = credentialFactory.getNormalised().listAll(username, source);
 
         /**
          * Prints the json

@@ -17,7 +17,7 @@ import com.veridu.idos.utils.Utils;
  */
 public class CompanyFactory {
 
-    public static String companyToken;
+    public String companyToken;
 
     /**
      * Companies object
@@ -66,19 +66,18 @@ public class CompanyFactory {
      */
 
     public CompanyFactory(String token) throws InvalidToken {
-        if (token == null || token.isEmpty()) {
+        if ((token == null) || token.isEmpty())
             throw new InvalidToken();
-        }
 
-        CompanyFactory.companyToken = token;
+        this.companyToken = token;
     }
 
     public CompanyFactory(String privateKey, String publicKey) {
-        CompanyFactory.companyToken = Utils.generateCompanyToken(privateKey, publicKey);
+        this.companyToken = Utils.generateCompanyToken(privateKey, publicKey);
     }
 
     public CompanyFactory(String privateKey, String publicKey, String subject) {
-        CompanyFactory.companyToken = Utils.generateCompanyToken(privateKey, publicKey, subject);
+        this.companyToken = Utils.generateCompanyToken(privateKey, publicKey, subject);
     }
 
     /**
@@ -89,9 +88,8 @@ public class CompanyFactory {
      * @throws Emptytoken
      */
     public Companies getCompany() throws InvalidToken {
-        if (!(this.company instanceof Companies)) {
-            this.company = new Companies();
-        }
+        if (!(this.company instanceof Companies))
+            this.company = new Companies(this.companyToken);
         return this.company;
     }
 
@@ -102,9 +100,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public Permissions getPermission() throws InvalidToken {
-        if (!(this.permission instanceof Permissions)) {
-            this.permission = new Permissions();
-        }
+        if (!(this.permission instanceof Permissions))
+            this.permission = new Permissions(this.companyToken);
         return this.permission;
     }
 
@@ -115,9 +112,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public Credentials getCredential() throws InvalidToken {
-        if (!(this.credential instanceof Credentials)) {
-            this.credential = new Credentials();
-        }
+        if (!(this.credential instanceof Credentials))
+            this.credential = new Credentials(this.companyToken);
         return this.credential;
     }
 
@@ -128,9 +124,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public Settings getSetting() throws InvalidToken {
-        if (!(this.setting instanceof Settings)) {
-            this.setting = new Settings();
-        }
+        if (!(this.setting instanceof Settings))
+            this.setting = new Settings(this.companyToken);
         return this.setting;
     }
 
@@ -141,9 +136,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public Members getMember() throws InvalidToken {
-        if (!(this.member instanceof Members)) {
-            this.member = new Members();
-        }
+        if (!(this.member instanceof Members))
+            this.member = new Members(this.companyToken);
         return this.member;
     }
 
@@ -155,9 +149,8 @@ public class CompanyFactory {
      */
 
     public Hooks getHook() throws InvalidToken {
-        if (!(this.hook instanceof Hooks)) {
-            this.hook = new Hooks();
-        }
+        if (!(this.hook instanceof Hooks))
+            this.hook = new Hooks(this.companyToken);
         return this.hook;
     }
 
@@ -168,9 +161,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public ProfileTags getTag() throws InvalidToken {
-        if (!(this.tag instanceof ProfileTags)) {
-            this.tag = new ProfileTags();
-        }
+        if (!(this.tag instanceof ProfileTags))
+            this.tag = new ProfileTags(this.companyToken);
         return this.tag;
     }
 
@@ -181,9 +173,8 @@ public class CompanyFactory {
      * @throws InvalidToken
      */
     public Services getService() throws InvalidToken {
-        if (!(this.service instanceof Services)) {
-            this.service = new Services();
-        }
+        if (!(this.service instanceof Services))
+            this.service = new Services(this.companyToken);
         return this.service;
     }
 

@@ -16,8 +16,8 @@ public class ProfileAttributes extends AbstractEndpoint {
     /**
      * Class Constructor
      */
-    public ProfileAttributes() {
-
+    public ProfileAttributes(String token) {
+        super(token);
     }
 
     /**

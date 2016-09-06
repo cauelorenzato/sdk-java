@@ -17,8 +17,8 @@ public class ServiceHandler extends AbstractEndpoint {
     /**
      * Constructor Class
      */
-    public ServiceHandler() {
-
+    public ServiceHandler(String token) {
+        super(token);
     }
 
     /**
@@ -53,9 +53,8 @@ public class ServiceHandler extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("serviceId", serviceId);
         JsonArray listensArray = new JsonArray();
-        for (String list : listens) {
+        for (String list : listens)
             listensArray.add(list);
-        }
         data.add("listens", listensArray);
         return this.fetch("POST", "service-handlers", data);
     }
@@ -71,9 +70,8 @@ public class ServiceHandler extends AbstractEndpoint {
     public JsonObject update(int serviceHandlerId, ArrayList<String> listens) throws SDKException {
         JsonObject data = new JsonObject();
         JsonArray listensArray = new JsonArray();
-        for (String list : listens) {
+        for (String list : listens)
             listensArray.add(list);
-        }
         data.add("listens", listensArray);
 
         return this.fetch("PUT", "service-handlers/" + serviceHandlerId, data);

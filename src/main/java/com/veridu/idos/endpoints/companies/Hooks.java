@@ -16,8 +16,8 @@ public class Hooks extends AbstractEndpoint {
     /**
      * Class Constructor
      */
-    public Hooks() {
-
+    public Hooks(String token) {
+        super(token);
     }
 
     /**

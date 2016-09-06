@@ -12,7 +12,7 @@ public class UserFactory {
     /**
      * Necessary userToken to make requests to the api
      */
-    public static String userToken;
+    public String userToken;
     /**
      * Tokens Endpoint object
      */
@@ -25,11 +25,10 @@ public class UserFactory {
      * @throws Emptytoken
      */
     public UserFactory(String token) throws InvalidToken {
-        if (token == null || token.isEmpty()) {
+        if ((token == null) || token.isEmpty())
             throw new InvalidToken();
-        }
 
-        UserFactory.userToken = token;
+        this.userToken = token;
     }
 
     /**
@@ -40,7 +39,7 @@ public class UserFactory {
      * @param username
      */
     public UserFactory(String credentialPrivKey, String credentialPubKey, String username) {
-        UserFactory.userToken = Utils.generateUserToken(credentialPrivKey, credentialPubKey, username);
+        this.userToken = Utils.generateUserToken(credentialPrivKey, credentialPubKey, username);
     }
 
     /**
@@ -50,9 +49,8 @@ public class UserFactory {
      * @throws InvalidToken
      */
     public Token getToken() throws InvalidToken {
-        if (!(this.token instanceof Token)) {
-            this.token = new Token();
-        }
+        if (!(this.token instanceof Token))
+            this.token = new Token(this.userToken);
         return this.token;
     }
 }

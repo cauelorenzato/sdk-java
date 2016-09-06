@@ -16,8 +16,8 @@ public class Settings extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public Settings() {
-        super();
+    public Settings(String token) {
+        super(token);
     }
 
     /**

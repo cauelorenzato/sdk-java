@@ -17,8 +17,8 @@ public class Token extends AbstractEndpoint {
     /**
      * Constructor Class
      */
-    public Token() {
-
+    public Token(String token) {
+        super(token);
     }
 
     /**

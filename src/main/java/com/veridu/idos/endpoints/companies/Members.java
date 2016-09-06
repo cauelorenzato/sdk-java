@@ -17,8 +17,8 @@ public class Members extends AbstractEndpoint {
      * Class constructor
      */
 
-    public Members() {
-        super();
+    public Members(String token) {
+        super(token);
     }
 
     /**

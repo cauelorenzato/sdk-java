@@ -17,8 +17,8 @@ public class Normalised extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public Normalised() {
-
+    public Normalised(String token) {
+        super(token);
     }
 
     /**

@@ -17,8 +17,8 @@ public class ProfileReferences extends AbstractEndpoint {
     /**
      * Constructor class
      */
-    public ProfileReferences() {
-
+    public ProfileReferences(String token) {
+        super(token);
     }
 
     /**

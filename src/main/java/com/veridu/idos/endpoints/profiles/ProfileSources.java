@@ -15,8 +15,8 @@ public class ProfileSources extends AbstractEndpoint {
     /**
      * Constructor class
      */
-    public ProfileSources() {
-
+    public ProfileSources(String token) {
+        super(token);
     }
 
     /**

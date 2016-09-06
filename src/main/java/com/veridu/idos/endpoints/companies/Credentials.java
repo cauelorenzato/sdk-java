@@ -14,13 +14,11 @@ import com.veridu.idos.exceptions.SDKException;
  */
 public class Credentials extends AbstractEndpoint {
 
-    private String token = null;
-
     /**
      * Class constructor
      */
-    public Credentials() {
-        super();
+    public Credentials(String token) {
+        super(token);
     }
 
     /**

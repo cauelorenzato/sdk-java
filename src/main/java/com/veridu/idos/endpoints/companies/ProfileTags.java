@@ -17,8 +17,8 @@ public class ProfileTags extends AbstractEndpoint {
     /**
      * Constructor class
      */
-    public ProfileTags() {
-
+    public ProfileTags(String token) {
+        super(token);
     }
 
     /**

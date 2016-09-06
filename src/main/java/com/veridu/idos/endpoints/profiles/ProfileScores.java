@@ -14,8 +14,8 @@ import com.veridu.idos.exceptions.SDKException;
  */
 public class ProfileScores extends AbstractEndpoint {
 
-    public ProfileScores() {
-
+    public ProfileScores(String token) {
+        super(token);
     }
 
     /**

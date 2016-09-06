@@ -22,56 +22,56 @@ public class CredentialFactory {
     /**
      * Necessary companyToken to make requests to the api
      */
-    public static String credentialToken;
+    private String credentialToken;
     /**
      * Mapped Endpoint object
      */
-    public Normalised normalised;
+    private Normalised normalised;
 
     /**
      * ProfileFeatures Endpoint object
      */
-    public ProfileFeatures feature;
+    private ProfileFeatures feature;
 
     /**
      * ProfileFlags Endpoint object
      */
-    public ProfileFlags flag;
+    private ProfileFlags flag;
 
     /**
      * ProfileGates Endpoint object
      */
-    public ProfileGates gate;
+    private ProfileGates gate;
 
     /**
      * ProfileReferences Endpoint object
      */
-    public ProfileReferences reference;
+    private ProfileReferences reference;
 
     /**
      * ProfileSources Endpoint object
      */
-    public ProfileSources source;
+    private ProfileSources source;
 
     /**
      * ProfileTasks Endpoint object
      */
-    public ProfileTasks task;
+    private ProfileTasks task;
 
     /**
      * ProfileAttributes Endpoint object
      */
-    public ProfileAttributes attribute;
+    private ProfileAttributes attribute;
 
     /**
      * ProfileScores Endpoint object
      */
-    public ProfileScores score;
+    private ProfileScores score;
 
     /**
      * Digested Endpoint object
      */
-    public Digested digested;
+    private Digested digested;
 
     /**
      * Constructor Class
@@ -81,11 +81,11 @@ public class CredentialFactory {
      * @param subjectPublicKey
      */
     public CredentialFactory(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
-        CredentialFactory.credentialToken = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
+        this.credentialToken = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
     }
 
     public CredentialFactory(String token) {
-        CredentialFactory.credentialToken = token;
+        this.credentialToken = token;
     }
 
     /**
@@ -95,9 +95,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileAttributes getAttribute() throws InvalidToken {
-        if (!(this.attribute instanceof ProfileAttributes)) {
-            this.attribute = new ProfileAttributes();
-        }
+        if (!(this.attribute instanceof ProfileAttributes))
+            this.attribute = new ProfileAttributes(this.credentialToken);
         return this.attribute;
     }
 
@@ -107,10 +106,9 @@ public class CredentialFactory {
      * @return Normalised instance
      * @throws InvalidToken
      */
-    public Normalised getNormalized() throws InvalidToken {
-        if (!(this.normalised instanceof Normalised)) {
-            this.normalised = new Normalised();
-        }
+    public Normalised getNormalised() throws InvalidToken {
+        if (!(this.normalised instanceof Normalised))
+            this.normalised = new Normalised(this.credentialToken);
         return this.normalised;
     }
 
@@ -121,9 +119,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileFeatures getFeature() throws InvalidToken {
-        if (!(this.feature instanceof ProfileFeatures)) {
-            this.feature = new ProfileFeatures();
-        }
+        if (!(this.feature instanceof ProfileFeatures))
+            this.feature = new ProfileFeatures(this.credentialToken);
         return this.feature;
     }
 
@@ -134,9 +131,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileFlags getFlag() throws InvalidToken {
-        if (!(this.flag instanceof ProfileFlags)) {
-            this.flag = new ProfileFlags();
-        }
+        if (!(this.flag instanceof ProfileFlags))
+            this.flag = new ProfileFlags(this.credentialToken);
         return this.flag;
     }
 
@@ -147,9 +143,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileGates getGate() throws InvalidToken {
-        if (!(this.gate instanceof ProfileGates)) {
-            this.gate = new ProfileGates();
-        }
+        if (!(this.gate instanceof ProfileGates))
+            this.gate = new ProfileGates(this.credentialToken);
         return this.gate;
     }
 
@@ -160,9 +155,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileReferences getReference() throws InvalidToken {
-        if (!(this.reference instanceof ProfileReferences)) {
-            this.reference = new ProfileReferences();
-        }
+        if (!(this.reference instanceof ProfileReferences))
+            this.reference = new ProfileReferences(this.credentialToken);
         return this.reference;
     }
 
@@ -173,9 +167,8 @@ public class CredentialFactory {
      * @throws Invalidtoken
      */
     public ProfileTasks getTask() throws InvalidToken {
-        if (!(this.task instanceof ProfileTasks)) {
-            this.task = new ProfileTasks();
-        }
+        if (!(this.task instanceof ProfileTasks))
+            this.task = new ProfileTasks(this.credentialToken);
         return this.task;
     }
 
@@ -186,9 +179,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public ProfileScores getScore() throws InvalidToken {
-        if (!(this.score instanceof ProfileScores)) {
-            this.score = new ProfileScores();
-        }
+        if (!(this.score instanceof ProfileScores))
+            this.score = new ProfileScores(this.credentialToken);
         return this.score;
     }
 
@@ -199,9 +191,8 @@ public class CredentialFactory {
      * @throws InvalidToken
      */
     public Digested getDigested() throws InvalidToken {
-        if (!(this.digested instanceof Digested)) {
-            this.digested = new Digested();
-        }
+        if (!(this.digested instanceof Digested))
+            this.digested = new Digested(this.credentialToken);
         return this.digested;
     }
 }

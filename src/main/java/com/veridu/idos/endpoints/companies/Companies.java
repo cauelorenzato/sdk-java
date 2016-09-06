@@ -20,8 +20,8 @@ public class Companies extends AbstractEndpoint {
      * 
      * @throws EmptyPrivateKey
      */
-    public Companies() throws InvalidToken {
-        super();
+    public Companies(String token) throws InvalidToken {
+        super(token);
     }
 
     /**

@@ -15,8 +15,8 @@ public class ProfileFlags extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public ProfileFlags() {
-
+    public ProfileFlags(String token) {
+        super(token);
     }
 
     /**
