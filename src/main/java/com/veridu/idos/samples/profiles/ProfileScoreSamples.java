@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
 
 public class ProfileScoreSamples {
 
@@ -27,9 +26,8 @@ public class ProfileScoreSamples {
          * this object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
-
-        CredentialFactory credentialFactory = new CredentialFactory(token);
+        CredentialFactory credentialFactory = new CredentialFactory(Config.issuerPrivateKey, Config.issuerPublicKey,
+                Config.credentialPublicKey);
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";

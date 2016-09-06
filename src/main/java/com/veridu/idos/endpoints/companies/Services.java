@@ -93,6 +93,29 @@ public class Services extends AbstractEndpoint {
      */
     public JsonObject update(int serviceId, HashMap<String, Object> data) throws SDKException {
         JsonObject json = new JsonObject();
+        if (data.containsKey("name")) {
+            json.addProperty("name", (String) data.get("name"));
+        }
+
+        if (data.containsKey("url")) {
+            json.addProperty("url", (String) data.get("url"));
+        }
+
+        if (data.containsKey("enabled")) {
+            json.addProperty("enabled", (boolean) data.get("enabled"));
+        }
+
+        if (data.containsKey("access")) {
+            json.addProperty("access", (int) data.get("access"));
+        }
+
+        if (data.containsKey("auth_username")) {
+            json.addProperty("auth_username", (String) data.get("auth_username"));
+        }
+
+        if (data.containsKey("auth_password")) {
+            json.addProperty("auth_password", (String) data.get("auth_password"));
+        }
 
         return this.fetch("PUT", "services/" + serviceId, json);
     }

@@ -1,6 +1,7 @@
 package com.veridu.idos.samples.companies;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.CompanyFactory;
@@ -65,5 +66,35 @@ public class ServiceSamples {
          */
         System.out.println(json);
 
+        /**
+         * Creates a Hash of data giving the parameters to update
+         */
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        data.put("name", "Other Service Name");
+
+        System.out.println(json);
+        /**
+         * Updates the service giving the service id created
+         */
+        json = companyFactory.service.update(json.get("data").getAsJsonObject().get("id").getAsInt(), data);
+
+        /**
+         * Prints the json response
+         */
+        System.out.println(json);
+
+        /**
+         * Deletes the service giving the service id updated
+         */
+        json = companyFactory.service.delete(json.get("data").getAsJsonObject().get("id").getAsInt());
+
+        /**
+         * Prints the json response
+         */
+        System.out.println(json);
+
+        json = companyFactory.service.deleteAll();
+
+        System.out.println(json.get("deleted").getAsInt());
     }
 }
