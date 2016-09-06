@@ -10,6 +10,7 @@ import com.veridu.idos.endpoints.profiles.ProfileReferences;
 import com.veridu.idos.endpoints.profiles.ProfileScores;
 import com.veridu.idos.endpoints.profiles.ProfileSources;
 import com.veridu.idos.endpoints.profiles.ProfileTasks;
+import com.veridu.idos.endpoints.profiles.ProfileWarnings;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.utils.IdOSUtils;
 
@@ -72,6 +73,11 @@ public class CredentialFactory {
      * Digested Endpoint object
      */
     private Digested digested;
+
+    /**
+     * ProfileWarnings Endpoint object
+     */
+    private ProfileWarnings warning;
 
     /**
      * Constructor Class
@@ -194,5 +200,17 @@ public class CredentialFactory {
         if (!(this.digested instanceof Digested))
             this.digested = new Digested(this.credentialToken);
         return this.digested;
+    }
+
+    /**
+     * Instantiates Warning endpoint
+     * 
+     * @return ProfileWarnings instance
+     * @throws InvalidToken
+     */
+    public ProfileWarnings getWarning() throws InvalidToken {
+        if (!(this.warning instanceof ProfileWarnings))
+            this.warning = new ProfileWarnings(this.credentialToken);
+        return this.warning;
     }
 }

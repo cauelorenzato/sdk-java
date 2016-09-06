@@ -75,15 +75,15 @@ public class CompanyFactory {
         if ((token == null) || token.isEmpty())
             throw new InvalidToken();
 
-        this.companyToken = token;
+        this.setCompanyToken(token);
     }
 
     public CompanyFactory(String privateKey, String publicKey) {
-        this.companyToken = IdOSUtils.generateCompanyToken(privateKey, publicKey);
+        this.setCompanyToken(IdOSUtils.generateCompanyToken(privateKey, publicKey));
     }
 
     public CompanyFactory(String privateKey, String publicKey, String subject) {
-        this.companyToken = IdOSUtils.generateCompanyToken(privateKey, publicKey, subject);
+        this.setCompanyToken(IdOSUtils.generateCompanyToken(privateKey, publicKey, subject));
     }
 
     /**
@@ -184,10 +184,34 @@ public class CompanyFactory {
         return this.service;
     }
 
+    /**
+     * Instantiates ServiceHandlers endpoint
+     * 
+     * @return ServiceHandlers instance
+     * @throws InvalidToken
+     */
     public ServiceHandlers getServiceHandler() throws InvalidToken {
         if (!(this.serviceHandler instanceof ServiceHandlers))
             this.serviceHandler = new ServiceHandlers(this.companyToken);
         return this.serviceHandler;
+    }
+
+    /**
+     * Retrieves company token
+     * 
+     * @return companyToken
+     */
+    public String getCompanyToken() {
+        return this.companyToken;
+    }
+
+    /**
+     * Sets the company token necessary to make requests
+     * 
+     * @param companyToken
+     */
+    public void setCompanyToken(String companyToken) {
+        this.companyToken = companyToken;
     }
 
 }

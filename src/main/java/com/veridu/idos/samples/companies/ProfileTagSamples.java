@@ -42,7 +42,7 @@ public class ProfileTagSamples {
         /**
          * Gets the response from the API trying to create a new tag
          */
-        json = companyFactory.getTag().create(username, "Tag Name", "tag-name");
+        json = companyFactory.getTag().create(username, "TagName", "tag-name");
 
         /**
          * Get the response form the API getting one tag
