@@ -7,7 +7,7 @@ import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 public class ProfileFeatureSamples {
     public static void main(String[] args) throws InvalidToken, SDKException, UnsupportedEncodingException {
@@ -27,7 +27,7 @@ public class ProfileFeatureSamples {
          * object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 

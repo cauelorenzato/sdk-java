@@ -11,7 +11,7 @@ import com.veridu.idos.endpoints.profiles.ProfileScores;
 import com.veridu.idos.endpoints.profiles.ProfileSources;
 import com.veridu.idos.endpoints.profiles.ProfileTasks;
 import com.veridu.idos.exceptions.InvalidToken;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 /**
  * CredentialFactory Class creates all Endpoints
@@ -81,7 +81,7 @@ public class CredentialFactory {
      * @param subjectPublicKey
      */
     public CredentialFactory(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
-        this.credentialToken = Utils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
+        this.credentialToken = IdOSUtils.generateToken(issuerPrivateKey, issuerPublicKey, subjectPublicKey);
     }
 
     public CredentialFactory(String token) {

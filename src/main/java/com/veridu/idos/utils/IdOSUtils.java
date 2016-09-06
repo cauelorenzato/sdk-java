@@ -4,7 +4,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-public class Utils {
+public class IdOSUtils {
 
     /**
      * Generates companyToken necessary for many requests to the API
@@ -37,7 +37,7 @@ public class Utils {
      * @return String companyToken
      */
     public static String generateCompanyToken(String privateKey, String publicKey, String subject) {
-        return Utils.generateToken(privateKey, publicKey, subject);
+        return IdOSUtils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Utils {
      * @return String companyToken
      */
     public static String generateCompanyToken(String privateKey, String publicKey) {
-        return Utils.generateToken(privateKey, publicKey, "");
+        return IdOSUtils.generateToken(privateKey, publicKey, "");
     }
 
     /**
@@ -60,7 +60,7 @@ public class Utils {
      * @return String companyToken
      */
     public static String generateCredentialToken(String privateKey, String publicKey, String subject) {
-        return Utils.generateToken(privateKey, publicKey, subject);
+        return IdOSUtils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Utils {
      * @return String companyToken
      */
     public static String generateUserToken(String privateKey, String publicKey, String subject) {
-        return Utils.generateToken(privateKey, publicKey, subject);
+        return IdOSUtils.generateToken(privateKey, publicKey, subject);
     }
 
     /**
@@ -83,6 +83,6 @@ public class Utils {
      * @return
      */
     public static String generateUserToken(String privateKey, String publicKey) {
-        return Utils.generateToken(privateKey, publicKey, "");
+        return IdOSUtils.generateToken(privateKey, publicKey, "");
     }
 }

@@ -2,7 +2,7 @@ package com.veridu.idos;
 
 import com.veridu.idos.endpoints.users.Token;
 import com.veridu.idos.exceptions.InvalidToken;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 /**
  * UserFactory Class creates all Endpoints
@@ -39,7 +39,7 @@ public class UserFactory {
      * @param username
      */
     public UserFactory(String credentialPrivKey, String credentialPubKey, String username) {
-        this.userToken = Utils.generateUserToken(credentialPrivKey, credentialPubKey, username);
+        this.userToken = IdOSUtils.generateUserToken(credentialPrivKey, credentialPubKey, username);
     }
 
     /**

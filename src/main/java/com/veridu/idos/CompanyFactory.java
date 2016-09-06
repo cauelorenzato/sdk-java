@@ -9,7 +9,7 @@ import com.veridu.idos.endpoints.companies.ProfileTags;
 import com.veridu.idos.endpoints.companies.Services;
 import com.veridu.idos.endpoints.companies.Settings;
 import com.veridu.idos.exceptions.InvalidToken;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 /**
  * CredentialFactory Endpoint creates all Endpoints
@@ -73,11 +73,11 @@ public class CompanyFactory {
     }
 
     public CompanyFactory(String privateKey, String publicKey) {
-        this.companyToken = Utils.generateCompanyToken(privateKey, publicKey);
+        this.companyToken = IdOSUtils.generateCompanyToken(privateKey, publicKey);
     }
 
     public CompanyFactory(String privateKey, String publicKey, String subject) {
-        this.companyToken = Utils.generateCompanyToken(privateKey, publicKey, subject);
+        this.companyToken = IdOSUtils.generateCompanyToken(privateKey, publicKey, subject);
     }
 
     /**

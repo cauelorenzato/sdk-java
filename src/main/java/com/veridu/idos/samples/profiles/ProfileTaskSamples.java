@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 public class ProfileTaskSamples {
     public static void main(String[] args) throws SDKException {
@@ -24,7 +24,7 @@ public class ProfileTaskSamples {
          * object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPublicKey, Config.issuerPrivateKey, Config.issuerPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 

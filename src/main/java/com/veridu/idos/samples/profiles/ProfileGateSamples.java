@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.Utils;
+import com.veridu.idos.utils.IdOSUtils;
 
 public class ProfileGateSamples {
 
@@ -27,7 +27,7 @@ public class ProfileGateSamples {
          * this object
          * 
          */
-        String token = Utils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
+        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey, Config.credentialPublicKey);
 
         CredentialFactory credentialFactory = new CredentialFactory(token);
 
