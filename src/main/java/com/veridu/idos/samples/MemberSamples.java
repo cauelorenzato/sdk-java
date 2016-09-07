@@ -30,7 +30,7 @@ public class MemberSamples {
          * @param privateKey
          *            The companyToken that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSHelper.getCredentials());
+        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all members

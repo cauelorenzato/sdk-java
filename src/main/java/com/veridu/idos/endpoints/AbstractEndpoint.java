@@ -182,7 +182,7 @@ public abstract class AbstractEndpoint {
                 || className.equals("ServiceHandlers") || className.equals("Services")
                 || className.equals("Settings")) {
             tokenType = "companies";
-        } else if (className.equals("Companies") || className.equals("Companies")) {
+        } else if (className.equals("Tokens") || className.equals("ProfileSources")) {
             tokenType = "users";
         } else {
             tokenType = "credentials";

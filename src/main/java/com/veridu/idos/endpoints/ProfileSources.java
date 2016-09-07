@@ -1,10 +1,14 @@
 package com.veridu.idos.endpoints;
 
+import java.util.HashMap;
+
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
 
 /**
- * Profile Sources Endpoint Class
+ * ProfileSources Endpoint class
  * 
  * @version 2.0
  *
@@ -13,6 +17,8 @@ public class ProfileSources extends AbstractEndpoint {
 
     /**
      * Constructor class
+     * 
+     * @param token
      */
     public ProfileSources(String token) {
         super(token);
@@ -31,38 +37,43 @@ public class ProfileSources extends AbstractEndpoint {
 
     /**
      * Retrieves a source given its source name
-     *
+     * 
      * @param username
-     * @param sourceName
+     * @param sourceId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, String sourceName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceName);
+    public JsonObject getOne(String username, int sourceId) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId);
     }
 
     /**
      * Creates a source passing the source name
      * 
      * @param username
-     * @param sourceName
+     * @param sourceId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject create(String username, String sourceName) throws SDKException {
-        return this.fetch("POST", "profiles/" + username + "/sources/" + sourceName);
+    public JsonObject create(String username, String name, HashMap<String, String> tags) throws SDKException {
+        Gson gson = new Gson();
+        String json = gson.toJson(tags);
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("tags", json);
+        return this.fetch("POST", "profiles/" + username + "/sources", data);
     }
 
     /**
      * Deletes a source given the source name
      * 
      * @param username
-     * @param sourceName
+     * @param sourceId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject delete(String username, String sourceName) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceName);
+    public JsonObject delete(String username, int sourceId) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId);
     }
 
     /**
@@ -75,5 +86,4 @@ public class ProfileSources extends AbstractEndpoint {
     public JsonObject deleteAll(String username) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/sources");
     }
-
 }

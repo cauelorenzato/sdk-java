@@ -27,7 +27,7 @@ public class CredentialsSamples {
          *            The jwt companyToken generated that authorizes requests to
          *            the API
          */
-        Factory factory = new Factory(IdOSHelper.getCredentials());
+        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all credentials

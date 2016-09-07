@@ -434,6 +434,13 @@ public class Factory {
         return this.token;
     }
 
+    public ProfileSources getSource() throws InvalidToken {
+        if (!(this.source instanceof ProfileSources)) {
+            this.source = new ProfileSources(this.userToken);
+        }
+        return this.source;
+    }
+
     /**
      * Retrieves company token
      * 
