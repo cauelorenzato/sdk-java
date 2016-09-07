@@ -1,7 +1,11 @@
 package com.veridu.idos.endpoints;
 
+import java.util.HashMap;
+
 import com.google.gson.JsonObject;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Tasks Endpoint Class
@@ -11,8 +15,8 @@ import com.veridu.idos.exceptions.SDKException;
  */
 public class ProfileTasks extends AbstractEndpoint {
 
-    public ProfileTasks(String token) {
-        super(token);
+    public ProfileTasks(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.HANDLER);
     }
 
     /**

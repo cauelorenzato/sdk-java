@@ -1,11 +1,13 @@
 package com.veridu.idos.endpoints;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Companies Class
@@ -19,8 +21,8 @@ public class Companies extends AbstractEndpoint {
      * 
      * @throws EmptyPrivateKey
      */
-    public Companies(String token) throws InvalidToken {
-        super(token);
+    public Companies(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.MANAGEMENT);
     }
 
     /**

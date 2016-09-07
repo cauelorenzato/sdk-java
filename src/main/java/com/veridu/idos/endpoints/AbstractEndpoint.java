@@ -7,15 +7,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
+import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.IdOSUtils;
 
 public abstract class AbstractEndpoint {
 
+    /**
+     * IdOSAuthType enum
+     */
+    protected IdOSAuthType authType;
     /**
      * Company's slug necessary to make most of requests to the API
      */
@@ -34,11 +42,15 @@ public abstract class AbstractEndpoint {
      */
     private String token;
 
+    private HashMap<String, String> credentials;
+
     /**
      * Class constructor
      */
-    public AbstractEndpoint(String token) {
-        this.token = token;
+    public AbstractEndpoint(HashMap<String, String> credentials, IdOSAuthType authType) throws InvalidToken {
+        this.credentials = credentials;
+        this.authType = authType;
+        this.generateAuthToken();
     }
 
     /**
@@ -107,15 +119,13 @@ public abstract class AbstractEndpoint {
             connection.setReadTimeout(10000);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
-            String tokenType = this.getEndpointName();
-
-            if (tokenType == "companies")
+            if (this.authType.toString().equals("MANAGEMENT")) {
                 connection.setRequestProperty("Authorization", "CompanyToken " + this.token);
-            else if (tokenType == "credentials")
+            } else if (this.authType.toString().equals("HANDLER")) {
                 connection.setRequestProperty("Authorization", "CredentialToken " + this.token);
-            else
+            } else {
                 connection.setRequestProperty("Authorization", "UserToken " + this.token);
-
+            }
             if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
                 connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 connection.setRequestProperty("Content-Length", Integer.toString(data.size()));
@@ -161,7 +171,6 @@ public abstract class AbstractEndpoint {
      * @return JsonObject response
      */
     protected JsonObject convertToJson(String apiResponse) {
-        // System.out.println(apiResponse);
         JsonParser parser = new JsonParser();
         JsonElement response = parser.parse(apiResponse);
         JsonObject json = response.getAsJsonObject();
@@ -170,24 +179,33 @@ public abstract class AbstractEndpoint {
     }
 
     /**
-     * Gets the endpoint name to set what authorization the request need to send
+     * Setter
      * 
-     * @return String name of authorization token
+     * @param authType
      */
-    protected String getEndpointName() {
-        String className = this.getClass().getSimpleName();
-        String tokenType = null;
-        if (className.equals("Companies") || className.equals("Credentials") || className.equals("Hooks")
-                || className.equals("Members") || className.equals("Permissions") || className.equals("ProfileTags")
-                || className.equals("ServiceHandlers") || className.equals("Services")
-                || className.equals("Settings")) {
-            tokenType = "companies";
-        } else if (className.equals("Tokens") || className.equals("ProfileSources")) {
-            tokenType = "users";
-        } else {
-            tokenType = "credentials";
+    public void setAuthType(IdOSAuthType authType) throws InvalidToken {
+        this.authType = authType;
+        this.generateAuthToken();
+    }
+
+    private void generateAuthToken() throws InvalidToken {
+        switch (this.authType) {
+        case USER:
+            this.token = IdOSUtils.generateUserToken(credentials.get("credentialPrivateKey"),
+                    credentials.get("credentialPublicKey"), credentials.get("username"));
+            break;
+        case MANAGEMENT:
+            this.token = IdOSUtils.generateCompanyToken(credentials.get("companyPrivateKey"),
+                    credentials.get("companyPublicKey"));
+            break;
+        case HANDLER:
+            this.token = IdOSUtils.generateCredentialToken(credentials.get("handlerPrivateKey"),
+                    credentials.get("handlerPublicKey"), credentials.get("credentialPublicKey"));
+            break;
+        default:
+            throw new InvalidToken();
         }
 
-        return tokenType;
     }
+
 }

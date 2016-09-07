@@ -11,7 +11,6 @@ import com.veridu.idos.endpoints.Normalised;
 import com.veridu.idos.endpoints.Permissions;
 import com.veridu.idos.endpoints.ProfileAttributes;
 import com.veridu.idos.endpoints.ProfileFeatures;
-import com.veridu.idos.endpoints.ProfileFlags;
 import com.veridu.idos.endpoints.ProfileGates;
 import com.veridu.idos.endpoints.ProfileReferences;
 import com.veridu.idos.endpoints.ProfileScores;
@@ -24,7 +23,6 @@ import com.veridu.idos.endpoints.Services;
 import com.veridu.idos.endpoints.Settings;
 import com.veridu.idos.endpoints.Token;
 import com.veridu.idos.exceptions.InvalidToken;
-import com.veridu.idos.utils.IdOSUtils;
 
 /**
  * CredentialFactory Endpoint creates all Endpoints
@@ -33,19 +31,9 @@ import com.veridu.idos.utils.IdOSUtils;
 public class IdOSAPIFactory {
 
     /**
-     * Company token
+     * Credentials data
      */
-    private String companyToken;
-
-    /**
-     * Credential token
-     */
-    private String credentialToken;
-
-    /**
-     * User Token
-     */
-    private String userToken;
+    private HashMap<String, String> credentials;
     /**
      * Companies object
      */
@@ -101,11 +89,6 @@ public class IdOSAPIFactory {
     private ProfileFeatures feature;
 
     /**
-     * ProfileFlags Endpoint object
-     */
-    private ProfileFlags flag;
-
-    /**
      * ProfileGates Endpoint object
      */
     private ProfileGates gate;
@@ -153,43 +136,12 @@ public class IdOSAPIFactory {
     /**
      * Class constructor
      * 
-     * @param companyToken
-     * @throws Emptytoken
+     * @param credentials
+     *            HashMap<String, String>
      */
-    // Refazer
-    public IdOSAPIFactory(String token) throws InvalidToken {
-        if ((token == null) || token.isEmpty())
-            throw new InvalidToken();
-
-        this.setCompanyToken(token);
-    }
 
     public IdOSAPIFactory(HashMap<String, String> credentials) {
-        if ((credentials.containsKey("companyPrivateKey")) && (credentials.containsKey("companyPublicKey"))) {
-            if (credentials.containsKey("companySubject")) {
-                this.companyToken = IdOSUtils.generateCompanyToken(credentials.get("companyPrivateKey"),
-                        credentials.get("companyPublicKey"), credentials.get("companySubject"));
-            } else {
-                this.companyToken = IdOSUtils.generateCompanyToken(credentials.get("companyPrivateKey"),
-                        credentials.get("companyPublicKey"));
-            }
-        }
-
-        if ((credentials.containsKey("handlerPrivateKey")) && (credentials.containsKey("handlerPublicKey"))
-                && (credentials.containsKey("credentialPublicKey"))) {
-            this.credentialToken = IdOSUtils.generateCredentialToken(credentials.get("handlerPrivateKey"),
-                    credentials.get("handlerPublicKey"), credentials.get("credentialPublicKey"));
-        }
-
-        if ((credentials.containsKey("credentialPrivateKey")) && (credentials.containsKey("credentialPublicKey"))
-                && (credentials.containsKey("username"))) {
-            this.userToken = IdOSUtils.generateUserToken(credentials.get("credentialPrivateKey"),
-                    credentials.get("credentialPublicKey"), credentials.get("username"));
-        }
-    }
-
-    public IdOSAPIFactory(String privateKey, String publicKey, String subject) {
-        this.setCompanyToken(IdOSUtils.generateCompanyToken(privateKey, publicKey, subject));
+        this.credentials = credentials;
     }
 
     /**
@@ -201,7 +153,7 @@ public class IdOSAPIFactory {
      */
     public Companies getCompany() throws InvalidToken {
         if (!(this.company instanceof Companies))
-            this.company = new Companies(this.companyToken);
+            this.company = new Companies(this.credentials);
         return this.company;
     }
 
@@ -213,7 +165,7 @@ public class IdOSAPIFactory {
      */
     public Permissions getPermission() throws InvalidToken {
         if (!(this.permission instanceof Permissions))
-            this.permission = new Permissions(this.companyToken);
+            this.permission = new Permissions(this.credentials);
         return this.permission;
     }
 
@@ -225,7 +177,7 @@ public class IdOSAPIFactory {
      */
     public Credentials getCredential() throws InvalidToken {
         if (!(this.credential instanceof Credentials))
-            this.credential = new Credentials(this.companyToken);
+            this.credential = new Credentials(this.credentials);
         return this.credential;
     }
 
@@ -237,7 +189,7 @@ public class IdOSAPIFactory {
      */
     public Settings getSetting() throws InvalidToken {
         if (!(this.setting instanceof Settings))
-            this.setting = new Settings(this.companyToken);
+            this.setting = new Settings(this.credentials);
         return this.setting;
     }
 
@@ -249,7 +201,7 @@ public class IdOSAPIFactory {
      */
     public Members getMember() throws InvalidToken {
         if (!(this.member instanceof Members))
-            this.member = new Members(this.companyToken);
+            this.member = new Members(this.credentials);
         return this.member;
     }
 
@@ -262,7 +214,7 @@ public class IdOSAPIFactory {
 
     public Hooks getHook() throws InvalidToken {
         if (!(this.hook instanceof Hooks))
-            this.hook = new Hooks(this.companyToken);
+            this.hook = new Hooks(this.credentials);
         return this.hook;
     }
 
@@ -274,7 +226,7 @@ public class IdOSAPIFactory {
      */
     public ProfileTags getTag() throws InvalidToken {
         if (!(this.tag instanceof ProfileTags))
-            this.tag = new ProfileTags(this.companyToken);
+            this.tag = new ProfileTags(this.credentials);
         return this.tag;
     }
 
@@ -286,7 +238,7 @@ public class IdOSAPIFactory {
      */
     public Services getService() throws InvalidToken {
         if (!(this.service instanceof Services))
-            this.service = new Services(this.companyToken);
+            this.service = new Services(this.credentials);
         return this.service;
     }
 
@@ -298,7 +250,7 @@ public class IdOSAPIFactory {
      */
     public ServiceHandlers getServiceHandler() throws InvalidToken {
         if (!(this.serviceHandler instanceof ServiceHandlers))
-            this.serviceHandler = new ServiceHandlers(this.companyToken);
+            this.serviceHandler = new ServiceHandlers(this.credentials);
         return this.serviceHandler;
     }
 
@@ -310,7 +262,7 @@ public class IdOSAPIFactory {
      */
     public ProfileAttributes getAttribute() throws InvalidToken {
         if (!(this.attribute instanceof ProfileAttributes))
-            this.attribute = new ProfileAttributes(this.credentialToken);
+            this.attribute = new ProfileAttributes(this.credentials);
         return this.attribute;
     }
 
@@ -322,7 +274,7 @@ public class IdOSAPIFactory {
      */
     public Normalised getNormalised() throws InvalidToken {
         if (!(this.normalised instanceof Normalised))
-            this.normalised = new Normalised(this.credentialToken);
+            this.normalised = new Normalised(this.credentials);
         return this.normalised;
     }
 
@@ -334,20 +286,8 @@ public class IdOSAPIFactory {
      */
     public ProfileFeatures getFeature() throws InvalidToken {
         if (!(this.feature instanceof ProfileFeatures))
-            this.feature = new ProfileFeatures(this.credentialToken);
+            this.feature = new ProfileFeatures(this.credentials);
         return this.feature;
-    }
-
-    /**
-     * Instantiates Flag endpoint
-     * 
-     * @return ProfileFlags instance
-     * @throws InvalidToken
-     */
-    public ProfileFlags getFlag() throws InvalidToken {
-        if (!(this.flag instanceof ProfileFlags))
-            this.flag = new ProfileFlags(this.credentialToken);
-        return this.flag;
     }
 
     /**
@@ -358,7 +298,7 @@ public class IdOSAPIFactory {
      */
     public ProfileGates getGate() throws InvalidToken {
         if (!(this.gate instanceof ProfileGates))
-            this.gate = new ProfileGates(this.credentialToken);
+            this.gate = new ProfileGates(this.credentials);
         return this.gate;
     }
 
@@ -370,7 +310,7 @@ public class IdOSAPIFactory {
      */
     public ProfileReferences getReference() throws InvalidToken {
         if (!(this.reference instanceof ProfileReferences))
-            this.reference = new ProfileReferences(this.credentialToken);
+            this.reference = new ProfileReferences(this.credentials);
         return this.reference;
     }
 
@@ -382,7 +322,7 @@ public class IdOSAPIFactory {
      */
     public ProfileTasks getTask() throws InvalidToken {
         if (!(this.task instanceof ProfileTasks))
-            this.task = new ProfileTasks(this.credentialToken);
+            this.task = new ProfileTasks(this.credentials);
         return this.task;
     }
 
@@ -394,7 +334,7 @@ public class IdOSAPIFactory {
      */
     public ProfileScores getScore() throws InvalidToken {
         if (!(this.score instanceof ProfileScores))
-            this.score = new ProfileScores(this.credentialToken);
+            this.score = new ProfileScores(this.credentials);
         return this.score;
     }
 
@@ -406,7 +346,7 @@ public class IdOSAPIFactory {
      */
     public Digested getDigested() throws InvalidToken {
         if (!(this.digested instanceof Digested))
-            this.digested = new Digested(this.credentialToken);
+            this.digested = new Digested(this.credentials);
         return this.digested;
     }
 
@@ -418,7 +358,7 @@ public class IdOSAPIFactory {
      */
     public ProfileWarnings getWarning() throws InvalidToken {
         if (!(this.warning instanceof ProfileWarnings))
-            this.warning = new ProfileWarnings(this.credentialToken);
+            this.warning = new ProfileWarnings(this.credentials);
         return this.warning;
     }
 
@@ -430,32 +370,21 @@ public class IdOSAPIFactory {
      */
     public Token getToken() throws InvalidToken {
         if (!(this.token instanceof Token))
-            this.token = new Token(this.userToken);
+            this.token = new Token(this.credentials);
         return this.token;
     }
 
+    /**
+     * Instantiates Source endpoint
+     * 
+     * @return Source instance
+     * @throws InvalidToken
+     */
     public ProfileSources getSource() throws InvalidToken {
         if (!(this.source instanceof ProfileSources)) {
-            this.source = new ProfileSources(this.userToken);
+            this.source = new ProfileSources(this.credentials);
         }
         return this.source;
     }
 
-    /**
-     * Retrieves company token
-     * 
-     * @return companyToken
-     */
-    public String getCompanyToken() {
-        return this.companyToken;
-    }
-
-    /**
-     * Sets the company token necessary to make requests
-     * 
-     * @param companyToken
-     */
-    public void setCompanyToken(String companyToken) {
-        this.companyToken = companyToken;
-    }
 }

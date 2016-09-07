@@ -3,8 +3,6 @@ package com.veridu.idos.samples;
 import com.google.gson.JsonObject;
 import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.settings.Config;
-import com.veridu.idos.utils.IdOSUtils;
 
 public class ProfileWarningSamples {
 
@@ -16,18 +14,17 @@ public class ProfileWarningSamples {
          */
         JsonObject parsed = null;
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * IdOSAPIFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an IdOSAPIFactory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this
+         * object
          * 
          */
-        String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
-                Config.credentialPublicKey);
 
-        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(token);
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Username necessary for all requests of this endpoint

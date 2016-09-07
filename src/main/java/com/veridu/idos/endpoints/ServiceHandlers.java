@@ -1,10 +1,13 @@
 package com.veridu.idos.endpoints;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * ServiceHandlers Endpoint class
@@ -15,8 +18,8 @@ public class ServiceHandlers extends AbstractEndpoint {
     /**
      * Constructor Class
      */
-    public ServiceHandlers(String token) {
-        super(token);
+    public ServiceHandlers(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.MANAGEMENT);
     }
 
     /**

@@ -1,9 +1,12 @@
 package com.veridu.idos.endpoints;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile References Endpoint Class
@@ -16,8 +19,8 @@ public class ProfileReferences extends AbstractEndpoint {
     /**
      * Constructor class
      */
-    public ProfileReferences(String token) {
-        super(token);
+    public ProfileReferences(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.HANDLER);
     }
 
     /**

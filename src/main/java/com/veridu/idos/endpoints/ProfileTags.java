@@ -3,7 +3,9 @@ package com.veridu.idos.endpoints;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Tags Endpoint Class
@@ -16,8 +18,8 @@ public class ProfileTags extends AbstractEndpoint {
     /**
      * Constructor class
      */
-    public ProfileTags(String token) {
-        super(token);
+    public ProfileTags(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.MANAGEMENT);
     }
 
     /**

@@ -1,7 +1,11 @@
 package com.veridu.idos.endpoints;
 
+import java.util.HashMap;
+
 import com.google.gson.JsonObject;
+import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * ProfileWarnings Endpoint class
@@ -15,8 +19,8 @@ public class ProfileWarnings extends AbstractEndpoint {
      * 
      * @param token
      */
-    public ProfileWarnings(String token) {
-        super(token);
+    public ProfileWarnings(HashMap<String, String> credentials) throws InvalidToken {
+        super(credentials, IdOSAuthType.HANDLER);
     }
 
     /**
