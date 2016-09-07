@@ -1,7 +1,7 @@
 package com.veridu.idos.samples;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.IdOSUtils;
@@ -16,18 +16,18 @@ public class ProfileWarningSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this object
          * 
          */
         String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
                 Config.credentialPublicKey);
 
-        Factory factory = new Factory(token);
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(token);
 
         /**
          * Username necessary for all requests of this endpoint
@@ -37,7 +37,7 @@ public class ProfileWarningSamples {
         /**
          * Gets the response from the API listing all warnings
          */
-        JsonObject json = factory.getWarning().listAll(username);
+        JsonObject json = idOSAPIFactory.getWarning().listAll(username);
 
         /**
          * Prints the json
@@ -47,12 +47,12 @@ public class ProfileWarningSamples {
         /**
          * Gets the response from the API trying to create a new warning
          */
-        json = factory.getWarning().create(username, "Testing", "firstName");
+        json = idOSAPIFactory.getWarning().create(username, "Testing", "firstName");
 
         /**
          * Get the response form the API getting one warning
          */
-        json = factory.getWarning().getOne(username, "testing");
+        json = idOSAPIFactory.getWarning().getOne(username, "testing");
 
         /**
          * Prints the array response
@@ -62,7 +62,7 @@ public class ProfileWarningSamples {
         /**
          * Deletes the warning giving the warning slug
          */
-        json = factory.getWarning().delete(username, "testing");
+        json = idOSAPIFactory.getWarning().delete(username, "testing");
 
         /**
          * Prints the status of the request
@@ -72,7 +72,7 @@ public class ProfileWarningSamples {
         /**
          * Deletes all warnings
          */
-        json = factory.getWarning().deleteAll(username);
+        json = idOSAPIFactory.getWarning().deleteAll(username);
 
         /**
          * Prints the number of deleted warnings

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class ServiceSamples {
@@ -18,7 +18,7 @@ public class ServiceSamples {
         JsonObject parsed = null;
 
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -29,12 +29,12 @@ public class ServiceSamples {
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all companies
          */
-        JsonObject json = factory.getService().listAll();
+        JsonObject json = idOSAPIFactory.getService().listAll();
 
         /**
          * Prints the json
@@ -57,7 +57,7 @@ public class ServiceSamples {
         /**
          * Creates the service
          */
-        json = factory.getService().create("New service name", "http://service-url.com", true, 1, "idos", "secret",
+        json = idOSAPIFactory.getService().create("New service name", "http://service-url.com", true, 1, "idos", "secret",
                 listens, triggers);
 
         /**
@@ -75,7 +75,7 @@ public class ServiceSamples {
         /**
          * Updates the service giving the service id created
          */
-        json = factory.getService().update(json.get("data").getAsJsonObject().get("id").getAsInt(), data);
+        json = idOSAPIFactory.getService().update(json.get("data").getAsJsonObject().get("id").getAsInt(), data);
 
         /**
          * Prints the json response
@@ -85,14 +85,14 @@ public class ServiceSamples {
         /**
          * Deletes the service giving the service id updated
          */
-        json = factory.getService().delete(json.get("data").getAsJsonObject().get("id").getAsInt());
+        json = idOSAPIFactory.getService().delete(json.get("data").getAsJsonObject().get("id").getAsInt());
 
         /**
          * Prints the json response
          */
         System.out.println(json);
 
-        json = factory.getService().deleteAll();
+        json = idOSAPIFactory.getService().deleteAll();
 
         System.out.println(json.get("deleted").getAsInt());
     }

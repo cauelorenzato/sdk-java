@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 
@@ -17,15 +17,15 @@ public class DigestedSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this object
          * 
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";
@@ -36,7 +36,7 @@ public class DigestedSamples {
         /**
          * Gets the response from the API listing all digested data
          */
-        JsonObject json = factory.getDigested().listAll(username, source);
+        JsonObject json = idOSAPIFactory.getDigested().listAll(username, source);
 
         /**
          * Prints the json
@@ -46,12 +46,12 @@ public class DigestedSamples {
         /**
          * Gets the response from the API trying to create a new digested data
          */
-        json = factory.getDigested().create(username, source, "Name", "Value");
+        json = idOSAPIFactory.getDigested().create(username, source, "Name", "Value");
 
         /**
          * Get the response form the API getting one digested data
          */
-        json = factory.getDigested().getOne(username, source, "Name");
+        json = idOSAPIFactory.getDigested().getOne(username, source, "Name");
 
         /**
          * Prints the array response
@@ -61,7 +61,7 @@ public class DigestedSamples {
         /**
          * Updates the digested data giving the digested name
          */
-        json = factory.getDigested().update(username, source, "Name", "newValue");
+        json = idOSAPIFactory.getDigested().update(username, source, "Name", "newValue");
 
         /**
          * Prints the json response
@@ -71,7 +71,7 @@ public class DigestedSamples {
         /**
          * Deletes the credential created giving the digested name
          */
-        json = factory.getDigested().delete(username, source, "Name");
+        json = idOSAPIFactory.getDigested().delete(username, source, "Name");
 
         /**
          * Prints the status of the request
@@ -81,7 +81,7 @@ public class DigestedSamples {
         /**
          * Deletes all digested data
          */
-        json = factory.getDigested().deleteAll(username, source);
+        json = idOSAPIFactory.getDigested().deleteAll(username, source);
 
         /**
          * Prints the number of deleted features

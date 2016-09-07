@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class PermissionSamples {
@@ -17,7 +17,7 @@ public class PermissionSamples {
         JsonObject parsed = null;
 
         /**
-         * Factory is a class that instantiate all endpoints (related to
+         * IdOSAPIFactory is a class that instantiate all endpoints (related to
          * /companies) as their methods (getEndpointName) are called. The
          * endpoints don't need to be instantiated one by one. You just need to
          * call the factory.getEndpoint and its going to be instantiated and
@@ -28,12 +28,12 @@ public class PermissionSamples {
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all permissions
          */
-        JsonObject json = factory.getPermission().listAll("veridu-ltd");
+        JsonObject json = idOSAPIFactory.getPermission().listAll("veridu-ltd");
 
         /**
          * Prints the json
@@ -43,7 +43,7 @@ public class PermissionSamples {
         /**
          * Gets the response from the API trying to create a new permission
          */
-        json = factory.getPermission().create("veridu-ltd", "hi:world");
+        json = idOSAPIFactory.getPermission().create("veridu-ltd", "hi:world");
 
         /**
          * Gets the status of the response If true, gets the permission that was
@@ -53,7 +53,7 @@ public class PermissionSamples {
             /**
              * Get the response form the API geting one company
              */
-            json = factory.getPermission().getOne("veridu-ltd", "hi:world");
+            json = idOSAPIFactory.getPermission().getOne("veridu-ltd", "hi:world");
 
             /**
              * Prints the array response
@@ -68,7 +68,7 @@ public class PermissionSamples {
          * route name
          * 
          */
-        json = factory.getPermission().delete("veridu-ltd", "hi:world");
+        json = idOSAPIFactory.getPermission().delete("veridu-ltd", "hi:world");
 
         /**
          * Prints the status of the request

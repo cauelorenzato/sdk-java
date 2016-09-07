@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class SettingSamples {
@@ -17,7 +17,7 @@ public class SettingSamples {
         JsonObject parsed = null;
 
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -29,12 +29,12 @@ public class SettingSamples {
          *            The credential companyToken that authorizes requests to
          *            the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all settings
          */
-        JsonObject json = factory.getSetting().listAll();
+        JsonObject json = idOSAPIFactory.getSetting().listAll();
         /**
          * Prints the json
          */
@@ -43,7 +43,7 @@ public class SettingSamples {
         /**
          * Gets the response from the API trying to create a new setting
          */
-        json = factory.getSetting().create("SectionEx", "PropertyEx", "ValueEx");
+        json = idOSAPIFactory.getSetting().create("SectionEx", "PropertyEx", "ValueEx");
 
         /**
          * Gets the id of the created setting
@@ -53,7 +53,7 @@ public class SettingSamples {
         /**
          * Get the response from the API getting one setting
          */
-        json = factory.getSetting().getOne(id);
+        json = idOSAPIFactory.getSetting().getOne(id);
 
         /**
          * Prints the array response
@@ -69,7 +69,7 @@ public class SettingSamples {
          * Deletes the setting that was just created giving its slug
          *
          */
-        json = factory.getSetting().delete(id);
+        json = idOSAPIFactory.getSetting().delete(id);
 
         /**
          * Prints the status of the request
@@ -79,7 +79,7 @@ public class SettingSamples {
         /**
          * Deletes all settings for the given companyToken
          */
-        json = factory.getSetting().deleteAll();
+        json = idOSAPIFactory.getSetting().deleteAll();
 
         /**
          * prints the number of deleted settings

@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 
@@ -16,15 +16,15 @@ public class ProfileFeatureSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this object
          * 
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";
@@ -32,7 +32,7 @@ public class ProfileFeatureSamples {
         /**
          * Gets the response from the API listing all features
          */
-        JsonObject json = factory.getFeature().listAll(username);
+        JsonObject json = idOSAPIFactory.getFeature().listAll(username);
 
         /**
          * Prints the json
@@ -42,12 +42,12 @@ public class ProfileFeatureSamples {
         /**
          * Gets the response from the API trying to create a new feature
          */
-        json = factory.getFeature().create(username, "Testing", "testing");
+        json = idOSAPIFactory.getFeature().create(username, "Testing", "testing");
 
         /**
          * Get the response form the API getting one feature
          */
-        json = factory.getFeature().getOne(username, "testing");
+        json = idOSAPIFactory.getFeature().getOne(username, "testing");
 
         /**
          * Prints the array response
@@ -57,7 +57,7 @@ public class ProfileFeatureSamples {
         /**
          * Updates the feature giving the feature-slug
          */
-        json = factory.getFeature().update(username, "testing", "New testing", "new value");
+        json = idOSAPIFactory.getFeature().update(username, "testing", "New testing", "new value");
 
         /**
          * Prints the json response
@@ -67,7 +67,7 @@ public class ProfileFeatureSamples {
         /**
          * Deletes the credential feature giving the feature name
          */
-        json = factory.getFeature().delete(username, "new-testing");
+        json = idOSAPIFactory.getFeature().delete(username, "new-testing");
 
         /**
          * Prints the status of the request
@@ -77,7 +77,7 @@ public class ProfileFeatureSamples {
         /**
          * Deletes all features
          */
-        json = factory.getFeature().deleteAll(username);
+        json = idOSAPIFactory.getFeature().deleteAll(username);
 
         /**
          * Prints the number of deleted features

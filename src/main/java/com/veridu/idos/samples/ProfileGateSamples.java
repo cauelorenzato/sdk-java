@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.IdOSUtils;
@@ -18,18 +18,18 @@ public class ProfileGateSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this object
          * 
          */
         String token = IdOSUtils.generateToken(Config.issuerPrivateKey, Config.issuerPublicKey,
                 Config.credentialPublicKey);
 
-        Factory credentialFactory = new Factory(token);
+        IdOSAPIFactory credentialFactory = new IdOSAPIFactory(token);
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";

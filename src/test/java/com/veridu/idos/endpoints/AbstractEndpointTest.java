@@ -18,7 +18,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
@@ -57,10 +57,10 @@ public class AbstractEndpointTest {
         // passing the companyToken trough the constructor so it can be stored
         // in the
         // companyToken String and used in the trasnformURL() method.
-        Factory factory = new Factory("companyToken");
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory("companyToken");
         assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
-                factory.getAttribute().transformURL("GET", "profile/attributes"));
-        Factory cfactory = new Factory("privKey");
+                idOSAPIFactory.getAttribute().transformURL("GET", "profile/attributes"));
+        IdOSAPIFactory cfactory = new IdOSAPIFactory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies",
                 cfactory.getCompany().transformURL("GET", "companies"));
         assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",
@@ -69,10 +69,10 @@ public class AbstractEndpointTest {
 
     @Test
     public void testTransformURLPOSTMethod() throws InvalidToken, EmptyPrivateKey {
-        Factory factory = new Factory("companyToken");
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory("companyToken");
         assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
-                factory.getAttribute().transformURL("POST", "profile/attributes"));
-        Factory cfactory = new Factory("privKey");
+                idOSAPIFactory.getAttribute().transformURL("POST", "profile/attributes"));
+        IdOSAPIFactory cfactory = new IdOSAPIFactory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies",
                 cfactory.getCompany().transformURL("POST", "companies"));
         assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",

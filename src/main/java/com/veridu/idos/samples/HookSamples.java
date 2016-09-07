@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 
@@ -17,7 +17,7 @@ public class HookSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -28,13 +28,13 @@ public class HookSamples {
          * @param privateKey
          *            The companyToken that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all Hooks (passing the
          * credential Public Key)
          */
-        JsonObject json = factory.getHook().listAll(Config.credentialPublicKey);
+        JsonObject json = idOSAPIFactory.getHook().listAll(Config.credentialPublicKey);
 
         /**
          * Prints the json
@@ -44,7 +44,7 @@ public class HookSamples {
         /**
          * Gets the response from the API trying to create a new hook
          */
-        json = factory.getHook().create(Config.credentialPublicKey, "trigger", "https://google.com", false);
+        json = idOSAPIFactory.getHook().create(Config.credentialPublicKey, "trigger", "https://google.com", false);
         /**
          * Gets the id of the created hook to retrieve the hook by the id
          */
@@ -53,7 +53,7 @@ public class HookSamples {
         /**
          * Get the response form the API geting one hook
          */
-        json = factory.getHook().getOne(Config.credentialPublicKey, id);
+        json = idOSAPIFactory.getHook().getOne(Config.credentialPublicKey, id);
 
         /**
          * Prints the array response
@@ -63,7 +63,7 @@ public class HookSamples {
         /**
          * Updates the hook giving the id
          */
-        json = factory.getHook().update(Config.credentialPublicKey, id, "trigger", "https://google.com", true);
+        json = idOSAPIFactory.getHook().update(Config.credentialPublicKey, id, "trigger", "https://google.com", true);
 
         /**
          * Prints the json response
@@ -78,7 +78,7 @@ public class HookSamples {
         /**
          * Deletes the hook created giving the id
          */
-        json = factory.getHook().delete(Config.credentialPublicKey, id);
+        json = idOSAPIFactory.getHook().delete(Config.credentialPublicKey, id);
 
         /**
          * Prints the status of the request
@@ -88,7 +88,7 @@ public class HookSamples {
         /**
          * Deletes all hooks for the given credential public key
          */
-        json = factory.getHook().deleteAll(Config.credentialPublicKey);
+        json = idOSAPIFactory.getHook().deleteAll(Config.credentialPublicKey);
 
         /**
          * Prints the number of deleted files

@@ -1,7 +1,7 @@
 package com.veridu.idos.samples;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class ProfileTagSamples {
@@ -14,15 +14,15 @@ public class ProfileTagSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpoi ntName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an Factory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this object
          * 
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";
@@ -30,7 +30,7 @@ public class ProfileTagSamples {
         /**
          * Gets the response from the API listing all tags
          */
-        JsonObject json = factory.getTag().listAll(username);
+        JsonObject json = idOSAPIFactory.getTag().listAll(username);
 
         /**
          * Prints the json
@@ -40,12 +40,12 @@ public class ProfileTagSamples {
         /**
          * Gets the response from the API trying to create a new tag
          */
-        json = factory.getTag().create(username, "TagName", "tag-name");
+        json = idOSAPIFactory.getTag().create(username, "TagName", "tag-name");
 
         /**
          * Get the response form the API getting one tag
          */
-        json = factory.getTag().getOne(username, "tag-name");
+        json = idOSAPIFactory.getTag().getOne(username, "tag-name");
 
         /**
          * Prints the array response
@@ -55,7 +55,7 @@ public class ProfileTagSamples {
         /**
          * Deletes the tag created giving the tag name
          */
-        json = factory.getTag().delete(username, "tag-name");
+        json = idOSAPIFactory.getTag().delete(username, "tag-name");
 
         /**
          * Prints the status of the request
@@ -65,7 +65,7 @@ public class ProfileTagSamples {
         /**
          * Deletes all profile tags related to the username
          */
-        json = factory.getTag().deleteAll(username);
+        json = idOSAPIFactory.getTag().deleteAll(username);
 
         /**
          * Prints the number of deleted tags

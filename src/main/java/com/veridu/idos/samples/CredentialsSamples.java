@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class CredentialsSamples {
@@ -15,7 +15,7 @@ public class CredentialsSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -27,12 +27,12 @@ public class CredentialsSamples {
          *            The jwt companyToken generated that authorizes requests to
          *            the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all credentials
          */
-        JsonObject json = factory.getCredential().listAll();
+        JsonObject json = idOSAPIFactory.getCredential().listAll();
 
         /**
          * Prints the json
@@ -42,7 +42,7 @@ public class CredentialsSamples {
         /**
          * Gets the response from the API trying to create a new credential
          */
-        json = factory.getCredential().create("Very Secure", "false");
+        json = idOSAPIFactory.getCredential().create("Very Secure", "false");
 
         /**
          * Gets the public key of the created credential to retrieve the
@@ -53,7 +53,7 @@ public class CredentialsSamples {
         /**
          * Get the response form the API geting one company
          */
-        json = factory.getCredential().getOne(publicKey);
+        json = idOSAPIFactory.getCredential().getOne(publicKey);
 
         /**
          * Prints the array response
@@ -63,7 +63,7 @@ public class CredentialsSamples {
         /**
          * Updates the credential giving the public Key and a new name for it
          */
-        json = factory.getCredential().update("New Name", publicKey);
+        json = idOSAPIFactory.getCredential().update("New Name", publicKey);
 
         /**
          * Prints the json response
@@ -78,7 +78,7 @@ public class CredentialsSamples {
         /**
          * Deletes the credential created giving the public key
          */
-        json = factory.getCredential().delete(publicKey);
+        json = idOSAPIFactory.getCredential().delete(publicKey);
 
         /**
          * Prints the status of the request

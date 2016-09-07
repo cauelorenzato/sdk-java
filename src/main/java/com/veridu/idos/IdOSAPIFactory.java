@@ -30,7 +30,7 @@ import com.veridu.idos.utils.IdOSUtils;
  * CredentialFactory Endpoint creates all Endpoints
  *
  */
-public class Factory {
+public class IdOSAPIFactory {
 
     /**
      * Company token
@@ -157,14 +157,14 @@ public class Factory {
      * @throws Emptytoken
      */
     // Refazer
-    public Factory(String token) throws InvalidToken {
+    public IdOSAPIFactory(String token) throws InvalidToken {
         if ((token == null) || token.isEmpty())
             throw new InvalidToken();
 
         this.setCompanyToken(token);
     }
 
-    public Factory(HashMap<String, String> credentials) {
+    public IdOSAPIFactory(HashMap<String, String> credentials) {
         if ((credentials.containsKey("companyPrivateKey")) && (credentials.containsKey("companyPublicKey"))) {
             if (credentials.containsKey("companySubject")) {
                 this.companyToken = IdOSUtils.generateCompanyToken(credentials.get("companyPrivateKey"),
@@ -188,7 +188,7 @@ public class Factory {
         }
     }
 
-    public Factory(String privateKey, String publicKey, String subject) {
+    public IdOSAPIFactory(String privateKey, String publicKey, String subject) {
         this.setCompanyToken(IdOSUtils.generateCompanyToken(privateKey, publicKey, subject));
     }
 

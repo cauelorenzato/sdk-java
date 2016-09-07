@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 
@@ -18,7 +18,7 @@ public class ServiceHandlerSamples {
         JsonObject parsed = null;
 
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -29,12 +29,12 @@ public class ServiceHandlerSamples {
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all companies
          */
-        JsonObject json = factory.getServiceHandler().listAll();
+        JsonObject json = idOSAPIFactory.getServiceHandler().listAll();
 
         /**
          * Prints the json
@@ -56,7 +56,7 @@ public class ServiceHandlerSamples {
         /**
          * Creates the service
          */
-        json = factory.getServiceHandler().create(serviceId, listens);
+        json = idOSAPIFactory.getServiceHandler().create(serviceId, listens);
 
         /**
          * Prints the json response
@@ -76,7 +76,7 @@ public class ServiceHandlerSamples {
          * Updates the service giving the service handler id created
          */
 
-        json = factory.getServiceHandler().update(serviceHandlerId, listens);
+        json = idOSAPIFactory.getServiceHandler().update(serviceHandlerId, listens);
 
         /**
          * Prints the json response
@@ -86,7 +86,7 @@ public class ServiceHandlerSamples {
         /**
          * Deletes the service giving the service id updated
          */
-        json = factory.getServiceHandler().delete(serviceHandlerId);
+        json = idOSAPIFactory.getServiceHandler().delete(serviceHandlerId);
 
         /**
          * Prints the json response
@@ -96,7 +96,7 @@ public class ServiceHandlerSamples {
         /**
          * Deletes all service handlers
          */
-        json = factory.getServiceHandler().deleteAll();
+        json = idOSAPIFactory.getServiceHandler().deleteAll();
 
         System.out.println(json.get("deleted").getAsInt());
     }

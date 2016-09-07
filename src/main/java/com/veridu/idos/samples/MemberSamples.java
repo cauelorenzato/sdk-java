@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 
@@ -19,7 +19,7 @@ public class MemberSamples {
         JsonObject parsed = null;
 
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -30,12 +30,12 @@ public class MemberSamples {
          * @param privateKey
          *            The companyToken that authorizes requests to the API
          */
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all members
          */
-        JsonObject json = factory.getMember().listAll();
+        JsonObject json = idOSAPIFactory.getMember().listAll();
 
         /**
          * Prints the json
@@ -45,7 +45,7 @@ public class MemberSamples {
         /**
          * Gets the response from the API trying to create a new member
          */
-        json = factory.getMember().create(Config.credentialPublicKey, "fd1fde2f31535a266ea7f70fdf224079", "Employee");
+        json = idOSAPIFactory.getMember().create(Config.credentialPublicKey, "fd1fde2f31535a266ea7f70fdf224079", "Employee");
         /**
          * Gets the id of the created member to retrieve the member by the id
          */
@@ -54,7 +54,7 @@ public class MemberSamples {
         /**
          * Get the response form the API geting one member
          */
-        json = factory.getMember().getOne(id);
+        json = idOSAPIFactory.getMember().getOne(id);
 
         /**
          * Prints the array response
@@ -64,7 +64,7 @@ public class MemberSamples {
         /**
          * Updates the member giving the id and changing the role
          */
-        json = factory.getMember().update(id, "admin");
+        json = idOSAPIFactory.getMember().update(id, "admin");
 
         /**
          * Prints the json response
@@ -79,7 +79,7 @@ public class MemberSamples {
         /**
          * Deletes the member created giving the id
          */
-        json = factory.getMember().delete(id);
+        json = idOSAPIFactory.getMember().delete(id);
 
         /**
          * Prints the status of the request
@@ -89,7 +89,7 @@ public class MemberSamples {
         /**
          * Deletes all members for the credential
          */
-        json = factory.getMember().deleteAll();
+        json = idOSAPIFactory.getMember().deleteAll();
 
         /**
          * Prints the number of deleted files

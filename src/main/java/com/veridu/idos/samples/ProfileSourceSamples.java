@@ -3,7 +3,7 @@ package com.veridu.idos.samples;
 import java.util.HashMap;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.Factory;
+import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.SDKException;
 
 public class ProfileSourceSamples {
@@ -16,7 +16,7 @@ public class ProfileSourceSamples {
          */
         JsonObject parsed = null;
         /**
-         * Factory is a class that instantiate all endpoints as their methods
+         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
          * (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
@@ -29,12 +29,12 @@ public class ProfileSourceSamples {
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";
 
-        Factory factory = new Factory(IdOSSamplesHelper.getCredentials());
+        IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all sources
          */
-        JsonObject json = factory.getSource().listAll(username);
+        JsonObject json = idOSAPIFactory.getSource().listAll(username);
 
         /**
          * Prints the json
@@ -49,13 +49,13 @@ public class ProfileSourceSamples {
         /**
          * Gets the response from the API trying to create a new source
          */
-        json = factory.getSource().create(username, "email", tags);
+        json = idOSAPIFactory.getSource().create(username, "email", tags);
 
         int sourceId = 1860914067;
         /**
          * Get the response form the API getting one source
          */
-        json = factory.getSource().getOne(username, sourceId);
+        json = idOSAPIFactory.getSource().getOne(username, sourceId);
 
         /**
          * Prints the array response
@@ -65,7 +65,7 @@ public class ProfileSourceSamples {
         /**
          * Deletes the source created giving the source name
          */
-        json = factory.getSource().delete(username, sourceId);
+        json = idOSAPIFactory.getSource().delete(username, sourceId);
 
         /**
          * Prints the status of the request
@@ -75,7 +75,7 @@ public class ProfileSourceSamples {
         /**
          * Deletes all profile sources related to the username
          */
-        json = factory.getSource().deleteAll(username);
+        json = idOSAPIFactory.getSource().deleteAll(username);
 
         /**
          * Prints the number of deleted sources
@@ -85,7 +85,7 @@ public class ProfileSourceSamples {
         /**
          * Deletes all profile sources related to the username
          */
-        json = factory.getSource().deleteAll(username);
+        json = idOSAPIFactory.getSource().deleteAll(username);
 
         /**
          * Prints the number of deleted sources
