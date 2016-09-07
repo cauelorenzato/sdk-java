@@ -18,7 +18,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.google.gson.JsonObject;
-import com.veridu.idos.CompanyFactory;
+import com.veridu.idos.Factory;
 import com.veridu.idos.CredentialFactory;
 import com.veridu.idos.exceptions.EmptyPrivateKey;
 import com.veridu.idos.exceptions.InvalidToken;
@@ -61,7 +61,7 @@ public class AbstractEndpointTest {
         CredentialFactory factory = new CredentialFactory("companyToken");
         assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
                 factory.getAttribute().transformURL("GET", "profile/attributes"));
-        CompanyFactory cfactory = new CompanyFactory("privKey");
+        Factory cfactory = new Factory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies",
                 cfactory.getCompany().transformURL("GET", "companies"));
         assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",
@@ -73,7 +73,7 @@ public class AbstractEndpointTest {
         CredentialFactory factory = new CredentialFactory("companyToken");
         assertEquals("http://localhost:8000/index.php/1.0/profile/attributes",
                 factory.getAttribute().transformURL("POST", "profile/attributes"));
-        CompanyFactory cfactory = new CompanyFactory("privKey");
+        Factory cfactory = new Factory("privKey");
         assertEquals("http://localhost:8000/index.php/1.0/companies",
                 cfactory.getCompany().transformURL("POST", "companies"));
         assertEquals("http://localhost:8000/index.php/1.0/companies/permissions",

@@ -117,8 +117,6 @@ public abstract class AbstractEndpoint {
                 connection.setRequestProperty("Authorization", "UserToken " + this.token);
 
             if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
-                // connection.setRequestProperty("Content-Type",
-                // "application/x-www-form-urlencoded");
                 connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 connection.setRequestProperty("Content-Length", Integer.toString(data.size()));
                 connection.setRequestProperty("Cache-Control", "no-cache");
@@ -177,18 +175,17 @@ public abstract class AbstractEndpoint {
      * @return String name of authorization token
      */
     protected String getEndpointName() {
-        String packageName = this.getClass().getPackage().getName();
+        String className = this.getClass().getSimpleName();
         String tokenType = null;
-        switch (packageName) {
-        case "com.veridu.idos.endpoints.companies":
+        if (className.equals("Companies") || className.equals("Credentials") || className.equals("Hooks")
+                || className.equals("Members") || className.equals("Permissions") || className.equals("ProfileTags")
+                || className.equals("ServiceHandlers") || className.equals("Services")
+                || className.equals("Settings")) {
             tokenType = "companies";
-            break;
-        case "com.veridu.idos.endpoints.profiles":
-            tokenType = "credentials";
-            break;
-        case "com.veridu.idos.endpoints.users":
+        } else if (className.equals("Companies") || className.equals("Companies")) {
             tokenType = "users";
-            break;
+        } else {
+            tokenType = "credentials";
         }
 
         return tokenType;
