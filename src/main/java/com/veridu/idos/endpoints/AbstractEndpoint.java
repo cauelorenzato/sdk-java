@@ -40,7 +40,7 @@ public abstract class AbstractEndpoint {
     /**
      * Token necessary to make requests to the API
      */
-    private String token;
+    private String currentToken = null;
 
     private HashMap<String, String> credentials;
 
@@ -50,7 +50,6 @@ public abstract class AbstractEndpoint {
     public AbstractEndpoint(HashMap<String, String> credentials, IdOSAuthType authType) throws InvalidToken {
         this.credentials = credentials;
         this.authType = authType;
-        this.generateAuthToken();
     }
 
     /**
@@ -110,8 +109,10 @@ public abstract class AbstractEndpoint {
      * @throws RequestFailed
      *             Exception
      */
-    public JsonObject request(String method, String url, JsonObject data) {
+    public JsonObject request(String method, String url, JsonObject data) throws InvalidToken {
         try {
+            if (this.currentToken == null)
+                this.generateAuthToken();
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
             connection.setRequestMethod(method);
@@ -119,13 +120,12 @@ public abstract class AbstractEndpoint {
             connection.setReadTimeout(10000);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
-            if (this.authType.toString().equals("MANAGEMENT")) {
-                connection.setRequestProperty("Authorization", "CompanyToken " + this.token);
-            } else if (this.authType.toString().equals("HANDLER")) {
-                connection.setRequestProperty("Authorization", "CredentialToken " + this.token);
-            } else {
-                connection.setRequestProperty("Authorization", "UserToken " + this.token);
-            }
+            if (this.authType.toString().equals("MANAGEMENT"))
+                connection.setRequestProperty("Authorization", "CompanyToken " + this.currentToken);
+            else if (this.authType.toString().equals("HANDLER"))
+                connection.setRequestProperty("Authorization", "CredentialToken " + this.currentToken);
+            else
+                connection.setRequestProperty("Authorization", "UserToken " + this.currentToken);
             if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
                 connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 connection.setRequestProperty("Content-Length", Integer.toString(data.size()));
@@ -191,15 +191,15 @@ public abstract class AbstractEndpoint {
     private void generateAuthToken() throws InvalidToken {
         switch (this.authType) {
         case USER:
-            this.token = IdOSUtils.generateUserToken(credentials.get("credentialPrivateKey"),
+            this.currentToken = IdOSUtils.generateUserToken(credentials.get("credentialPrivateKey"),
                     credentials.get("credentialPublicKey"), credentials.get("username"));
             break;
         case MANAGEMENT:
-            this.token = IdOSUtils.generateManagementToken(credentials.get("companyPrivateKey"),
+            this.currentToken = IdOSUtils.generateManagementToken(credentials.get("companyPrivateKey"),
                     credentials.get("companyPublicKey"));
             break;
         case HANDLER:
-            this.token = IdOSUtils.generateHandlerToken(credentials.get("servicePrivateKey"),
+            this.currentToken = IdOSUtils.generateHandlerToken(credentials.get("servicePrivateKey"),
                     credentials.get("servicePublicKey"), credentials.get("credentialPublicKey"));
             break;
         default:
