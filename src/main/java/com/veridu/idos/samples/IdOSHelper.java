@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.veridu.idos.settings.Config;
 
-public class Helper {
+public class IdOSHelper {
     /**
      * Credentials for making requests to the api
      */

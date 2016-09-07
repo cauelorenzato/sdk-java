@@ -21,7 +21,7 @@ public class ProfileTaskSamples {
          * going to pass by an Factory Class, and accessed through this object
          * 
          */
-        Factory credentialFactory = new Factory(Helper.getCredentials());
+        Factory credentialFactory = new Factory(IdOSHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
         String username = "9fd9f63e0d6487537569075da85a0c7f2";

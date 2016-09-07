@@ -29,7 +29,7 @@ public class SettingSamples {
          *            The credential companyToken that authorizes requests to
          *            the API
          */
-        Factory factory = new Factory(Helper.getCredentials());
+        Factory factory = new Factory(IdOSHelper.getCredentials());
 
         /**
          * Gets the response from the API listing all settings

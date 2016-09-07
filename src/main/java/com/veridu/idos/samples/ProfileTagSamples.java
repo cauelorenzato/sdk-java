@@ -22,7 +22,7 @@ public class ProfileTagSamples {
          * going to pass by an Factory Class, and accessed through this object
          * 
          */
-        Factory factory = new Factory(Helper.getCredentials());
+        Factory factory = new Factory(IdOSHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
         String username = "fd1fde2f31535a266ea7f70fdf224079";

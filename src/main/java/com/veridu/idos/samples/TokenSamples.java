@@ -29,7 +29,7 @@ public class TokenSamples {
          * @param privateKey
          *            The company public key that authorizes requests to the API
          */
-        Factory factory = new Factory(Helper.getCredentials());
+        Factory factory = new Factory(IdOSHelper.getCredentials());
 
         /**
          * Exchanges the user token to company token, passing the company slug
