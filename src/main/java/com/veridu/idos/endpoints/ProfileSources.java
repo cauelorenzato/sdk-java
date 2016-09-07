@@ -2,9 +2,7 @@ package com.veridu.idos.endpoints;
 
 import java.util.HashMap;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.veridu.idos.endpoints.AbstractEndpoint;
 import com.veridu.idos.exceptions.SDKException;
 
 /**
@@ -56,11 +54,13 @@ public class ProfileSources extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject create(String username, String name, HashMap<String, String> tags) throws SDKException {
-        Gson gson = new Gson();
-        String json = gson.toJson(tags);
+        JsonObject jsonTags = new JsonObject();
+        for (String key : tags.keySet()) {
+            jsonTags.addProperty(key, tags.get(key));
+        }
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
-        data.addProperty("tags", json);
+        data.add("tags", jsonTags);
         return this.fetch("POST", "profiles/" + username + "/sources", data);
     }
 
