@@ -9,21 +9,22 @@ public class Config {
     /**
      * Company's private key
      */
-    public static String privateKey = "4e37dae79456985ae0d27a67639cf335";
+    public static String companyPrivateKey = "4e37dae79456985ae0d27a67639cf335";
+
     /**
      * Company's public key
      */
-    public static String publicKey = "8b5fe9db84e338b424ed6d59da3254a0";
+    public static String companyPublicKey = "8b5fe9db84e338b424ed6d59da3254a0";
 
     /**
-     * Issuer's public key
+     * Service's public key
      */
-    public static String issuerPublicKey = "ef970ffad1f1253a2182a88667233991";
+    public static String servicePublicKey = "ef970ffad1f1253a2182a88667233991";
 
     /**
-     * Issuer's private to assign credential tokens
+     * Service's private to assign credential tokens
      */
-    public static String issuerPrivateKey = "213b83392b80ee98c8eb2a9fed9bb84d";
+    public static String servicePrivateKey = "213b83392b80ee98c8eb2a9fed9bb84d";
 
     /**
      * Credential's public key

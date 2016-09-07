@@ -21,7 +21,7 @@ public class ProfileSources extends AbstractEndpoint {
      * @param token
      */
     public ProfileSources(HashMap<String, String> credentials) throws InvalidToken {
-        super(credentials, IdOSAuthType.HANDLER);
+        super(credentials, IdOSAuthType.USER);
     }
 
     /**

@@ -26,7 +26,7 @@ public class TokenSamples {
          * 
          * The userToken will be stored at factory.userToken;
          *
-         * @param privateKey
+         * @param companyPrivateKey
          *            The company public key that authorizes requests to the API
          */
         IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());

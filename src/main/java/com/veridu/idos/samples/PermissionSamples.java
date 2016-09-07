@@ -25,7 +25,7 @@ public class PermissionSamples {
          * endpoints is going to pass by an CredentialFactory Class, and
          * accessed through this object
          * 
-         * @param privateKey
+         * @param companyPrivateKey
          *            The company public key that authorizes requests to the API
          */
         IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());

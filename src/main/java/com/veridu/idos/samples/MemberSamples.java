@@ -27,7 +27,7 @@ public class MemberSamples {
          * going to pass by an CredentialFactory Class, and accessed through
          * this object
          * 
-         * @param privateKey
+         * @param companyPrivateKey
          *            The companyToken that authorizes requests to the API
          */
         IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());

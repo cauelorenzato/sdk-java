@@ -195,12 +195,12 @@ public abstract class AbstractEndpoint {
                     credentials.get("credentialPublicKey"), credentials.get("username"));
             break;
         case MANAGEMENT:
-            this.token = IdOSUtils.generateCompanyToken(credentials.get("companyPrivateKey"),
+            this.token = IdOSUtils.generateManagementToken(credentials.get("companyPrivateKey"),
                     credentials.get("companyPublicKey"));
             break;
         case HANDLER:
-            this.token = IdOSUtils.generateCredentialToken(credentials.get("handlerPrivateKey"),
-                    credentials.get("handlerPublicKey"), credentials.get("credentialPublicKey"));
+            this.token = IdOSUtils.generateHandlerToken(credentials.get("servicePrivateKey"),
+                    credentials.get("servicePublicKey"), credentials.get("credentialPublicKey"));
             break;
         default:
             throw new InvalidToken();

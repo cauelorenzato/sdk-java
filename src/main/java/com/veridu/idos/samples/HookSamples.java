@@ -17,15 +17,15 @@ public class HookSamples {
          */
         JsonObject parsed = null;
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * IdOSAPIFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
          * going to pass by an CredentialFactory Class, and accessed through
          * this object
          * 
-         * @param privateKey
+         * @param companyPrivateKey
          *            The companyToken that authorizes requests to the API
          */
         IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
@@ -41,14 +41,17 @@ public class HookSamples {
          */
         System.out.println(json);
 
-        /**
-         * Gets the response from the API trying to create a new hook
-         */
-        json = idOSAPIFactory.getHook().create(Config.credentialPublicKey, "trigger", "https://google.com", false);
-        /**
-         * Gets the id of the created hook to retrieve the hook by the id
-         */
-        int id = json.get("data").getAsJsonObject().get("id").getAsInt();
+        // /**
+        // * Gets the response from the API trying to create a new hook
+        // */
+        // json = idOSAPIFactory.getHook().create(Config.credentialPublicKey,
+        // "trigger.test",
+        // "http://test.com/example.php", false);
+        // /**
+        // * Gets the id of the created hook to retrieve the hook by the id
+        // */
+        // int id = json.get("data").getAsJsonObject().get("id").getAsInt();
+        int id = 1321189817;
 
         /**
          * Get the response form the API geting one hook

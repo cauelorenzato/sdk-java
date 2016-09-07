@@ -39,7 +39,7 @@ public class Credentials extends AbstractEndpoint {
     /**
      * Gets the credential given the public key
      * 
-     * @param publicKey
+     * @param companyPublicKey
      * @return JsonObject response
      * @throws SDKException
      */
@@ -69,7 +69,7 @@ public class Credentials extends AbstractEndpoint {
      * credential
      * 
      * @param name
-     * @param publicKey
+     * @param companyPublicKey
      * @return JsonObject response
      * @throws UnsupportedEncodingException
      * @throws SDKException
@@ -83,7 +83,7 @@ public class Credentials extends AbstractEndpoint {
     /**
      * Deletes the credential givin the public key
      * 
-     * @param publicKey
+     * @param companyPublicKey
      * @return JsonObject response
      * @throws SDKException
      */
