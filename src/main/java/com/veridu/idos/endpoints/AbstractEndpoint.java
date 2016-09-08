@@ -23,7 +23,7 @@ public abstract class AbstractEndpoint {
     /**
      * IdOSAuthType enum
      */
-    protected IdOSAuthType authType;
+    protected IdOSAuthType authType = null;
     /**
      * Company's slug necessary to make most of requests to the API
      */
@@ -184,8 +184,10 @@ public abstract class AbstractEndpoint {
      * @param authType
      */
     public void setAuthType(IdOSAuthType authType) throws InvalidToken {
-        this.authType = authType;
-        this.generateAuthToken();
+        if ((this.authType == null) || (this.currentToken == null) || (authType != this.authType)) {
+            this.authType = authType;
+            this.generateAuthToken();
+        }
     }
 
     private void generateAuthToken() throws InvalidToken {
