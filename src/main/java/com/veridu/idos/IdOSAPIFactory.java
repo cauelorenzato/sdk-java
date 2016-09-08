@@ -14,11 +14,14 @@ import com.veridu.idos.endpoints.ProfileFeatures;
 import com.veridu.idos.endpoints.ProfileGates;
 import com.veridu.idos.endpoints.ProfileRaw;
 import com.veridu.idos.endpoints.ProfileReferences;
+import com.veridu.idos.endpoints.ProfileReviews;
 import com.veridu.idos.endpoints.ProfileScores;
 import com.veridu.idos.endpoints.ProfileSources;
 import com.veridu.idos.endpoints.ProfileTags;
 import com.veridu.idos.endpoints.ProfileTasks;
 import com.veridu.idos.endpoints.ProfileWarnings;
+import com.veridu.idos.endpoints.RoleAccess;
+import com.veridu.idos.endpoints.SSO;
 import com.veridu.idos.endpoints.ServiceHandlers;
 import com.veridu.idos.endpoints.Services;
 import com.veridu.idos.endpoints.Settings;
@@ -135,9 +138,24 @@ public class IdOSAPIFactory {
     private Token token;
 
     /**
-     * Raw Endpoint object
+     * ProfileRaw Endpoint object
      */
     private ProfileRaw raw;
+
+    /**
+     * RoleAccess object
+     */
+    private RoleAccess role;
+
+    /**
+     * ProfileReview object
+     */
+    private ProfileReviews review;
+
+    /**
+     * SSO object
+     */
+    private SSO sso;
 
     /**
      * Class constructor
@@ -393,6 +411,12 @@ public class IdOSAPIFactory {
         return this.source;
     }
 
+    /**
+     * Instantiates Raw endpoint
+     * 
+     * @return Raw instance
+     * @throws InvalidToken
+     */
     public ProfileRaw getRaw() throws InvalidToken {
         if (!(this.raw instanceof ProfileRaw)) {
             this.raw = new ProfileRaw(this.credentials);
@@ -400,4 +424,42 @@ public class IdOSAPIFactory {
         return this.raw;
     }
 
+    /**
+     * Instantiates Role endpoint
+     * 
+     * @return Role instance
+     * @throws InvalidToken
+     */
+    public RoleAccess getRole() throws InvalidToken {
+        if (!(this.role instanceof RoleAccess)) {
+            this.role = new RoleAccess(this.credentials);
+        }
+        return this.role;
+    }
+
+    /**
+     * Instantiates Review endpoint
+     * 
+     * @return Review instance
+     * @throws InvalidToken
+     */
+    public ProfileReviews getReview() throws InvalidToken {
+        if (!(this.review instanceof ProfileReviews)) {
+            this.review = new ProfileReviews(this.credentials);
+        }
+        return this.review;
+    }
+
+    /**
+     * Instantiates SSO endpoint
+     * 
+     * @return SSO instance
+     * @throws InvalidToken
+     */
+    public SSO getSSO() throws InvalidToken {
+        if (!(this.sso instanceof SSO)) {
+            this.sso = new SSO(this.credentials);
+        }
+        return this.sso;
+    }
 }
