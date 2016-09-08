@@ -17,12 +17,13 @@ public class TokenSamples {
         JsonObject parsed = null;
 
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints that requires the
-         * UserToken Authorization. The endpoints don't need to be instantiated
-         * one by one. You just need to call the factory.getEndpoint and its
-         * going to be instantiated and available to call its methods. In other
-         * words, it means that all endpoints is going to pass by an IdOSAPIFactory
-         * Class, and accessed through this object
+         * IdOSAPIFactory is a class that instantiate all endpoints that
+         * requires the UserToken Authorization. The endpoints don't need to be
+         * instantiated one by one. You just need to call the
+         * factory.getEndpoint and its going to be instantiated and available to
+         * call its methods. In other words, it means that all endpoints is
+         * going to pass by an IdOSAPIFactory Class, and accessed through this
+         * object
          * 
          * The userToken will be stored at factory.userToken;
          *

@@ -13,23 +13,24 @@ public class ProfileTaskSamples {
          */
         JsonObject parsed = null;
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * IdOSAPIFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an IdOSAPIFactory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this
+         * object
          * 
          */
         IdOSAPIFactory credentialFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
 
         /* Username necessary for all requests of this endpoint */
-        String username = "9fd9f63e0d6487537569075da85a0c7f2";
+        String username = "fd1fde2f31535a266ea7f70fdf224079";
 
         /**
          * Gets the response from the API listing all tasks
          */
-        JsonObject json = credentialFactory.getTask().listAll(username);
+        JsonObject json = credentialFactory.getTask().listAll(username, 1321189817);
 
         /**
          * Prints the json
@@ -37,9 +38,20 @@ public class ProfileTaskSamples {
         System.out.println(json);
 
         /**
+         * Creates a new task
+         */
+        json = credentialFactory.getTask().create(username, 1321189817, "Testing", "testing", true);
+
+        /**
+         * Prints the api response
+         */
+        System.out.println(json);
+
+        /**
          * Get the response form the API getting one task
          */
-        json = credentialFactory.getTask().getOne(username, 1);
+        json = credentialFactory.getTask().getOne(username, 1321189817,
+                json.get("data").getAsJsonObject().get("id").getAsInt());
 
         /**
          * Prints the array response

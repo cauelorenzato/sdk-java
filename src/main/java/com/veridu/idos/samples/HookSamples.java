@@ -41,17 +41,15 @@ public class HookSamples {
          */
         System.out.println(json);
 
-        // /**
-        // * Gets the response from the API trying to create a new hook
-        // */
-        // json = idOSAPIFactory.getHook().create(Config.credentialPublicKey,
-        // "trigger.test",
-        // "http://test.com/example.php", false);
-        // /**
-        // * Gets the id of the created hook to retrieve the hook by the id
-        // */
-        // int id = json.get("data").getAsJsonObject().get("id").getAsInt();
-        int id = 1321189817;
+        /**
+         * Gets the response from the API trying to create a new hook
+         */
+        json = idOSAPIFactory.getHook().create(Config.credentialPublicKey, "trigger.test",
+                "http://test.com/example.php", false);
+        /**
+         * Gets the id of the created hook to retrieve the hook by the id
+         */
+        int id = json.get("data").getAsJsonObject().get("id").getAsInt();
 
         /**
          * Get the response form the API geting one hook

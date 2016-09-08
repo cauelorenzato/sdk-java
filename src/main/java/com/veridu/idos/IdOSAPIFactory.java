@@ -12,6 +12,7 @@ import com.veridu.idos.endpoints.Permissions;
 import com.veridu.idos.endpoints.ProfileAttributes;
 import com.veridu.idos.endpoints.ProfileFeatures;
 import com.veridu.idos.endpoints.ProfileGates;
+import com.veridu.idos.endpoints.ProfileRaw;
 import com.veridu.idos.endpoints.ProfileReferences;
 import com.veridu.idos.endpoints.ProfileScores;
 import com.veridu.idos.endpoints.ProfileSources;
@@ -132,6 +133,11 @@ public class IdOSAPIFactory {
      * Tokens Endpoint object
      */
     private Token token;
+
+    /**
+     * Raw Endpoint object
+     */
+    private ProfileRaw raw;
 
     /**
      * Class constructor
@@ -385,6 +391,13 @@ public class IdOSAPIFactory {
             this.source = new ProfileSources(this.credentials);
         }
         return this.source;
+    }
+
+    public ProfileRaw getRaw() throws InvalidToken {
+        if (!(this.raw instanceof ProfileRaw)) {
+            this.raw = new ProfileRaw(this.credentials);
+        }
+        return this.raw;
     }
 
 }

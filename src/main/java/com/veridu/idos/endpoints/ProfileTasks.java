@@ -20,14 +20,15 @@ public class ProfileTasks extends AbstractEndpoint {
     }
 
     /**
-     * Lists all tasks related to the username
+     * Lists all tasks related to the username given the process id
      * 
      * @param username
+     * @param processId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/tasks");
+    public JsonObject listAll(String username, int processId) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/processes/" + processId + "/tasks");
     }
 
     /**
@@ -38,8 +39,29 @@ public class ProfileTasks extends AbstractEndpoint {
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, int taskId) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/tasks/" + taskId);
+    public JsonObject getOne(String username, int processId, int taskId) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/processes/" + processId + "/tasks/" + taskId);
+    }
+
+    /**
+     * Creates a new task
+     * 
+     * @param username
+     * @param processId
+     * @param name
+     * @param event
+     * @param running
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject create(String username, int processId, String name, String event, boolean running)
+            throws SDKException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("event", event);
+        data.addProperty("running", running);
+
+        return this.fetch("POST", "profiles/" + username + "/processes/" + processId + "/tasks", data);
     }
 
     /**
@@ -47,10 +69,10 @@ public class ProfileTasks extends AbstractEndpoint {
      * 
      * @param username
      * @param taskId
-     * @return JsonObject response
+     * @return JsonObject response+
      * @throws SDKException
      */
-    public JsonObject update(String username, int taskId) throws SDKException {
-        return this.fetch("PUT", "profiles/" + username + "/tasks/" + taskId);
+    public JsonObject update(String username, int processId, int taskId) throws SDKException {
+        return this.fetch("PUT", "profiles/" + username + "/processes/" + processId + "/tasks/" + taskId);
     }
 }
