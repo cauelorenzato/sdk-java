@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.Filter;
 
 /**
  * Profile Attributes Endpoint Class
@@ -31,6 +32,17 @@ public class ProfileAttributes extends AbstractEndpoint {
      */
     public JsonObject listAll(String username) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/attributes");
+    }
+
+    /**
+     * Lists all profiles attributes
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/attributes", null, filter);
     }
 
     /**
@@ -84,6 +96,17 @@ public class ProfileAttributes extends AbstractEndpoint {
      */
     public JsonObject deleteAll(String username) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/attributes");
+    }
+
+    /**
+     * Deletes all attributes related to the given username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/attributes", null, filter);
     }
 
 }

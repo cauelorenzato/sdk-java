@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.Filter;
 
 /**
  * Profile References Endpoint Class
@@ -33,7 +34,7 @@ public class ProfileReferences extends AbstractEndpoint {
     public JsonObject listAll(String username) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/references");
     }
-    
+
     /**
      * Lists all references given an username
      * 
@@ -41,11 +42,8 @@ public class ProfileReferences extends AbstractEndpoint {
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, String nameFilter) throws SDKException {
-    	HashMap<String, String> queryParams = new HashMap<>();
-    	queryParams.put("name", nameFilter);
-    	
-        return this.fetch("GET", "profiles/" + username + "/references", null, queryParams);
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/references", null, filter);
     }
 
     /**
@@ -99,5 +97,16 @@ public class ProfileReferences extends AbstractEndpoint {
      */
     public JsonObject deleteAll(String username) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/references");
+    }
+
+    /**
+     * Deletes all references associated with a username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/references", null, filter);
     }
 }
