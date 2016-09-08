@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.Filter;
 
 /**
  * Settings Class
@@ -30,6 +31,16 @@ public class Settings extends AbstractEndpoint {
      */
     public JsonObject listAll() throws SDKException {
         return this.fetch("GET", "management/settings");
+    }
+
+    /**
+     * Lists all Settings for the given credential companyToken
+     * 
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(Filter filter) throws SDKException {
+        return this.fetch("GET", "management/settings", null, filter);
     }
 
     /**

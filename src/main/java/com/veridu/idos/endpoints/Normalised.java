@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.Filter;
 
 /**
  * Role Acess Endpoint Class
@@ -39,11 +40,8 @@ public class Normalised extends AbstractEndpoint {
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, int sourceId, String nameFilter) throws SDKException {
-    	HashMap<String, String> queryParams = new HashMap<>();
-    	queryParams.put("name", nameFilter);
-    	
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised", null, queryParams);
+    public JsonObject listAll(String username, int sourceId, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised", null, filter);
     }
 
     /**
@@ -124,6 +122,18 @@ public class Normalised extends AbstractEndpoint {
      */
     public JsonObject deleteAll(String username, int sourceId) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/normalised");
+    }
+
+    /**
+     * Deletes all normalised data from the given source.
+     * 
+     * @param username
+     * @param sourceId
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username, int sourceId, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/normalised", null, filter);
     }
 
 }

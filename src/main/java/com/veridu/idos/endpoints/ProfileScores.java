@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.utils.IdOSAuthType;
+import com.veridu.idos.utils.Filter;
 
 /**
  * Profile Scores Endpoint Class
@@ -40,11 +41,8 @@ public class ProfileScores extends AbstractEndpoint {
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, String attributeName, String nameFilter) throws SDKException {
-    	HashMap<String, String> queryParams = new HashMap<>();
-    	queryParams.put("name", nameFilter);
-    	
-        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, queryParams);
+    public JsonObject listAll(String username, String attributeName, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, filter);
     }
 
     /**
@@ -121,6 +119,18 @@ public class ProfileScores extends AbstractEndpoint {
      */
     public JsonObject deleteAll(String username, String attributeName) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName + "/scores");
+    }
+
+    /**
+     * Deletes all scores related to the attribute Name
+     * 
+     * @param username
+     * @param attributeName
+     * @return
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username, String attributeName, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, filter);
     }
 
 }

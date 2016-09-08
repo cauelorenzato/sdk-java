@@ -9,6 +9,10 @@ public class Filter {
     private Filter() {
     }
 
+    public HashMap<String, String> getParams() {
+        return params;
+    }
+
     public Filter addNameFilter(String filter) {
         return this.addFilterByKeyName("name", filter);
     }
