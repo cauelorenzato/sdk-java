@@ -31,6 +31,21 @@ public class ProfileScores extends AbstractEndpoint {
     public JsonObject listAll(String username, String attributeName) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores");
     }
+    
+    /**
+     * Lists all scores for the given attribute name
+     * 
+     * @param username
+     * @param attributeName
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, String attributeName, String nameFilter) throws SDKException {
+    	HashMap<String, String> queryParams = new HashMap<>();
+    	queryParams.put("name", nameFilter);
+    	
+        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, queryParams);
+    }
 
     /**
      * Retrieves the score related to the given scoreName
