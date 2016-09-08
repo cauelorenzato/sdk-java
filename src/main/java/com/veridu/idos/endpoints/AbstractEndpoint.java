@@ -17,6 +17,7 @@ import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
 import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.IdOSUtils;
+import com.veridu.idos.utils.Filter;
 
 public abstract class AbstractEndpoint {
 
@@ -24,14 +25,17 @@ public abstract class AbstractEndpoint {
      * IdOSAuthType enum
      */
     protected IdOSAuthType authType = null;
+
     /**
      * Company's slug necessary to make most of requests to the API
      */
     protected String companySlug = null;
+
     /**
      * Default connection
      */
     protected HttpURLConnection connection = null;
+
     /**
      * Last API response code
      */
@@ -41,6 +45,9 @@ public abstract class AbstractEndpoint {
      */
     private String currentToken = null;
 
+    /**
+     *
+     */
     private HashMap<String, String> credentials;
 
     /**
@@ -97,25 +104,26 @@ public abstract class AbstractEndpoint {
      * @throws SDKException
      *
      */
-    protected JsonObject fetch(String method, String resource, JsonObject data, HashMap<String, String> queryParams)
-            throws SDKException {
-        String url = this.transformURL(method, resource, queryParams);
+
+    protected JsonObject fetch(String method, String resource, JsonObject data, Filter filter) throws SDKException {
+        String url = this.transformURL(method, resource, filter);
+
+        if (filter != null && method.equals("DELETE"))
+            for (String key : filter.getParams().keySet())
+                data.addProperty(key, filter.getParams().get(key));
         JsonObject response = request(method, url, data);
 
         return response;
     }
 
-    private String transformURL(String method, String resource, HashMap<String, String> queryParams) {
+    private String transformURL(String method, String resource, Filter filter) {
         String url = Config.BASE_URL;
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
 
-        if (queryParams != null) {
-            url += "?";
-            for (String key : queryParams.keySet()) {
-                url += key + "=" + queryParams.get(key) + "&";
-            }
+        if (filter != null && !method.equals("DELETE")) {
+        	url += "?" + filter.toString();
         }
 
         return url;
@@ -193,7 +201,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Converts string response to json
-     * 
+     *
      * @param apiResponse
      * @return JsonObject response
      */
@@ -207,7 +215,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Setter
-     * 
+     *
      * @param authType
      */
     public void setAuthType(IdOSAuthType authType) throws InvalidToken {
