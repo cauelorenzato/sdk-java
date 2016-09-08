@@ -32,6 +32,19 @@ public class Normalised extends AbstractEndpoint {
     public JsonObject listAll(String username, int sourceId) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised");
     }
+    
+    /**
+     * Lists all data normalised by a given source
+     * 
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, int sourceId, String nameFilter) throws SDKException {
+    	HashMap<String, String> queryParams = new HashMap<>();
+    	queryParams.put("name", nameFilter);
+    	
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised", null, queryParams);
+    }
 
     /**
      * Retrieves a normalised data from a given source.

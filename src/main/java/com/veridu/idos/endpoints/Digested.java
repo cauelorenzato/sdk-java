@@ -34,6 +34,21 @@ public class Digested extends AbstractEndpoint {
     public JsonObject listAll(String username, int sourceId) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/digested");
     }
+    
+    /**
+     * Retrieve a complete list of the data digested by a given source.
+     * 
+     * @param username
+     * @param sourceId
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, int sourceId, String nameFilter) throws SDKException {
+    	HashMap<String, String> queryParams = new HashMap<>();
+    	queryParams.put("name", nameFilter);
+    	
+        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/digested", null, queryParams);
+    }
 
     /**
      * Retrieves a digested data from a given source.

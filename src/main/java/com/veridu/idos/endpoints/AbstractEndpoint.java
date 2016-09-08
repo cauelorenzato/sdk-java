@@ -61,8 +61,28 @@ public abstract class AbstractEndpoint {
      * @throws SDKException
      *
      */
-    public JsonObject fetch(String method, String resource) throws SDKException {
-        return fetch(method, resource, null);
+    protected JsonObject fetch(String method, String resource) throws SDKException {
+        return fetch(method, resource, null, null);
+    }
+    
+    /**
+     * Fetches an API Resource
+     *
+     * @param method
+     *            String
+     * @param resource
+     *            String
+     * @param data
+     *            JsonObject
+     *
+     * @throws SDKException
+     *
+     */
+    protected JsonObject fetch(String method, String resource, JsonObject data) throws SDKException {
+        String url = this.transformURL(method, resource, null);
+        JsonObject response = request(method, url, data);
+
+        return response;
     }
 
     /**
@@ -78,18 +98,25 @@ public abstract class AbstractEndpoint {
      * @throws SDKException
      *
      */
-    public JsonObject fetch(String method, String resource, JsonObject data) throws SDKException {
-        String url = this.transformURL(method, resource);
+    protected JsonObject fetch(String method, String resource, JsonObject data, HashMap<String, String> queryParams) throws SDKException {
+        String url = this.transformURL(method, resource, queryParams);
         JsonObject response = request(method, url, data);
 
         return response;
     }
 
-    public String transformURL(String method, String resource) {
+    private String transformURL(String method, String resource, HashMap<String, String> queryParams) {
         String url = Config.BASE_URL;
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
+        
+        if (queryParams != null) {
+        	url += "?";
+        	for(String key : queryParams.keySet()) {
+        		url += key + "=" + queryParams.get(key) + "&";
+        	}
+        }
 
         return url;
     }

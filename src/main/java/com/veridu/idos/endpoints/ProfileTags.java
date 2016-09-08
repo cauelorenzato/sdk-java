@@ -32,6 +32,20 @@ public class ProfileTags extends AbstractEndpoint {
     public JsonObject listAll(String username) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/tags");
     }
+    
+    /**
+     * Lists all tags related to the username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, String nameFilter) throws SDKException {
+    	HashMap<String, String> queryParams = new HashMap<>();
+    	queryParams.put("name", nameFilter);
+    	
+        return this.fetch("GET", "profiles/" + username + "/tags", null, queryParams);
+    }
 
     /**
      * Retrieves a tag given the tag name
