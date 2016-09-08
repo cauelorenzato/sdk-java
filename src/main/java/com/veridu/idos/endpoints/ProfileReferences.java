@@ -33,6 +33,20 @@ public class ProfileReferences extends AbstractEndpoint {
     public JsonObject listAll(String username) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/references");
     }
+    
+    /**
+     * Lists all references given an username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, String nameFilter) throws SDKException {
+    	HashMap<String, String> queryParams = new HashMap<>();
+    	queryParams.put("name", nameFilter);
+    	
+        return this.fetch("GET", "profiles/" + username + "/references", null, queryParams);
+    }
 
     /**
      * Retrieves a reference given its attribute name
