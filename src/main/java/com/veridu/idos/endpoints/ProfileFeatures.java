@@ -30,9 +30,10 @@ public class ProfileFeatures extends AbstractEndpoint {
     }
 
     /**
-     * Retrieve a complete list of all features that belong to the given user.
+     * Retrieve a complete list of all features that belong to the given user, with filtering.
      * 
      * @param username
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
@@ -115,9 +116,10 @@ public class ProfileFeatures extends AbstractEndpoint {
     }
 
     /**
-     * Deletes all features that belongs to the given user
+     * Deletes all features that belongs to the given user, with filtering
      * 
      * @param username
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */

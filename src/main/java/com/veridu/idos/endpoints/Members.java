@@ -61,6 +61,7 @@ public class Members extends AbstractEndpoint {
         data.addProperty("credential", credentialPubKey);
         data.addProperty("userName", userName);
         data.addProperty("role", role);
+
         return this.fetch("POST", "management/members", data);
     }
 
@@ -76,6 +77,7 @@ public class Members extends AbstractEndpoint {
     public JsonObject update(int id, String role) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("role", role);
+        
         return this.fetch("PUT", "management/members/" + id, data);
     }
 

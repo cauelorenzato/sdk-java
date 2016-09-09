@@ -37,10 +37,11 @@ public class Digested extends AbstractEndpoint {
     }
     
     /**
-     * Retrieve a complete list of the data digested by a given source.
+     * Retrieve a complete list of the data digested by a given source, with filtering.
      * 
      * @param username
      * @param sourceId
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
@@ -124,10 +125,11 @@ public class Digested extends AbstractEndpoint {
     }
 
     /**
-     * Deletes all digested data related to the given sourceId
+     * Deletes all digested data related to the given sourceId, with filtering.
      * 
      * @param username
      * @param sourceIds
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */

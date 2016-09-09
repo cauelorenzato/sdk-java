@@ -107,11 +107,6 @@ public abstract class AbstractEndpoint {
      */
     protected JsonObject fetch(String method, String resource, JsonObject data, Filter filter) throws SDKException {
         String url = this.transformURL(method, resource, filter);
-
-        if (filter != null && method.equals("DELETE"))
-            for (String key : filter.getParams().keySet())
-                data.addProperty(key, filter.getParams().get(key));
-
         JsonObject response = request(method, url, data);
 
         return response;
@@ -123,7 +118,7 @@ public abstract class AbstractEndpoint {
             url = url.concat("/");
         url = url.concat(resource);
         
-        if (filter != null && !method.equals("DELETE")) {
+        if (filter != null) {
         	url += "?" + filter.toString();
         }
 
@@ -147,8 +142,10 @@ public abstract class AbstractEndpoint {
      */
     public JsonObject request(String method, String url, JsonObject data) throws InvalidToken {
         try {
+
             if (this.currentToken == null)
                 this.generateAuthToken();
+
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
             connection.setRequestMethod(method);
@@ -156,19 +153,23 @@ public abstract class AbstractEndpoint {
             connection.setReadTimeout(10000);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
+
             if (this.authType.toString().equals("MANAGEMENT"))
                 connection.setRequestProperty("Authorization", "CompanyToken " + this.currentToken);
             else if (this.authType.toString().equals("HANDLER"))
                 connection.setRequestProperty("Authorization", "CredentialToken " + this.currentToken);
             else
                 connection.setRequestProperty("Authorization", "UserToken " + this.currentToken);
+
             if ((method.compareTo("GET") != 0) && (data != null) && (data.size() != 0)) {
                 connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 connection.setRequestProperty("Content-Length", Integer.toString(data.size()));
                 connection.setRequestProperty("Cache-Control", "no-cache");
                 connection.setDoInput(true);
+
                 DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
                 String content = data.toString();
+
                 wr.writeBytes(content);
                 wr.flush();
                 wr.close();
@@ -176,27 +177,31 @@ public abstract class AbstractEndpoint {
 
             this.lastCode = connection.getResponseCode();
             InputStream is;
+
             if (this.lastCode >= 400)
                 is = connection.getErrorStream();
             else
                 is = connection.getInputStream();
+
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
             StringBuilder response = new StringBuilder();
+
             while ((line = rd.readLine()) != null) {
                 response.append(line);
                 response.append('\r');
             }
 
             rd.close();
-            return this.convertToJson(response.toString());
 
+            return this.convertToJson(response.toString());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (this.connection != null)
                 this.connection.disconnect();
         }
+        
         return null;
     }
 

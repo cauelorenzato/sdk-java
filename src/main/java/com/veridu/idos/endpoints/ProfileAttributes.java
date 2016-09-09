@@ -35,9 +35,10 @@ public class ProfileAttributes extends AbstractEndpoint {
     }
 
     /**
-     * Lists all profiles attributes
+     * Lists all profiles attributes, with filtering
      * 
      * @param username
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
@@ -99,9 +100,10 @@ public class ProfileAttributes extends AbstractEndpoint {
     }
 
     /**
-     * Deletes all attributes related to the given username
+     * Deletes all attributes related to the given username, with filtering
      * 
      * @param username
+     * @param
      * @return JsonObject response
      * @throws SDKException
      */

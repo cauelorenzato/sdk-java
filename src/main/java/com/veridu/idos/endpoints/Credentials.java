@@ -78,6 +78,7 @@ public class Credentials extends AbstractEndpoint {
     public JsonObject update(String name, String publicKey) throws UnsupportedEncodingException, SDKException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
+        
         return this.fetch("PUT", "management/credentials/" + publicKey, data);
     }
 
