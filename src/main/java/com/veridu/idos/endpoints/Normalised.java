@@ -27,6 +27,8 @@ public class Normalised extends AbstractEndpoint {
     /**
      * Lists all data normalised by a given source
      * 
+     * @param username
+     * @param sourceId
      * @return JsonObject response
      * @throws SDKException
      */
@@ -35,8 +37,11 @@ public class Normalised extends AbstractEndpoint {
     }
     
     /**
-     * Lists all data normalised by a given source
+     * Lists all data normalised by a given source, with filtering
      * 
+     * @param username
+     * @param sourceId
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
@@ -125,10 +130,11 @@ public class Normalised extends AbstractEndpoint {
     }
 
     /**
-     * Deletes all normalised data from the given source.
+     * Deletes all normalised data from the given source, with filtering.
      * 
      * @param username
      * @param sourceId
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */

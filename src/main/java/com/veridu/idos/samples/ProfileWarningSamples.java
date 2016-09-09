@@ -49,7 +49,7 @@ public class ProfileWarningSamples {
         /**
          * Get the response form the API getting one warning
          */
-        json = idOSAPIFactory.getWarning().getOne(username, "testing");
+        json = idOSAPIFactory.getWarning().getOne(username, 1234);
 
         /**
          * Prints the array response
@@ -59,7 +59,7 @@ public class ProfileWarningSamples {
         /**
          * Deletes the warning giving the warning slug
          */
-        json = idOSAPIFactory.getWarning().delete(username, "testing");
+        json = idOSAPIFactory.getWarning().delete(username, 1234);
 
         /**
          * Prints the status of the request

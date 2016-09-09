@@ -36,15 +36,27 @@ public class ProfileWarnings extends AbstractEndpoint {
     }
 
     /**
-     * Retrieves the warn related to the given warning slug
+     * Lists all warnings given the username, with filtering
      * 
      * @param username
-     * @param warningSlug
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, String warningSlug) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/warnings/" + warningSlug);
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/warnings", null, filter);
+    }
+
+    /**
+     * Retrieves the warn related to the given warning slug
+     * 
+     * @param username
+     * @param warningId
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject getOne(String username, Integer warningId) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/warnings/" + warningId);
     }
 
     /**
@@ -68,12 +80,12 @@ public class ProfileWarnings extends AbstractEndpoint {
      * Deletes a warning given its warning slug
      * 
      * @param username
-     * @param warningSlug
+     * @param warningId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject delete(String username, String warningSlug) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/warnings/" + warningSlug);
+    public JsonObject delete(String username, Integer warningId) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/warnings/" + warningId);
     }
 
     /**
@@ -85,5 +97,17 @@ public class ProfileWarnings extends AbstractEndpoint {
      */
     public JsonObject deleteAll(String username) throws SDKException {
         return this.fetch("DELETE", "profiles/" + username + "/warnings");
+    }
+
+    /**
+     * Deletes all warnings related to the given username, with filtering
+     * 
+     * @param username
+     * @param filter
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject deleteAll(String username, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/warnings", null, filter);
     }
 }

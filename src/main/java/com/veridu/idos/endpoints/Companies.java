@@ -64,6 +64,7 @@ public class Companies extends AbstractEndpoint {
     public JsonObject create(String name) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
+
         return this.fetch("POST", "companies", data);
     }
 
@@ -81,6 +82,7 @@ public class Companies extends AbstractEndpoint {
     public JsonObject update(String name, String companySlug) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
+        
         return this.fetch("PUT", "companies/" + companySlug, data);
     }
 

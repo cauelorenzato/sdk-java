@@ -61,6 +61,7 @@ public class Permissions extends AbstractEndpoint {
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("routeName", permissionRouteName);
+        
         return this.fetch("POST", "companies/" + slug + "/permissions", data);
     }
 

@@ -10,32 +10,32 @@ import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
 
 /**
- * Profile Gates Endpoint Class
+ * Profile Attribute Reviews Endpoint Class
  * 
  * @version 2.0
  *
  */
-public class ProfileGates extends AbstractEndpoint {
+public class ProfileAttributeReviews extends AbstractEndpoint {
     /**
      * Class constructor
      */
-    public ProfileGates(HashMap<String, String> credentials) throws InvalidToken {
+    public ProfileAttributeReviews(HashMap<String, String> credentials) throws InvalidToken {
         super(credentials, IdOSAuthType.HANDLER);
     }
 
     /**
-     * Lists all gates given an username
+     * Lists all reviews given an username
      * 
      * @param username
      * @return JsonObject response
      * @throws SDKException
      */
     public JsonObject listAll(String username) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/gates");
+        return this.fetch("GET", "profiles/" + username + "/reviews");
     }
 
     /**
-     * Lists all gates given an username, with filtering
+     * Lists all reviews given an username, filtering by warning id
      * 
      * @param username
      * @param filter
@@ -43,80 +43,83 @@ public class ProfileGates extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject listAll(String username, Filter filter) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/gates", null, filter);
+        return this.fetch("GET", "profiles/" + username + "/reviews", null, filter);
     }
 
     /**
-     * Retrieves a gate given its gate name
+     * Retrieves a review
      * 
      * @param username
-     * @param gateName
+     * @param reviewId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, String gateName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/gates/" + gateName);
+    public JsonObject getOne(String username, Integer reviewId) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/reviews/" + reviewId);
     }
 
     /**
-     * Creates a gate passing the gate name
+     * Creates a review
      * 
      * @param username
-     * @param gateName
-     * @return JsonObject response
-     * @throws SDKException
-     * @throws UnsupportedEncodingException
-     */
-    public JsonObject create(String username, String gateName, boolean pass)
-            throws SDKException, UnsupportedEncodingException {
-        JsonObject data = new JsonObject();
-        data.addProperty("name", gateName);
-        data.addProperty("pass", String.valueOf(pass));
-        return this.fetch("POST", "profiles/" + username + "/gates", data);
-    }
-
-    /**
-     * Updates a gate given its gate name
-     * 
-     * @param username
-     * @param gateName
-     * @param pass
+     * @param warningId
+     * @param positive
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
-    public JsonObject update(String username, String gateName, boolean pass)
+    public JsonObject create(String username, Integer warningId, Boolean positive)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
-        data.addProperty("pass", pass);
-        return this.fetch("PUT", "profiles/" + username + "/gates/" + gateName, data);
+        data.addProperty("warningId", warningId);
+        data.addProperty("positive", positive);
+
+        return this.fetch("POST", "profiles/" + username + "/reviews", data);
     }
 
     /**
-     * Deletes a gate given the gate name
+     * Updates a review
      * 
      * @param username
-     * @param gateName
+     * @param reviewId
+     * @param positive
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject update(String username, Integer reviewId, Boolean positive)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("positive", positive);
+
+        return this.fetch("PUT", "profiles/" + username + "/reviews/" + reviewId, data);
+    }
+
+    /**
+     * Deletes a review
+     * 
+     * @param username
+     * @param reviewId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject delete(String username, String gateName) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/gates/" + gateName);
+    public JsonObject delete(String username, Integer reviewId) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/reviews/" + reviewId);
     }
 
     /**
-     * Deletes all gates associated with a username
+     * Deletes all reviews
      * 
      * @param username
      * @return JsonObject response
      * @throws SDKException
      */
     public JsonObject deleteAll(String username) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/gates");
+        return this.fetch("DELETE", "profiles/" + username + "/reviews");
     }
 
     /**
-     * Deletes all gates associated with a username
+     * Deletes all reviews, filtering by warning id
      * 
      * @param username
      * @param filter
@@ -124,6 +127,6 @@ public class ProfileGates extends AbstractEndpoint {
      * @throws SDKException
      */
     public JsonObject deleteAll(String username, Filter filter) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/gates", null, filter);
+        return this.fetch("DELETE", "profiles/" + username + "/reviews", null, filter);
     }
 }
