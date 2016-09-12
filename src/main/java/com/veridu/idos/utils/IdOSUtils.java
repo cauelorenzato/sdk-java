@@ -20,11 +20,9 @@ public class IdOSUtils {
     public static String generateToken(String issuerPrivateKey, String issuerPublicKey, String subjectPublicKey) {
         byte[] apiKeySecretBytes = issuerPrivateKey.getBytes();
         JwtBuilder jwt = Jwts.builder().setIssuer(issuerPublicKey);
-        if (!subjectPublicKey.isEmpty()) {
+        if (!subjectPublicKey.isEmpty())
             jwt.setSubject(subjectPublicKey);
-        }
         String token = jwt.signWith(SignatureAlgorithm.HS256, apiKeySecretBytes).compact();
-        System.out.println(token);
         return token;
     }
 
