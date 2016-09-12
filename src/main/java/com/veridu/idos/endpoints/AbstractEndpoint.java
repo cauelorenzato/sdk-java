@@ -146,10 +146,9 @@ public abstract class AbstractEndpoint {
      */
     public JsonObject request(String method, String url, JsonObject data) throws InvalidToken {
         try {
-
-            if (this.currentToken == null)
+            if (this.currentToken == null) {
                 this.generateAuthToken();
-
+            }
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
             connection.setRequestMethod(method);
@@ -235,19 +234,25 @@ public abstract class AbstractEndpoint {
         }
     }
 
-    private void generateAuthToken() throws InvalidToken {
+    /**
+     * Generates an authorization token
+     * 
+     * @throws InvalidToken
+     */
+    private String generateAuthToken() throws InvalidToken {
         switch (this.authType) {
         case USER:
-            this.currentToken = IdOSUtils.generateUserToken(credentials.get("credentialPrivateKey"),
-                    credentials.get("credentialPublicKey"), credentials.get("username"));
+            this.currentToken = IdOSUtils.generateUserToken(this.credentials.get("credentialPrivateKey"),
+                    this.credentials.get("credentialPublicKey"), this.credentials.get("username"));
             break;
         case MANAGEMENT:
-            this.currentToken = IdOSUtils.generateManagementToken(credentials.get("companyPrivateKey"),
-                    credentials.get("companyPublicKey"));
+            this.currentToken = IdOSUtils.generateManagementToken(this.credentials.get("companyPrivateKey"),
+                    this.credentials.get("companyPublicKey"));
             break;
         case HANDLER:
-            this.currentToken = IdOSUtils.generateHandlerToken(credentials.get("servicePrivateKey"),
-                    credentials.get("servicePublicKey"), credentials.get("credentialPublicKey"));
+            System.out.println(this.credentials);
+            this.currentToken = IdOSUtils.generateHandlerToken(this.credentials.get("servicePrivateKey"),
+                    this.credentials.get("servicePublicKey"), this.credentials.get("credentialPublicKey"));
             break;
         case NONE:
             this.currentToken = "none";
@@ -256,6 +261,7 @@ public abstract class AbstractEndpoint {
             throw new InvalidToken();
         }
 
+        return this.currentToken;
     }
 
     /**
@@ -267,5 +273,4 @@ public abstract class AbstractEndpoint {
     public void setCredentials(HashMap<String, String> credentials) {
         this.credentials = credentials;
     }
-
 }

@@ -24,7 +24,6 @@ public class IdOSUtils {
             jwt.setSubject(subjectPublicKey);
         }
         String token = jwt.signWith(SignatureAlgorithm.HS256, apiKeySecretBytes).compact();
-        System.out.println(token);
         return token;
     }
 
