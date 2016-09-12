@@ -22,20 +22,17 @@ import com.veridu.idos.utils.IdOSUtils;
 public abstract class AbstractEndpoint {
 
     /**
-     * IdOSAuthType enum
+     * IdOSAuthType (USER, HANDLER, MANAGEMENT)
      */
     protected IdOSAuthType authType = null;
-
     /**
      * Company's slug necessary to make most of requests to the API
      */
     protected String companySlug = null;
-
     /**
      * Default connection
      */
     protected HttpURLConnection connection = null;
-
     /**
      * Last API response code
      */
@@ -44,9 +41,9 @@ public abstract class AbstractEndpoint {
      * Token necessary to make requests to the API
      */
     private String currentToken = null;
-
     /**
-     *
+     * Keys (public and private) necessary to generate UserToken,
+     * CredentialToken, IdentityToken
      */
     private HashMap<String, String> credentials;
 
@@ -117,7 +114,6 @@ public abstract class AbstractEndpoint {
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
-
         if (filter != null)
             url += "?" + filter.toString();
 
@@ -260,6 +256,16 @@ public abstract class AbstractEndpoint {
             throw new InvalidToken();
         }
 
+    }
+
+    /**
+     * Sets Credentials (public and private keys)
+     * 
+     * @param credentials
+     *            HashMap<String, String>
+     */
+    public void setCredentials(HashMap<String, String> credentials) {
+        this.credentials = credentials;
     }
 
 }
