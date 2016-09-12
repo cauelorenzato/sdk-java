@@ -6,10 +6,14 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
+import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.IdOSAuthType;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(AbstractEndpoint.class)
@@ -26,20 +30,17 @@ public class AbstractEndpointTest {
         assertSame("MANAGEMENT", tag.authType.toString());
     }
 
-    // @Test
-    // public void testFetch() throws SDKException {
-    // AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class,
-    // Mockito.CALLS_REAL_METHODS);
-    // abstractMock.setAuthType(IdOSAuthType.MANAGEMENT);
-    // JsonObject json = new JsonObject();
-    // json.addProperty("dummy", "value");
-    // Mockito.when(abstractMock.request("POST",
-    // "http://localhost:8000/index.php/1.0/companies", json))
-    // .thenReturn(json);
-    // Mockito.when(abstractMock.fetch("POST", "/companies",
-    // json)).thenCallRealMethod();
-    // assertSame(json, abstractMock.fetch("POST", "/companies", json));
-    // }
+    @Test
+    public void testFetch() throws SDKException {
+        AbstractEndpoint abstractMock = Mockito.mock(AbstractEndpoint.class, Mockito.CALLS_REAL_METHODS);
+        abstractMock.setAuthType(IdOSAuthType.MANAGEMENT);
+        JsonObject json = new JsonObject();
+        json.addProperty("dummy", "value");
+        Mockito.when(abstractMock.request("POST", "http://localhost:8000/index.php/1.0/companies", json))
+                .thenReturn(json);
+        Mockito.when(abstractMock.fetch("POST", "/companies", json)).thenCallRealMethod();
+        assertSame(json, abstractMock.fetch("POST", "/companies", json));
+    }
 
     // @Test
     // public void testFetchEmptyData() throws SDKException {
