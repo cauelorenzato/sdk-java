@@ -13,15 +13,42 @@ public class Filter {
         return params;
     }
 
+    public Filter addSourceNameFilter(String filter) {
+        return this.addFilterByKeyName("source.name", filter);
+    }
+
+    /**
+     * Use this filter to get profile features not related
+     * to a particular source (e.g., self submitted).
+     * 
+     * @return
+     */
+    public Filter addSourceNullFilter() {
+        return this.addFilterByKeyName("source.id", "0");
+    }
+
     public Filter addNameFilter(String filter) {
         return this.addFilterByKeyName("name", filter);
     }
 
-    public Filter addProviderFilter(String filter) {
-        this.addFilterByKeyName("provider", filter);
+    public Filter addCreatorFilter(String filter) {
+        this.addFilterByKeyName("creator", filter);
         return this;
     }
 
+    public Filter addTypeFilter(String filter) {
+        this.addFilterByKeyName("type", filter);
+        return this;
+    }
+
+    /**
+     * Add a filter passing the name of the filter parameter.
+     * 
+     * @param name parameter on which to run the filter
+     * @param filter actual filter value
+     * 
+     * @return
+     */
     public Filter addFilterByKeyName(String name, String filter) {
         this.params.put(name, filter);
         return this;

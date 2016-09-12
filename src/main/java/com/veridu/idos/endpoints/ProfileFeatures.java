@@ -6,8 +6,8 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 public class ProfileFeatures extends AbstractEndpoint {
 
@@ -63,12 +63,69 @@ public class ProfileFeatures extends AbstractEndpoint {
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
+    public JsonObject create(String username, String name, int value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Integer");
+        return this.fetch("POST", "profiles/" + username + "/features", data);
+    }
+
+    /**
+     * Create a new feature for the given user.
+     * 
+     * @param username
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject create(String username, String name, double value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Double");
+        return this.fetch("POST", "profiles/" + username + "/features", data);
+    }
+
+    /**
+     * Create a new feature for the given user.
+     * 
+     * @param username
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject create(String username, String name, boolean value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Boolean");
+        return this.fetch("POST", "profiles/" + username + "/features", data);
+    }
+
+    /**
+     * Create a new feature for the given user.
+     * 
+     * @param username
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
     public JsonObject create(String username, String name, String value)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
         data.addProperty("value", value);
-
+        data.addProperty("type", "String");
         return this.fetch("POST", "profiles/" + username + "/features", data);
     }
 
@@ -88,6 +145,70 @@ public class ProfileFeatures extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
         data.addProperty("value", value);
+        data.addProperty("type", "String");
+
+        return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, data);
+    }
+
+    /**
+     * Updates Feature's specific information.
+     * 
+     * @param username
+     * @param featureSlug
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject update(String username, String featureSlug, String name, double value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Double");
+
+        return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, data);
+    }
+
+    /**
+     * Updates Feature's specific information.
+     * 
+     * @param username
+     * @param featureSlug
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject update(String username, String featureSlug, String name, int value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Integer");
+
+        return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, data);
+    }
+
+    /**
+     * Updates Feature's specific information.
+     * 
+     * @param username
+     * @param featureSlug
+     * @param name
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject update(String username, String featureSlug, String name, boolean value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", name);
+        data.addProperty("value", value);
+        data.addProperty("type", "Boolean");
 
         return this.fetch("PUT", "profiles/" + username + "/features/" + featureSlug, data);
     }

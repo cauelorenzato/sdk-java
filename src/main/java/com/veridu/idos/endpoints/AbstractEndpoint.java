@@ -15,9 +15,9 @@ import com.google.gson.JsonParser;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
+import com.veridu.idos.utils.Filter;
 import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.IdOSUtils;
-import com.veridu.idos.utils.Filter;
 
 public abstract class AbstractEndpoint {
 
@@ -117,12 +117,20 @@ public abstract class AbstractEndpoint {
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
-        
-        if (filter != null) {
-        	url += "?" + filter.toString();
-        }
+
+        if (filter != null)
+            url += "?" + filter.toString();
 
         return url;
+    }
+
+    /**
+     * Regenerate the token
+     * 
+     * @throws InvalidToken
+     */
+    public void refreshToken() throws InvalidToken {
+        this.generateAuthToken();
     }
 
     /**
@@ -201,7 +209,7 @@ public abstract class AbstractEndpoint {
             if (this.connection != null)
                 this.connection.disconnect();
         }
-        
+
         return null;
     }
 
