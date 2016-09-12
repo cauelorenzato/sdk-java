@@ -14,7 +14,7 @@ public class Filter {
     }
 
     public Filter addSourceNameFilter(String filter) {
-        return this.addFilterByKeyName("source.name", filter);
+        return this.addFilterByKeyName("source:name", filter);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Filter {
      * @return
      */
     public Filter addSourceNullFilter() {
-        return this.addFilterByKeyName("source.id", "0");
+        return this.addFilterByKeyName("source:id", "0");
     }
 
     public Filter addNameFilter(String filter) {
