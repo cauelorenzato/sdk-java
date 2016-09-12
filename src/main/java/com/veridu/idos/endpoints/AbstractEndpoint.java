@@ -114,12 +114,19 @@ public abstract class AbstractEndpoint {
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
-
-        if (filter != null) {
+        if (filter != null)
             url += "?" + filter.toString();
-        }
 
         return url;
+    }
+
+    /**
+     * Regenerate the token
+     * 
+     * @throws InvalidToken
+     */
+    public void refreshToken() throws InvalidToken {
+        this.generateAuthToken();
     }
 
     /**
