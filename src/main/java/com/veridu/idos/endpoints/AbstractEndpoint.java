@@ -15,27 +15,24 @@ import com.google.gson.JsonParser;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
 import com.veridu.idos.settings.Config;
+import com.veridu.idos.utils.Filter;
 import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.IdOSUtils;
-import com.veridu.idos.utils.Filter;
 
 public abstract class AbstractEndpoint {
 
     /**
-     * IdOSAuthType enum
+     * IdOSAuthType (USER, HANDLER, MANAGEMENT)
      */
     protected IdOSAuthType authType = null;
-
     /**
      * Company's slug necessary to make most of requests to the API
      */
     protected String companySlug = null;
-
     /**
      * Default connection
      */
     protected HttpURLConnection connection = null;
-
     /**
      * Last API response code
      */
@@ -44,9 +41,9 @@ public abstract class AbstractEndpoint {
      * Token necessary to make requests to the API
      */
     private String currentToken = null;
-
     /**
-     *
+     * Keys (public and private) necessary to generate UserToken,
+     * CredentialToken, IdentityToken
      */
     private HashMap<String, String> credentials;
 
@@ -117,9 +114,9 @@ public abstract class AbstractEndpoint {
         if (resource.charAt(0) != '/')
             url = url.concat("/");
         url = url.concat(resource);
-        
+
         if (filter != null) {
-        	url += "?" + filter.toString();
+            url += "?" + filter.toString();
         }
 
         return url;
@@ -201,7 +198,7 @@ public abstract class AbstractEndpoint {
             if (this.connection != null)
                 this.connection.disconnect();
         }
-        
+
         return null;
     }
 
@@ -252,6 +249,16 @@ public abstract class AbstractEndpoint {
             throw new InvalidToken();
         }
 
+    }
+
+    /**
+     * Sets Credentials (public and private keys)
+     * 
+     * @param credentials
+     *            HashMap<String, String>
+     */
+    public void setCredentials(HashMap<String, String> credentials) {
+        this.credentials = credentials;
     }
 
 }
