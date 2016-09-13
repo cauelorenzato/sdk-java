@@ -111,7 +111,7 @@ public abstract class AbstractEndpoint {
             url = url.concat("/");
         url = url.concat(resource);
         if (filter != null)
-            if (filter.getParams().toString().isEmpty() == false) {
+            if (filter.toString().isEmpty() == false) {
                 url += "?" + filter.toString();
             }
 
@@ -119,12 +119,9 @@ public abstract class AbstractEndpoint {
     }
 
     private String transformURL(String url, Filter filter) {
-        if (filter != null) {
-            if (url.contains("?") == false)
-                url += "?" + filter.toString();
-            else
-                url += "&" + filter.toString();
-        }
+        if (filter != null)
+            url += "?" + filter.toString();
+
         return url;
     }
 
@@ -158,26 +155,25 @@ public abstract class AbstractEndpoint {
         if (this.currentToken == null) {
             this.generateAuthToken();
         }
-        if (filter != null) {
-            if (filter.getAllPagesTrue() == true) {
-                String newUrl = "";
-                do {
-                    if (newUrl.length() != 0)
-                        json = this.sendRequest(method, newUrl, data);
-                    else
-                        json = this.sendRequest(method, url, data);
-                    array.addAll(json.get("data").getAsJsonArray());
-                    int page = json.get("pagination").getAsJsonObject().get("current_page").getAsInt() + 1;
-                    filter.addParameterByKeyName("page", String.valueOf(page));
-                    newUrl = this.transformURL(url, filter);
-                } while (json.get("pagination").getAsJsonObject().get("current_page").getAsInt() < json
-                        .get("pagination").getAsJsonObject().get("total").getAsInt());
-                json.add("data", array);
-                return json;
-            }
+        if ((filter != null) && (filter.getAllPagesTrue())) {
+            String newUrl = "";
+            do {
+                if (newUrl.length() != 0)
+                    json = this.sendRequest(method, newUrl, data);
+                else
+                    json = this.sendRequest(method, url, data);
+                array.addAll(json.get("data").getAsJsonArray());
+                int page = json.get("pagination").getAsJsonObject().get("current_page").getAsInt() + 1;
+                filter.addFilterByKeyName("page", String.valueOf(page));
+                newUrl = this.transformURL(url, filter);
+            } while (json.get("pagination").getAsJsonObject().get("current_page").getAsInt() < json.get("pagination")
+                    .getAsJsonObject().get("total").getAsInt());
+            json.add("data", array);
+            return json;
         }
 
         return this.sendRequest(method, url, data);
+
     }
 
     /**

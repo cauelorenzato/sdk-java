@@ -34,7 +34,7 @@ public class ProfileFeatureSamples {
         /**
          * Gets the response from the API listing all features
          */
-        Filter filter = (Filter) Filter.createFilter();
+        Filter filter = Filter.createFilter();
         filter.setAllPagesTrue();
         JsonObject json = idOSAPIFactory.getFeature().listAll(username, filter);
 

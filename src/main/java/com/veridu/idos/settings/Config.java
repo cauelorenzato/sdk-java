@@ -4,7 +4,7 @@ public class Config {
     /**
      * Default base URL;
      */
-    public static String BASE_URL = "http://127.0.0.1:8080/index.php/1.0";
+    public static String BASE_URL = "http://127.0.0.1:8000/index.php/1.0";
 
     /**
      * Company's private key
