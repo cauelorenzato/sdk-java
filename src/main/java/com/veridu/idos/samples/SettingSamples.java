@@ -17,8 +17,8 @@ public class SettingSamples {
         JsonObject parsed = null;
 
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * IdOSAPIFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
@@ -86,5 +86,4 @@ public class SettingSamples {
          */
         System.out.println(json.get("deleted").getAsInt());
     }
-
 }

@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.veridu.idos.IdOSAPIFactory;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
+import com.veridu.idos.utils.Filter;
 
 public class ProfileFeatureSamples {
     public static void main(String[] args) throws InvalidToken, SDKException, UnsupportedEncodingException {
@@ -16,12 +17,13 @@ public class ProfileFeatureSamples {
          */
         JsonObject parsed = null;
         /**
-         * IdOSAPIFactory is a class that instantiate all endpoints as their methods
-         * (getEndpointName) are called. The endpoints don't need to be
+         * IdOSAPIFactory is a class that instantiate all endpoints as their
+         * methods (getEndpointName) are called. The endpoints don't need to be
          * instantiated one by one. You just need to call the
          * factory.getEndpoint and its going to be instantiated and available to
          * call its methods. In other words, it means that all endpoints is
-         * going to pass by an IdOSAPIFactory Class, and accessed through this object
+         * going to pass by an IdOSAPIFactory Class, and accessed through this
+         * object
          * 
          */
         IdOSAPIFactory idOSAPIFactory = new IdOSAPIFactory(IdOSSamplesHelper.getCredentials());
@@ -32,7 +34,9 @@ public class ProfileFeatureSamples {
         /**
          * Gets the response from the API listing all features
          */
-        JsonObject json = idOSAPIFactory.getFeature().listAll(username);
+        Filter filter = (Filter) Filter.createFilter();
+        filter.setAllPagesTrue();
+        JsonObject json = idOSAPIFactory.getFeature().listAll(username, filter);
 
         /**
          * Prints the json
@@ -77,11 +81,11 @@ public class ProfileFeatureSamples {
         /**
          * Deletes all features
          */
-        json = idOSAPIFactory.getFeature().deleteAll(username);
+        // json = idOSAPIFactory.getFeature().deleteAll(username);
 
         /**
          * Prints the number of deleted features
          */
-        System.out.println(json.get("deleted").getAsInt());
+        // System.out.println(json.get("deleted").getAsInt());
     }
 }

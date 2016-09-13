@@ -2,9 +2,12 @@ package com.veridu.idos.utils;
 
 import java.util.HashMap;
 
-public class Filter {
+public class Filter extends Parameter {
 
-    private HashMap<String, String> params = new HashMap<>();
+    /**
+     * Boolean value to get all pages
+     */
+    private boolean getAllPages = false;
 
     private Filter() {
     }
@@ -18,10 +21,10 @@ public class Filter {
     }
 
     /**
-     * Use this filter to get profile features not related
-     * to a particular source (e.g., self submitted).
+     * Use this filter to get profile features not related to a particular
+     * source (e.g., self submitted).
      * 
-     * @return
+     * @return self
      */
     public Filter addSourceNullFilter() {
         return this.addFilterByKeyName("source:id", "0");
@@ -44,13 +47,15 @@ public class Filter {
     /**
      * Add a filter passing the name of the filter parameter.
      * 
-     * @param name parameter on which to run the filter
-     * @param filter actual filter value
+     * @param name
+     *            parameter on which to run the filter
+     * @param filter
+     *            actual filter value
      * 
-     * @return
+     * @return self
      */
     public Filter addFilterByKeyName(String name, String filter) {
-        this.params.put(name, filter);
+        super.addParameterByKeyName(name, filter);
         return this;
     }
 
@@ -71,4 +76,11 @@ public class Filter {
         return String.join("&", queryElements);
     }
 
+    public void setAllPagesTrue() {
+        this.getAllPages = true;
+    }
+
+    public boolean getAllPagesTrue() {
+        return this.getAllPages;
+    }
 }

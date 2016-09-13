@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -56,7 +57,8 @@ public abstract class AbstractEndpoint {
     }
 
     /**
-     *
+     * Fetches an API Resource
+     * 
      * @param method
      *            String
      * @param resource
@@ -70,22 +72,17 @@ public abstract class AbstractEndpoint {
 
     /**
      * Fetches an API Resource
-     *
+     * 
      * @param method
      *            String
      * @param resource
      *            String
      * @param data
      *            JsonObject
-     *
      * @throws SDKException
-     *
      */
     protected JsonObject fetch(String method, String resource, JsonObject data) throws SDKException {
-        String url = this.transformURL(method, resource, null);
-        JsonObject response = request(method, url, data);
-
-        return response;
+        return fetch(method, resource, data, null);
     }
 
     /**
@@ -101,10 +98,9 @@ public abstract class AbstractEndpoint {
      * @throws SDKException
      *
      */
-
     protected JsonObject fetch(String method, String resource, JsonObject data, Filter filter) throws SDKException {
         String url = this.transformURL(method, resource, filter);
-        JsonObject response = request(method, url, data);
+        JsonObject response = request(method, url, data, filter);
 
         return response;
     }
@@ -115,8 +111,20 @@ public abstract class AbstractEndpoint {
             url = url.concat("/");
         url = url.concat(resource);
         if (filter != null)
-            url += "?" + filter.toString();
+            if (filter.getParams().toString().isEmpty() == false) {
+                url += "?" + filter.toString();
+            }
 
+        return url;
+    }
+
+    private String transformURL(String url, Filter filter) {
+        if (filter != null) {
+            if (url.contains("?") == false)
+                url += "?" + filter.toString();
+            else
+                url += "&" + filter.toString();
+        }
         return url;
     }
 
@@ -144,11 +152,44 @@ public abstract class AbstractEndpoint {
      * @throws RequestFailed
      *             Exception
      */
-    public JsonObject request(String method, String url, JsonObject data) throws InvalidToken {
-        try {
-            if (this.currentToken == null) {
-                this.generateAuthToken();
+    public JsonObject request(String method, String url, JsonObject data, Filter filter) throws InvalidToken {
+        JsonObject json = new JsonObject();
+        JsonArray array = new JsonArray();
+        if (this.currentToken == null) {
+            this.generateAuthToken();
+        }
+        if (filter != null) {
+            if (filter.getAllPagesTrue() == true) {
+                String newUrl = "";
+                do {
+                    if (newUrl.length() != 0)
+                        json = this.sendRequest(method, newUrl, data);
+                    else
+                        json = this.sendRequest(method, url, data);
+                    array.addAll(json.get("data").getAsJsonArray());
+                    int page = json.get("pagination").getAsJsonObject().get("current_page").getAsInt() + 1;
+                    filter.addParameterByKeyName("page", String.valueOf(page));
+                    newUrl = this.transformURL(url, filter);
+                } while (json.get("pagination").getAsJsonObject().get("current_page").getAsInt() < json
+                        .get("pagination").getAsJsonObject().get("total").getAsInt());
+                json.add("data", array);
+                return json;
             }
+        }
+
+        return this.sendRequest(method, url, data);
+    }
+
+    /**
+     * Sends the request
+     * 
+     * @param method
+     * @param url
+     * @param data
+     * @return
+     */
+    private JsonObject sendRequest(String method, String url, JsonObject data) {
+        try {
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
             connection.setRequestMethod(method);
@@ -196,7 +237,6 @@ public abstract class AbstractEndpoint {
             }
 
             rd.close();
-
             return this.convertToJson(response.toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,7 +244,6 @@ public abstract class AbstractEndpoint {
             if (this.connection != null)
                 this.connection.disconnect();
         }
-
         return null;
     }
 
