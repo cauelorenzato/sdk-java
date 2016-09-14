@@ -12,7 +12,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * ServiceHandlers Endpoint class
- * 
+ *
  * @version 2.0
  */
 public class ServiceHandlers extends AbstractEndpoint {
@@ -25,7 +25,7 @@ public class ServiceHandlers extends AbstractEndpoint {
 
     /**
      * Lists all service handlers related to the given company token
-     * 
+     *
      * @return JsonObject response
      */
     public JsonObject listAll() throws SDKException {
@@ -34,7 +34,7 @@ public class ServiceHandlers extends AbstractEndpoint {
 
     /**
      * Retrieves a service handler given its service handler id
-     * 
+     *
      * @param serviceHandlerId
      * @return JsonObject response
      * @throws SDKException
@@ -45,7 +45,7 @@ public class ServiceHandlers extends AbstractEndpoint {
 
     /**
      * Creates a new service handler
-     * 
+     *
      * @param serviceId
      * @param listens
      * @return JsonObject response
@@ -64,7 +64,7 @@ public class ServiceHandlers extends AbstractEndpoint {
 
     /**
      * Updates a service handler given its id
-     * 
+     *
      * @param serviceHandlerId
      * @param listens
      * @return JsonObject response
@@ -78,12 +78,12 @@ public class ServiceHandlers extends AbstractEndpoint {
         }
         data.add("listens", listensArray);
 
-        return this.fetch("PUT", "service-handlers/" + serviceHandlerId, data);
+        return this.fetch("PATCH", "service-handlers/" + serviceHandlerId, data);
     }
 
     /**
      * Deletes a service handler given its id
-     * 
+     *
      * @param serviceHandlerId
      * @return JsonObject response
      * @throws SDKException
@@ -94,7 +94,7 @@ public class ServiceHandlers extends AbstractEndpoint {
 
     /**
      * Deletes all service handlers related to the given company
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */

@@ -10,7 +10,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Profile Tasks Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -22,7 +22,7 @@ public class ProfileTasks extends AbstractEndpoint {
 
     /**
      * Lists all tasks related to the username given the process id
-     * 
+     *
      * @param username
      * @param processId
      * @return JsonObject response
@@ -34,7 +34,7 @@ public class ProfileTasks extends AbstractEndpoint {
 
     /**
      * Retrieves a task given its task id
-     * 
+     *
      * @param username
      * @param taskId
      * @return JsonObject response
@@ -46,7 +46,7 @@ public class ProfileTasks extends AbstractEndpoint {
 
     /**
      * Creates a new task
-     * 
+     *
      * @param username
      * @param processId
      * @param name
@@ -67,13 +67,13 @@ public class ProfileTasks extends AbstractEndpoint {
 
     /**
      * Updates a task given its task id
-     * 
+     *
      * @param username
      * @param taskId
      * @return JsonObject response+
      * @throws SDKException
      */
     public JsonObject update(String username, int processId, int taskId) throws SDKException {
-        return this.fetch("PUT", "profiles/" + username + "/processes/" + processId + "/tasks/" + taskId);
+        return this.fetch("PATCH", "profiles/" + username + "/processes/" + processId + "/tasks/" + taskId);
     }
 }

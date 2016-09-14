@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Digested Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -26,7 +26,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Retrieve a complete list of the data digested by a given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @return JsonObject response
@@ -35,10 +35,10 @@ public class Digested extends AbstractEndpoint {
     public JsonObject listAll(String username, int sourceId) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/digested");
     }
-    
+
     /**
      * Retrieve a complete list of the data digested by a given source, with filtering.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param filter
@@ -51,7 +51,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Retrieves a digested data from a given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param digestedName
@@ -64,7 +64,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Creates a new digested data
-     * 
+     *
      * @param username
      * @param sourceId
      * @param digestedName
@@ -83,7 +83,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Updates a digested data
-     * 
+     *
      * @param username
      * @param sourceId
      * @param digestedName
@@ -96,12 +96,12 @@ public class Digested extends AbstractEndpoint {
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("value", digestedValue);
-        return this.fetch("PUT", "profiles/" + username + "/sources/" + sourceId + "/digested/" + digestedName, data);
+        return this.fetch("PATCH", "profiles/" + username + "/sources/" + sourceId + "/digested/" + digestedName, data);
     }
 
     /**
      * Deletes a digested data given its name
-     * 
+     *
      * @param username
      * @param sourceId
      * @param digestedName
@@ -114,7 +114,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Deletes all digested data related to the given sourceId
-     * 
+     *
      * @param username
      * @param sourceIds
      * @return JsonObject response
@@ -126,7 +126,7 @@ public class Digested extends AbstractEndpoint {
 
     /**
      * Deletes all digested data related to the given sourceId, with filtering.
-     * 
+     *
      * @param username
      * @param sourceIds
      * @param filter

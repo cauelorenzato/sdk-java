@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Credentials Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -19,7 +19,7 @@ public class Credentials extends AbstractEndpoint {
 
     /**
      * Class constructor
-     * 
+     *
      * @throws InvalidToken
      */
     public Credentials(HashMap<String, String> credentials) throws InvalidToken {
@@ -28,9 +28,9 @@ public class Credentials extends AbstractEndpoint {
 
     /**
      * Lists all credentials available
-     * 
+     *
      * @return JsonObject response
-     * 
+     *
      * @throws SDKException
      */
     public JsonObject listAll() throws SDKException {
@@ -39,7 +39,7 @@ public class Credentials extends AbstractEndpoint {
 
     /**
      * Gets the credential given the public key
-     * 
+     *
      * @param companyPublicKey
      * @return JsonObject response
      * @throws SDKException
@@ -50,7 +50,7 @@ public class Credentials extends AbstractEndpoint {
 
     /**
      * Creates a new credential
-     * 
+     *
      * @param name
      * @param production
      * @return JsonObject response
@@ -68,7 +68,7 @@ public class Credentials extends AbstractEndpoint {
     /**
      * Updates the credential giving the public key and the new name for the
      * credential
-     * 
+     *
      * @param name
      * @param companyPublicKey
      * @return JsonObject response
@@ -78,13 +78,13 @@ public class Credentials extends AbstractEndpoint {
     public JsonObject update(String name, String publicKey) throws UnsupportedEncodingException, SDKException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
-        
-        return this.fetch("PUT", "management/credentials/" + publicKey, data);
+
+        return this.fetch("PATCH", "management/credentials/" + publicKey, data);
     }
 
     /**
      * Deletes the credential givin the public key
-     * 
+     *
      * @param companyPublicKey
      * @return JsonObject response
      * @throws SDKException

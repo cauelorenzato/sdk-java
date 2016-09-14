@@ -11,14 +11,14 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Hooks Endpoint Class
- * 
+ *
  * @version 2.0
  */
 public class Hooks extends AbstractEndpoint {
 
     /**
      * Class Constructor
-     * 
+     *
      * @throws InvalidToken
      */
     public Hooks(HashMap<String, String> credentials) throws InvalidToken {
@@ -27,7 +27,7 @@ public class Hooks extends AbstractEndpoint {
 
     /**
      * Lists all hooks available given the credential public key
-     * 
+     *
      * @param credentialPubKey
      * @return JsonObject response
      * @throws SDKException
@@ -38,7 +38,7 @@ public class Hooks extends AbstractEndpoint {
 
     /**
      * Retrieves a hook given its id
-     * 
+     *
      * @param credentialPubKey
      * @param id
      * @return JsonObject response
@@ -51,7 +51,7 @@ public class Hooks extends AbstractEndpoint {
     /**
      * Creates a new hook given the credential public key, the trigger, url and
      * if is subscribedibed
-     * 
+     *
      * @param credentialPubKey
      * @param trigger
      * @param url
@@ -72,7 +72,7 @@ public class Hooks extends AbstractEndpoint {
 
     /**
      * Updates an existing hook given its id
-     * 
+     *
      * @param credentialPubKey
      * @param id
      * @param trigger
@@ -89,12 +89,12 @@ public class Hooks extends AbstractEndpoint {
         data.addProperty("url", url);
         data.addProperty("subscribedibed", subscribed);
 
-        return this.fetch("PUT", "management/credentials/" + credentialPubKey + "/hooks/" + id, data);
+        return this.fetch("PATCH", "management/credentials/" + credentialPubKey + "/hooks/" + id, data);
     }
 
     /**
      * Deletes a hook given its id
-     * 
+     *
      * @param credentialPubKey
      * @param id
      * @return JsonObject response
@@ -106,7 +106,7 @@ public class Hooks extends AbstractEndpoint {
 
     /**
      * Deletes all hooks associated with the credential public key
-     * 
+     *
      * @param credentialPubKey
      * @return JsonObject response
      * @throws SDKException

@@ -6,12 +6,12 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Scores Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -22,115 +22,133 @@ public class ProfileScores extends AbstractEndpoint {
     }
 
     /**
-     * Lists all scores for the given attribute name
-     * 
+     * Lists all scores for a user
+     *
      * @param username
-     * @param attributeName
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, String attributeName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores");
+    public JsonObject listAll(String username) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/scores");
     }
-    
+
     /**
      * Lists all scores for the given attribute name
-     * 
+     *
      * @param username
-     * @param attributeName
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, String attributeName, Filter filter) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, filter);
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/scores", null, filter);
     }
 
     /**
      * Retrieves the score related to the given scoreName
-     * 
+     *
      * @param username
-     * @param attributeName
      * @param scoreName
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, String attributeName, String scoreName) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/attributes/" + attributeName + "/scores/" + scoreName);
+    public JsonObject getOne(String username, String scoreName) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/scores/" + scoreName);
     }
 
     /**
      * Creates a new score
-     * 
+     *
      * @param username
-     * @param attributeName
      * @param scoreName
+     * @param attributeName
      * @param value
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
-    public JsonObject create(String username, String attributeName, String scoreName, double value)
+    public JsonObject create(String username, String scoreName, String attributeName, double value)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", scoreName);
         data.addProperty("value", value);
-        return this.fetch("POST", "profiles/" + username + "/attributes/" + attributeName + "/scores", data);
+        data.addProperty("attribute", attributeName);
+        return this.fetch("POST", "profiles/" + username + "/scores", data);
     }
 
     /**
-     * Updates an existing score given the score name
-     * 
+     * Update or insert a new score
+     *
      * @param username
-     * @param attributeName
      * @param scoreName
+     * @param attributeName
      * @param value
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
-    public JsonObject update(String username, String attributeName, String scoreName, double value)
+    public JsonObject upsert(String username, String scoreName, String attributeName, double value)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", scoreName);
-        return this.fetch("PUT", "profiles/" + username + "/attributes/" + attributeName + "/scores/" + scoreName,
-                data);
+        data.addProperty("value", value);
+        data.addProperty("attribute", attributeName);
+        return this.fetch("PUT", "profiles/" + username + "/scores", data);
+    }
+
+    /**
+     * Updates an existing score given the score name
+     *
+     * @param username
+     * @param scoreName
+     * @param attributeName
+     * @param value
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject update(String username, String scoreName, String attributeName, double value)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("value", value);
+        data.addProperty("attribute", attributeName);
+        return this.fetch("PATCH", "profiles/" + username + "/scores/" + scoreName, data);
     }
 
     /**
      * Deletes a score given its score name
-     * 
+     *
      * @param username
-     * @param attributeName
      * @param scoreName
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject delete(String username, String attributeName, String scoreName) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName + "/scores/" + scoreName);
+    public JsonObject delete(String username, String scoreName) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/scores/" + scoreName);
     }
 
     /**
-     * Deletes all scores related to the attribute Name
-     * 
+     * Deletes all scores related to the user
+     *
      * @param username
      * @param attributeName
      * @return
      * @throws SDKException
      */
-    public JsonObject deleteAll(String username, String attributeName) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName + "/scores");
+    public JsonObject deleteAll(String username) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/scores");
     }
 
     /**
-     * Deletes all scores related to the attribute Name
-     * 
+     * Deletes all scores related to a user
+     *
      * @param username
-     * @param attributeName
+     * @param filter
      * @return
      * @throws SDKException
      */
-    public JsonObject deleteAll(String username, String attributeName, Filter filter) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/attributes/" + attributeName + "/scores", null, filter);
+    public JsonObject deleteAll(String username, Filter filter) throws SDKException {
+        return this.fetch("DELETE", "profiles/" + username + "/scores", null, filter);
     }
 
 }

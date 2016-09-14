@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Profile Attribute Reviews Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -25,7 +25,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Lists all reviews given an username
-     * 
+     *
      * @param username
      * @return JsonObject response
      * @throws SDKException
@@ -36,7 +36,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Lists all reviews given an username, filtering by warning id
-     * 
+     *
      * @param username
      * @param filter
      * @return JsonObject response
@@ -48,7 +48,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Retrieves a review
-     * 
+     *
      * @param username
      * @param reviewId
      * @return JsonObject response
@@ -60,7 +60,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Creates a review
-     * 
+     *
      * @param username
      * @param warningId
      * @param positive
@@ -79,7 +79,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Updates a review
-     * 
+     *
      * @param username
      * @param reviewId
      * @param positive
@@ -92,12 +92,12 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("positive", positive);
 
-        return this.fetch("PUT", "profiles/" + username + "/reviews/" + reviewId, data);
+        return this.fetch("PATCH", "profiles/" + username + "/reviews/" + reviewId, data);
     }
 
     /**
      * Deletes a review
-     * 
+     *
      * @param username
      * @param reviewId
      * @return JsonObject response
@@ -109,7 +109,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Deletes all reviews
-     * 
+     *
      * @param username
      * @return JsonObject response
      * @throws SDKException
@@ -120,7 +120,7 @@ public class ProfileAttributeReviews extends AbstractEndpoint {
 
     /**
      * Deletes all reviews, filtering by warning id
-     * 
+     *
      * @param username
      * @param filter
      * @return JsonObject response

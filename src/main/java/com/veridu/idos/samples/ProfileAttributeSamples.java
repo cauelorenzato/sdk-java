@@ -41,7 +41,7 @@ public class ProfileAttributeSamples {
         /**
          * Gets the response from the API trying to create a new attribute
          */
-        json = idOSAPIFactory.getAttribute().create(username, "attributeName", "attributeValue");
+        json = idOSAPIFactory.getAttribute().create(username, "attributeName", "attributeValue", 0.5);
 
         /**
          * Get the response form the API getting one attribute

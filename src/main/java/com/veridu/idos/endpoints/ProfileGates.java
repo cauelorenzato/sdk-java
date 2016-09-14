@@ -6,12 +6,12 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Gates Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -25,7 +25,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Lists all gates given an username
-     * 
+     *
      * @param username
      * @return JsonObject response
      * @throws SDKException
@@ -36,7 +36,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Lists all gates given an username, with filtering
-     * 
+     *
      * @param username
      * @param filter
      * @return JsonObject response
@@ -48,7 +48,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Retrieves a gate given its gate name
-     * 
+     *
      * @param username
      * @param gateName
      * @return JsonObject response
@@ -60,7 +60,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Creates a gate passing the gate name
-     * 
+     *
      * @param username
      * @param gateName
      * @return JsonObject response
@@ -71,13 +71,30 @@ public class ProfileGates extends AbstractEndpoint {
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", gateName);
-        data.addProperty("pass", String.valueOf(pass));
+        data.addProperty("pass", pass);
         return this.fetch("POST", "profiles/" + username + "/gates", data);
     }
 
     /**
+     * Updates or creates a gate passing the gate name
+     *
+     * @param username
+     * @param gateName
+     * @return JsonObject response
+     * @throws SDKException
+     * @throws UnsupportedEncodingException
+     */
+    public JsonObject upsert(String username, String gateName, boolean pass)
+            throws SDKException, UnsupportedEncodingException {
+        JsonObject data = new JsonObject();
+        data.addProperty("name", gateName);
+        data.addProperty("pass", pass);
+        return this.fetch("PUT", "profiles/" + username + "/gates", data);
+    }
+
+    /**
      * Updates a gate given its gate name
-     * 
+     *
      * @param username
      * @param gateName
      * @param pass
@@ -89,12 +106,12 @@ public class ProfileGates extends AbstractEndpoint {
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("pass", pass);
-        return this.fetch("PUT", "profiles/" + username + "/gates/" + gateName, data);
+        return this.fetch("PATCH", "profiles/" + username + "/gates/" + gateName, data);
     }
 
     /**
      * Deletes a gate given the gate name
-     * 
+     *
      * @param username
      * @param gateName
      * @return JsonObject response
@@ -106,7 +123,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Deletes all gates associated with a username
-     * 
+     *
      * @param username
      * @return JsonObject response
      * @throws SDKException
@@ -117,7 +134,7 @@ public class ProfileGates extends AbstractEndpoint {
 
     /**
      * Deletes all gates associated with a username
-     * 
+     *
      * @param username
      * @param filter
      * @return JsonObject response

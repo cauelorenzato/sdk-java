@@ -12,14 +12,14 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Companies Class
- * 
+ *
  * @version 2.0
  */
 public class Companies extends AbstractEndpoint {
 
     /**
      * Class Constructor
-     * 
+     *
      * @throws EmptyPrivateKey
      */
     public Companies(HashMap<String, String> credentials) throws InvalidToken {
@@ -28,9 +28,9 @@ public class Companies extends AbstractEndpoint {
 
     /**
      * Lists all companies available
-     * 
+     *
      * @return String response
-     * 
+     *
      * @throws SDKException
      */
     public JsonObject listAll() throws SDKException {
@@ -39,10 +39,10 @@ public class Companies extends AbstractEndpoint {
 
     /**
      * Retrieves the respective company for the given companySlug
-     * 
+     *
      * @param String
      *            companySlug The company slug to retrieve data for
-     * 
+     *
      * @return String response
      *
      * @throws SDKException
@@ -53,11 +53,11 @@ public class Companies extends AbstractEndpoint {
 
     /**
      * Creates a new company
-     * 
+     *
      * @param name
-     * 
+     *
      * @return String response
-     * 
+     *
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
@@ -82,8 +82,8 @@ public class Companies extends AbstractEndpoint {
     public JsonObject update(String name, String companySlug) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
-        
-        return this.fetch("PUT", "companies/" + companySlug, data);
+
+        return this.fetch("PATCH", "companies/" + companySlug, data);
     }
 
     /**

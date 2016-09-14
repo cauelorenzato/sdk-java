@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Members Class
- * 
+ *
  * @version 2.0
  */
 public class Members extends AbstractEndpoint {
@@ -26,7 +26,7 @@ public class Members extends AbstractEndpoint {
 
     /**
      * Lists all members of a company
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */
@@ -36,7 +36,7 @@ public class Members extends AbstractEndpoint {
 
     /**
      * Retrieves a member given its id
-     * 
+     *
      * @param id
      * @return JsonObject response
      * @throws SDKException
@@ -47,7 +47,7 @@ public class Members extends AbstractEndpoint {
 
     /**
      * Creates a new Member for the given credential
-     * 
+     *
      * @param credentialPubKey
      * @param userName
      * @param role
@@ -67,7 +67,7 @@ public class Members extends AbstractEndpoint {
 
     /**
      * Updates a member given its id being able to change the role
-     * 
+     *
      * @param id
      * @param role
      * @return JsonObject response
@@ -77,13 +77,13 @@ public class Members extends AbstractEndpoint {
     public JsonObject update(int id, String role) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("role", role);
-        
-        return this.fetch("PUT", "management/members/" + id, data);
+
+        return this.fetch("PATCH", "management/members/" + id, data);
     }
 
     /**
      * Deletes a member given its id
-     * 
+     *
      * @param id
      * @return JsonObject response
      * @throws SDKException
@@ -95,7 +95,7 @@ public class Members extends AbstractEndpoint {
 
     /**
      * Deletes all members associated with the company private key given
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */

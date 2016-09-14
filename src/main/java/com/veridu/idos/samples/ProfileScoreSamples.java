@@ -32,51 +32,51 @@ public class ProfileScoreSamples {
         /**
          * Creates a new attribute to make requests for the attribute' scores
          */
-        JsonObject json = credentialFactory.getAttribute().create(username, "attributeName", "attributeValue");
+        // JsonObject json = credentialFactory.getAttribute().create(username, "attributeName", "attributeValue");
         /**
          * Gets the response from the API listing all scores
          */
-        json = credentialFactory.getScore().listAll(username, "attributeName");
+        // json = credentialFactory.getScore().listAll(username, "attributeName");
 
         /**
          * Prints the json
          */
-        System.out.println(json);
+        // System.out.println(json);
 
         /**
          * Gets the response from the API trying to create a new score
          */
-        json = credentialFactory.getScore().create(username, "attributeName", "nameTest", 0.6);
+        // json = credentialFactory.getScore().create(username, "attributeName", "nameTest", 0.6);
 
         /**
          * Get the response form the API getting one score
          */
-        json = credentialFactory.getScore().getOne(username, "attributeName", "nameTest");
+        // json = credentialFactory.getScore().getOne(username, "attributeName", "nameTest");
 
         /**
          * Prints the array response
          */
-        System.out.println(json.get("data").getAsJsonObject());
+        // System.out.println(json.get("data").getAsJsonObject());
 
         /**
          * Deletes the score created giving the score name
          */
-        json = credentialFactory.getScore().delete(username, "attributeName", "nameTest");
+        // json = credentialFactory.getScore().delete(username, "attributeName", "nameTest");
 
         /**
          * Prints the status of the request
-         */
-        System.out.println(json.get("status").getAsBoolean());
+        /       */
+        // System.out.println(json.get("status").getAsBoolean());
 
         /**
          * Deletes all attribute scores related to the username
          */
-        json = credentialFactory.getScore().deleteAll(username, "attributeName");
+        // json = credentialFactory.getScore().deleteAll(username, "attributeName");
 
         /**
          * Prints the number of deleted scores
          */
-        System.out.println(json.get("deleted").getAsInt());
+        // System.out.println(json.get("deleted").getAsInt());
     }
 
 }

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Attributes Endpoint Class
@@ -64,15 +64,17 @@ public class ProfileAttributes extends AbstractEndpoint {
      * @param username
      * @param attributeName
      * @param attributeValue
+     * @param attributeSupport
      * @return JsonObject response
      * @throws SDKException
      * @throws UnsupportedEncodingException
      */
-    public JsonObject create(String username, String attributeName, String attributeValue)
+    public JsonObject create(String username, String attributeName, String attributeValue, double attributeSupport)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("name", attributeName);
         data.addProperty("value", attributeValue);
+        data.addProperty("support", attributeSupport);
         return this.fetch("POST", "profiles/" + username + "/attributes", data);
     }
 

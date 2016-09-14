@@ -9,7 +9,7 @@ import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Role Acess Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -17,7 +17,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Constructor class
-     * 
+     *
      * @param credentials
      * @throws InvalidToken
      */
@@ -27,7 +27,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Lists all roles related to the User token
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */
@@ -37,7 +37,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Retrieves the role given its id
-     * 
+     *
      * @param roleId
      * @return JsonObject response
      * @throws SDKException
@@ -48,7 +48,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Creates a new access role
-     * 
+     *
      * @param roleName
      * @param roleAccess
      * @param resource
@@ -66,7 +66,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Updates access for a role, given its role id
-     * 
+     *
      * @param roleId
      * @param roleAccess
      * @return JsonObject response
@@ -75,12 +75,12 @@ public class RoleAccess extends AbstractEndpoint {
     public JsonObject update(int roleId, int roleAccess) throws SDKException {
         JsonObject data = new JsonObject();
         data.addProperty("access", roleAccess);
-        return this.fetch("PUT", "access/roles/" + roleId, data);
+        return this.fetch("PATCH", "access/roles/" + roleId, data);
     }
 
     /**
      * Deletes a role access given its role id
-     * 
+     *
      * @param roleId
      * @return
      * @throws SDKException
@@ -91,7 +91,7 @@ public class RoleAccess extends AbstractEndpoint {
 
     /**
      * Deletes all role access related to the User token
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */

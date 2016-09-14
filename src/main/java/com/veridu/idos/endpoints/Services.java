@@ -12,7 +12,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Services Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -27,7 +27,7 @@ public class Services extends AbstractEndpoint {
 
     /**
      * Lists all services associated to the company token
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */
@@ -37,7 +37,7 @@ public class Services extends AbstractEndpoint {
 
     /**
      * Retrieves the service given the serviceId
-     * 
+     *
      * @param serviceId
      * @return JsonObject response
      * @throws SDKException
@@ -48,7 +48,7 @@ public class Services extends AbstractEndpoint {
 
     /**
      * Creates a new service
-     * 
+     *
      * @param name
      * @param url
      * @param enabled
@@ -88,7 +88,7 @@ public class Services extends AbstractEndpoint {
 
     /**
      * Updates an existing service given its serviceId
-     * 
+     *
      * @param serviceId
      * @return JsonObject response
      * @throws SDKException
@@ -113,12 +113,12 @@ public class Services extends AbstractEndpoint {
         if (data.containsKey("auth_password"))
             json.addProperty("auth_password", (String) data.get("auth_password"));
 
-        return this.fetch("PUT", "services/" + serviceId, json);
+        return this.fetch("PATCH", "services/" + serviceId, json);
     }
 
     /**
      * Deletes a service given
-     * 
+     *
      * @param serviceId
      * @return
      * @throws SDKException
@@ -129,7 +129,7 @@ public class Services extends AbstractEndpoint {
 
     /**
      * Deletes all services related to the company token
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */

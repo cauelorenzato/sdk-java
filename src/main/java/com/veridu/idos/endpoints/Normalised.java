@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Role Acess Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -26,7 +26,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Lists all data normalised by a given source
-     * 
+     *
      * @param username
      * @param sourceId
      * @return JsonObject response
@@ -35,10 +35,10 @@ public class Normalised extends AbstractEndpoint {
     public JsonObject listAll(String username, int sourceId) throws SDKException {
         return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/normalised");
     }
-    
+
     /**
      * Lists all data normalised by a given source, with filtering
-     * 
+     *
      * @param username
      * @param sourceId
      * @param filter
@@ -51,7 +51,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Retrieves a normalised data from a given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param normalisedName
@@ -64,7 +64,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Creates a new normalised data for the given source
-     * 
+     *
      * @param username
      * @param sourceId
      * @param name
@@ -84,7 +84,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Updates a normalised data in the given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param normalisedName
@@ -100,13 +100,13 @@ public class Normalised extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
 
-        return this.fetch("PUT", "profiles/" + username + "/sources/" + sourceId + "/normalised/" + normalisedName,
+        return this.fetch("PATCH", "profiles/" + username + "/sources/" + sourceId + "/normalised/" + normalisedName,
                 data);
     }
 
     /**
      * Deletes a normalised data from the given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param normalisedName
@@ -119,7 +119,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Deletes all normalised data from the given source.
-     * 
+     *
      * @param username
      * @param sourceId
      * @return JsonObject response
@@ -131,7 +131,7 @@ public class Normalised extends AbstractEndpoint {
 
     /**
      * Deletes all normalised data from the given source, with filtering.
-     * 
+     *
      * @param username
      * @param sourceId
      * @param filter

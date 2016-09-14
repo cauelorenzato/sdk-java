@@ -10,7 +10,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Profile Raw Endpoint Class
- * 
+ *
  * @version 2.0
  *
  */
@@ -18,7 +18,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Class constructor
-     * 
+     *
      * @param credentials
      * @throws InvalidToken
      */
@@ -28,7 +28,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Lists all raw data related to the given source
-     * 
+     *
      * @param username
      * @param sourceId
      * @return JsonObject response
@@ -40,7 +40,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Retrieves a raw data given its name
-     * 
+     *
      * @param username
      * @param sourceId
      * @param collection
@@ -53,7 +53,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Creates a new raw data
-     * 
+     *
      * @param username
      * @param sourceId
      * @param collection
@@ -72,7 +72,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Updates a raw data given its collection (name)
-     * 
+     *
      * @param username
      * @param sourceId
      * @param collection
@@ -87,12 +87,12 @@ public class ProfileRaw extends AbstractEndpoint {
         data.addProperty("collection", collection);
         data.addProperty("data", collectionData);
 
-        return this.fetch("PUT", "profiles/" + username + "/sources/" + sourceId + "/raw/" + collection, data);
+        return this.fetch("PATCH", "profiles/" + username + "/sources/" + sourceId + "/raw/" + collection, data);
     }
 
     /**
      * Deletes a raw data given its collection (name)
-     * 
+     *
      * @param username
      * @param sourceId
      * @param collection
@@ -105,7 +105,7 @@ public class ProfileRaw extends AbstractEndpoint {
 
     /**
      * Deletes all raw data given the source id
-     * 
+     *
      * @param username
      * @param sourceId
      * @return JsonObject response

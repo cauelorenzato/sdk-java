@@ -61,7 +61,7 @@ public class ProfileFeatureSamples {
         /**
          * Updates the feature giving the feature-slug
          */
-        json = idOSAPIFactory.getFeature().update(username, "testing", "New testing", "new value");
+        json = idOSAPIFactory.getFeature().update(username, 1, 2, "new value");
 
         /**
          * Prints the json response
@@ -71,7 +71,7 @@ public class ProfileFeatureSamples {
         /**
          * Deletes the credential feature giving the feature name
          */
-        json = idOSAPIFactory.getFeature().delete(username, "new-testing");
+        json = idOSAPIFactory.getFeature().delete(username, 1);
 
         /**
          * Prints the status of the request

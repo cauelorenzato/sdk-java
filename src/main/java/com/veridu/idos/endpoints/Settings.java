@@ -11,7 +11,7 @@ import com.veridu.idos.utils.Filter;
 
 /**
  * Settings Class
- * 
+ *
  * @version 2.0
  */
 public class Settings extends AbstractEndpoint {
@@ -25,7 +25,7 @@ public class Settings extends AbstractEndpoint {
 
     /**
      * Lists all Settings for the given credential companyToken
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */
@@ -35,7 +35,7 @@ public class Settings extends AbstractEndpoint {
 
     /**
      * Lists all Settings for the given credential companyToken
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */
@@ -45,7 +45,7 @@ public class Settings extends AbstractEndpoint {
 
     /**
      * Gets the setting for the given public key
-     * 
+     *
      * @param id
      * @return JsonObject response
      * @throws SDKException
@@ -56,7 +56,7 @@ public class Settings extends AbstractEndpoint {
 
     /**
      * Creates a new setting given the section, property and value
-     * 
+     *
      * @param section
      * @param property
      * @param value
@@ -77,7 +77,7 @@ public class Settings extends AbstractEndpoint {
     /**
      * Updates an existing setting given the value and the public key of the
      * setting
-     * 
+     *
      * @param value
      * @param id
      * @return JsonObject response
@@ -87,12 +87,12 @@ public class Settings extends AbstractEndpoint {
     public JsonObject update(String value, int id) throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
         data.addProperty("value", value);
-        return this.fetch("PUT", "management/settings/" + id, data);
+        return this.fetch("PATCH", "management/settings/" + id, data);
     }
 
     /**
      * Deletes an existing setting given the public key of the setting
-     * 
+     *
      * @param id
      * @return JsonObject response
      * @throws SDKException
@@ -103,7 +103,7 @@ public class Settings extends AbstractEndpoint {
 
     /**
      * Deletes all settings associated with the credential companyToken
-     * 
+     *
      * @return JsonObject response
      * @throws SDKException
      */

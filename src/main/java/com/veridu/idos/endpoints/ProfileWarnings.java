@@ -5,8 +5,8 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * ProfileWarnings Endpoint class
@@ -64,7 +64,7 @@ public class ProfileWarnings extends AbstractEndpoint {
      * 
      * @param username
      * @param name
-     * @param reference
+     * @param reference name of the attribute to which the warning refers to
      * @return JsonObject response
      * @throws SDKException
      */
