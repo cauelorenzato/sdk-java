@@ -5,8 +5,8 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * Profile Raw Endpoint Class
@@ -30,25 +30,23 @@ public class ProfileRaw extends AbstractEndpoint {
      * Lists all raw data related to the given source
      *
      * @param username
-     * @param sourceId
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject listAll(String username, int sourceId) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/raw");
+    public JsonObject listAll(String username) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/raw");
     }
 
     /**
-     * Retrieves a raw data given its name
+     * Lists all raw data related to the given source
      *
      * @param username
-     * @param sourceId
-     * @param collection
+     * @param filter
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject getOne(String username, int sourceId, String collection) throws SDKException {
-        return this.fetch("GET", "profiles/" + username + "/sources/" + sourceId + "/raw/" + collection);
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/raw", null, filter);
     }
 
     /**
@@ -66,8 +64,9 @@ public class ProfileRaw extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("collection", collection);
         data.addProperty("data", collectionData);
+        data.addProperty("sourceId", sourceId);
 
-        return this.fetch("POST", "profiles/" + username + "/sources/" + sourceId + "/raw", data);
+        return this.fetch("POST", "profiles/" + username + "/raw", data);
     }
 
     /**
@@ -87,31 +86,6 @@ public class ProfileRaw extends AbstractEndpoint {
         data.addProperty("collection", collection);
         data.addProperty("data", collectionData);
 
-        return this.fetch("PATCH", "profiles/" + username + "/sources/" + sourceId + "/raw/" + collection, data);
-    }
-
-    /**
-     * Deletes a raw data given its collection (name)
-     *
-     * @param username
-     * @param sourceId
-     * @param collection
-     * @return JsonObject response
-     * @throws SDKException
-     */
-    public JsonObject delete(String username, int sourceId, String collection) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/raw/" + collection);
-    }
-
-    /**
-     * Deletes all raw data given the source id
-     *
-     * @param username
-     * @param sourceId
-     * @return JsonObject response
-     * @throws SDKException
-     */
-    public JsonObject deleteAll(String username, int sourceId) throws SDKException {
-        return this.fetch("DELETE", "profiles/" + username + "/sources/" + sourceId + "/raw");
+        return this.fetch("PATCH", "profiles/" + username + "/raw/" + sourceId, data);
     }
 }

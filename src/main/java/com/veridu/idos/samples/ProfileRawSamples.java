@@ -35,7 +35,7 @@ public class ProfileRawSamples {
         /**
          * Gets the response from the API listing all raw
          */
-        json = credentialFactory.getRaw().listAll(username, sourceId);
+        // json = credentialFactory.getRaw().listAll(username, sourceId);
 
         /**
          * Prints the json
@@ -50,7 +50,7 @@ public class ProfileRawSamples {
         /**
          * Get the response form the API getting one raw
          */
-        json = credentialFactory.getRaw().getOne(username, sourceId, "collection-test");
+        // json = credentialFactory.getRaw().getOne(username, sourceId, "collection-test");
 
         /**
          * Prints the array response
@@ -60,7 +60,7 @@ public class ProfileRawSamples {
         /**
          * Deletes the raw created giving the raw name
          */
-        json = credentialFactory.getRaw().delete(username, sourceId, "collection-test");
+        // json = credentialFactory.getRaw().delete(username, sourceId, "collection-test");
 
         /**
          * Prints the status of the request
@@ -70,7 +70,7 @@ public class ProfileRawSamples {
         /**
          * Deletes all attribute raw related to the username
          */
-        json = credentialFactory.getRaw().deleteAll(username, sourceId);
+        // json = credentialFactory.getRaw().deleteAll(username, sourceId);
 
         /**
          * Prints the number of deleted raw

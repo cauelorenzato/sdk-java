@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class Filter {
 
     protected HashMap<String, String> params = new HashMap<>();
+
     /**
      * Boolean value to get all pages
      */
@@ -36,13 +37,42 @@ public class Filter {
     }
 
     /**
-     * Use this filter to get profile features not related to a particular
-     * source (e.g., self submitted).
+     * Use this filter to get features not related to a particular
+     * source, but the profile itself (e.g., self submitted).
      * 
      * @return self
      */
-    public Filter addSourceNullFilter() {
+    public Filter addSourceIDNullFilter() {
         return this.addFilterByKeyName("source:id", "0");
+    }
+
+    /**
+     * Filter by source id
+     * 
+     * @param id
+     * @return
+     */
+    public Filter addSourceIDFilter(int id) {
+        return this.addFilterByKeyName("source:id", String.valueOf(id));
+    }
+
+    /**
+     * Filter by latest source document
+     * 
+     * @return
+     */
+    public Filter addSourceLatestFilter() {
+        return this.addFilterByKeyName("source:latest", String.valueOf(true));
+    }
+
+    /**
+     * Filter by source collection
+     * 
+     * @param collection
+     * @return
+     */
+    public Filter addCollectionFilter(String collection) {
+        return this.addFilterByKeyName("collection", collection);
     }
 
     /**
@@ -73,8 +103,7 @@ public class Filter {
      * @return
      */
     public Filter addTypeFilter(String filter) {
-        this.addFilterByKeyName("type", filter);
-        return this;
+        return this.addFilterByKeyName("type", filter);
     }
 
     /**
@@ -98,20 +127,18 @@ public class Filter {
      * @param page
      * @return
      */
-    public Filter setPaginationNumber(int page) {
-        this.params.put("page", String.valueOf(page));
-        return this;
+    public Filter addPageNumber(int page) {
+        return this.addFilterByKeyName("page", String.valueOf(page));
     }
 
     /**
-     * Sets the limite per page and adds it to the filter
+     * Sets the limit per page and adds it to the filter
      * 
      * @param limitPerPage
      * @return
      */
-    public Filter setLimitPerPage(int limitPerPage) {
-        this.params.put("perPage", String.valueOf(limitPerPage));
-        return this;
+    public Filter addLimitPerPage(int limitPerPage) {
+        return this.addFilterByKeyName("perPage", String.valueOf(limitPerPage));
     }
 
     /**
