@@ -111,9 +111,8 @@ public abstract class AbstractEndpoint {
             url = url.concat("/");
         url = url.concat(resource);
         if (filter != null)
-            if (filter.toString().isEmpty() == false) {
+            if (filter.toString().isEmpty() == false)
                 url += "?" + filter.toString();
-            }
 
         return url;
     }
@@ -152,9 +151,8 @@ public abstract class AbstractEndpoint {
     public JsonObject request(String method, String url, JsonObject data, Filter filter) throws InvalidToken {
         JsonObject json = new JsonObject();
         JsonArray array = new JsonArray();
-        if (this.currentToken == null) {
+        if (this.currentToken == null)
             this.generateAuthToken();
-        }
         if ((filter != null) && (filter.getAllPagesTrue())) {
             String newUrl = "";
             do {
@@ -285,7 +283,6 @@ public abstract class AbstractEndpoint {
                     this.credentials.get("companyPublicKey"));
             break;
         case HANDLER:
-            System.out.println(this.credentials);
             this.currentToken = IdOSUtils.generateHandlerToken(this.credentials.get("servicePrivateKey"),
                     this.credentials.get("servicePublicKey"), this.credentials.get("credentialPublicKey"));
             break;

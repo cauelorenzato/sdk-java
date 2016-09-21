@@ -27,12 +27,32 @@ public class Filter {
     }
 
     /**
-     * Adds a source name filter
+     * Add a source name filter when using the source endpoint
+     * 
+     * @param name
+     * @return
+     */
+    public Filter addSourceNameFilter(String name) {
+        return this.addFilterByKeyName("name", name);
+    }
+
+    /**
+     * Adds a feature source name filter
      * 
      * @param filter
      * @return
      */
-    public Filter addSourceNameFilter(String filter) {
+    public Filter addFeatureSourceNameFilter(String filter) {
+        return this.addFilterByKeyName("source", filter);
+    }
+
+    /**
+     * Adds a raw source name filter
+     * 
+     * @param filter
+     * @return
+     */
+    public Filter addRawSourceNameFilter(String filter) {
         return this.addFilterByKeyName("source:name", filter);
     }
 
@@ -57,12 +77,36 @@ public class Filter {
     }
 
     /**
-     * Filter by latest source document
+     * Filter using a sort - true for ascending
      * 
      * @return
      */
-    public Filter addSourceLatestFilter() {
-        return this.addFilterByKeyName("source:latest", String.valueOf(true));
+    public Filter addSortFilter(SortFilterType type) {
+        return this.addFilterByKeyName("filter:sort", String.valueOf(type));
+    }
+
+    /**
+     * Add an order by fitler
+     * 
+     * @param parameter
+     * @return
+     */
+    public Filter addOrderByFilter(String parameter) {
+        return this.addFilterByKeyName("filter:order", parameter);
+    }
+
+    public Filter addRawFilterOrderLatest() {
+        return this.addFilterByKeyName("filter:order", "latest");
+    }
+
+    /**
+     * Limit the number of results
+     * 
+     * @param limit
+     * @return
+     */
+    public Filter addLimitFilter(int limit) {
+        return this.addFilterByKeyName("filter:limit", String.valueOf(limit));
     }
 
     /**

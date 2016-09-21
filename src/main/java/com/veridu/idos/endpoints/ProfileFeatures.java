@@ -84,7 +84,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "integer");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("PUT", "profiles/" + username + "/features", data);
     }
 
@@ -119,7 +120,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "double");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("PUT", "profiles/" + username + "/features", data);
     }
 
@@ -154,7 +156,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "string");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("PUT", "profiles/" + username + "/features", data);
     }
 
@@ -189,7 +192,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "boolean");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("PUT", "profiles/" + username + "/features", data);
     }
 
@@ -224,7 +228,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "integer");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("POST", "profiles/" + username + "/features", data);
     }
 
@@ -244,7 +249,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "double");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("POST", "profiles/" + username + "/features", data);
     }
 
@@ -278,7 +284,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
         data.addProperty("value", value);
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         data.addProperty("type", "boolean");
         return this.fetch("POST", "profiles/" + username + "/features", data);
     }
@@ -314,7 +321,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         data.addProperty("name", name);
         data.addProperty("value", value);
         data.addProperty("type", "string");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         return this.fetch("POST", "profiles/" + username + "/features", data);
     }
 
@@ -349,7 +357,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("value", value);
         data.addProperty("type", "string");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
 
         return this.fetch("PATCH", "profiles/" + username + "/features/" + featureId, data);
     }
@@ -370,7 +379,8 @@ public class ProfileFeatures extends AbstractEndpoint {
         JsonObject data = new JsonObject();
         data.addProperty("value", value);
         data.addProperty("type", "double");
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
 
         return this.fetch("PATCH", "profiles/" + username + "/features/" + featureId, data);
     }
@@ -389,7 +399,8 @@ public class ProfileFeatures extends AbstractEndpoint {
     public JsonObject update(String username, int featureId, int sourceId, int value)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         data.addProperty("value", value);
         data.addProperty("type", "integer");
 
@@ -410,7 +421,8 @@ public class ProfileFeatures extends AbstractEndpoint {
     public JsonObject update(String username, int featureId, int sourceId, boolean value)
             throws SDKException, UnsupportedEncodingException {
         JsonObject data = new JsonObject();
-        data.addProperty("sourceId", sourceId);
+        if (sourceId != 0)
+            data.addProperty("sourceId", sourceId);
         data.addProperty("value", value);
         data.addProperty("type", "boolean");
 

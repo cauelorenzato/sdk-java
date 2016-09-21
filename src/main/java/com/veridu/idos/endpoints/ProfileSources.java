@@ -5,8 +5,8 @@ import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.veridu.idos.exceptions.InvalidToken;
 import com.veridu.idos.exceptions.SDKException;
-import com.veridu.idos.utils.IdOSAuthType;
 import com.veridu.idos.utils.Filter;
+import com.veridu.idos.utils.IdOSAuthType;
 
 /**
  * ProfileSources Endpoint class
@@ -37,6 +37,17 @@ public class ProfileSources extends AbstractEndpoint {
     }
 
     /**
+     * Lists all sources given an username
+     * 
+     * @param username
+     * @return JsonObject response
+     * @throws SDKException
+     */
+    public JsonObject listAll(String username, Filter filter) throws SDKException {
+        return this.fetch("GET", "profiles/" + username + "/sources", null, filter);
+    }
+
+    /**
      * Retrieves a source given its source name
      * 
      * @param username
@@ -58,9 +69,8 @@ public class ProfileSources extends AbstractEndpoint {
      */
     public JsonObject create(String username, String name, HashMap<String, String> tags) throws SDKException {
         JsonObject jsonTags = new JsonObject();
-        for (String key : tags.keySet()) {
+        for (String key : tags.keySet())
             jsonTags.addProperty(key, tags.get(key));
-        }
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
         data.add("tags", jsonTags);
