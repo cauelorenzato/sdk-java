@@ -19,7 +19,7 @@ public class Filter {
 
     /**
      * Return all parameters added in the HashMap<String, String>
-     * 
+     *
      * @return
      */
     public HashMap<String, String> getParams() {
@@ -28,7 +28,7 @@ public class Filter {
 
     /**
      * Add a source name filter when using the source endpoint
-     * 
+     *
      * @param name
      * @return
      */
@@ -38,7 +38,7 @@ public class Filter {
 
     /**
      * Adds a feature source name filter
-     * 
+     *
      * @param filter
      * @return
      */
@@ -48,7 +48,7 @@ public class Filter {
 
     /**
      * Adds a raw source name filter
-     * 
+     *
      * @param filter
      * @return
      */
@@ -59,7 +59,7 @@ public class Filter {
     /**
      * Use this filter to get features not related to a particular
      * source, but the profile itself (e.g., self submitted).
-     * 
+     *
      * @return self
      */
     public Filter addSourceIDNullFilter() {
@@ -68,7 +68,7 @@ public class Filter {
 
     /**
      * Filter by source id
-     * 
+     *
      * @param id
      * @return
      */
@@ -78,7 +78,7 @@ public class Filter {
 
     /**
      * Filter using a sort - true for ascending
-     * 
+     *
      * @return
      */
     public Filter addSortFilter(SortFilterType type) {
@@ -87,7 +87,7 @@ public class Filter {
 
     /**
      * Add an order by fitler
-     * 
+     *
      * @param parameter
      * @return
      */
@@ -101,7 +101,7 @@ public class Filter {
 
     /**
      * Limit the number of results
-     * 
+     *
      * @param limit
      * @return
      */
@@ -111,7 +111,7 @@ public class Filter {
 
     /**
      * Filter by source collection
-     * 
+     *
      * @param collection
      * @return
      */
@@ -121,7 +121,7 @@ public class Filter {
 
     /**
      * Adds a name filter
-     * 
+     *
      * @param filter
      * @return
      */
@@ -130,8 +130,18 @@ public class Filter {
     }
 
     /**
+     * Adds a slug filter
+     *
+     * @param filter
+     * @return
+     */
+    public Filter addSlugFilter(String filter) {
+        return this.addFilterByKeyName("slug", filter);
+    }
+
+    /**
      * Adds a creator filter
-     * 
+     *
      * @param filter
      * @return
      */
@@ -142,7 +152,7 @@ public class Filter {
 
     /**
      * Adds a type filter
-     * 
+     *
      * @param filter
      * @return
      */
@@ -152,12 +162,12 @@ public class Filter {
 
     /**
      * Add a filter passing the name of the filter parameter.
-     * 
+     *
      * @param name
      *            parameter on which to run the filter
      * @param filter
      *            actual filter value
-     * 
+     *
      * @return self
      */
     public Filter addFilterByKeyName(String name, String value) {
@@ -167,7 +177,7 @@ public class Filter {
 
     /**
      * Sets the pagination number and adds it to the filter
-     * 
+     *
      * @param page
      * @return
      */
@@ -177,7 +187,7 @@ public class Filter {
 
     /**
      * Sets the limit per page and adds it to the filter
-     * 
+     *
      * @param limitPerPage
      * @return
      */
@@ -187,7 +197,7 @@ public class Filter {
 
     /**
      * Factory to create a new Filter object
-     * 
+     *
      * @return
      */
     public static Filter createFilter() {
@@ -219,7 +229,7 @@ public class Filter {
 
     /**
      * Return the boolean value of the property getAllPages
-     * 
+     *
      * @return
      */
     public boolean getAllPagesTrue() {
