@@ -64,14 +64,14 @@ public class ProfileWarnings extends AbstractEndpoint {
      * 
      * @param username
      * @param name
-     * @param reference name of the attribute to which the warning refers to
+     * @param attribute name of the attribute to which the warning refers to
      * @return JsonObject response
      * @throws SDKException
      */
-    public JsonObject create(String username, String name, String reference) throws SDKException {
+    public JsonObject create(String username, String name, String attribute) throws SDKException {
         JsonObject data = new JsonObject();
         data.addProperty("name", name);
-        data.addProperty("reference", reference);
+        data.addProperty("attribute", attribute);
 
         return this.fetch("POST", "profiles/" + username + "/warnings", data);
     }
