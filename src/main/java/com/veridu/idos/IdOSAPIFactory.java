@@ -1,5 +1,6 @@
 package com.veridu.idos;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import com.veridu.idos.endpoints.Companies;
@@ -32,7 +33,7 @@ import com.veridu.idos.exceptions.InvalidToken;
  * CredentialFactory Endpoint creates all Endpoints
  *
  */
-public class IdOSAPIFactory {
+public class IdOSAPIFactory implements Serializable {
 
     /**
      * Credentials data
@@ -159,7 +160,7 @@ public class IdOSAPIFactory {
 
     /**
      * Class constructor
-     * 
+     *
      * @param credentials
      *            HashMap<String, String>
      */
@@ -170,10 +171,10 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Companies endpoint
-     * 
+     *
      * @return
-     * 
-     * @throws Emptytoken
+     *
+     * @throws InvalidToken
      */
     public Companies getCompany() throws InvalidToken {
         if (!(this.company instanceof Companies))
@@ -183,7 +184,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Permissions endpoint
-     * 
+     *
      * @return
      * @throws InvalidToken
      */
@@ -195,7 +196,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Credentials endpoint
-     * 
+     *
      * @return
      * @throws InvalidToken
      */
@@ -207,7 +208,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Settings endpoint
-     * 
+     *
      * @return
      * @throws InvalidToken
      */
@@ -219,7 +220,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Members endpoint
-     * 
+     *
      * @return
      * @throws InvalidToken
      */
@@ -231,7 +232,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Hooks endpoint
-     * 
+     *
      * @return
      * @throws InvalidToken
      */
@@ -244,7 +245,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Tag endpoint
-     * 
+     *
      * @return ProfileTags instance
      * @throws InvalidToken
      */
@@ -256,7 +257,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Services endpoint
-     * 
+     *
      * @return Services instance
      * @throws InvalidToken
      */
@@ -268,7 +269,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates ServiceHandlers endpoint
-     * 
+     *
      * @return ServiceHandlers instance
      * @throws InvalidToken
      */
@@ -280,7 +281,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Attribute endpoint
-     * 
+     *
      * @return ProfileAttribute instance
      * @throws InvalidToken
      */
@@ -292,7 +293,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Normalised endpoint
-     * 
+     *
      * @return Normalised instance
      * @throws InvalidToken
      */
@@ -304,7 +305,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Feature endpoint
-     * 
+     *
      * @return ProfileFeatures instance
      * @throws InvalidToken
      */
@@ -316,7 +317,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Gate endpoint
-     * 
+     *
      * @return ProfileGates instance
      * @throws InvalidToken
      */
@@ -328,7 +329,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Reference endpoint
-     * 
+     *
      * @return ProfileReferences instance
      * @throws InvalidToken
      */
@@ -340,9 +341,9 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Task endpoint
-     * 
+     *
      * @return ProfileTasks instance
-     * @throws Invalidtoken
+     * @throws InvalidToken
      */
     public ProfileTasks getTask() throws InvalidToken {
         if (!(this.task instanceof ProfileTasks))
@@ -352,7 +353,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Score endpoint
-     * 
+     *
      * @return ProfileScores instance
      * @throws InvalidToken
      */
@@ -364,7 +365,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Digested endpoint
-     * 
+     *
      * @return Digested instance
      * @throws InvalidToken
      */
@@ -376,7 +377,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Warning endpoint
-     * 
+     *
      * @return ProfileWarnings instance
      * @throws InvalidToken
      */
@@ -388,7 +389,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Token endpoint
-     * 
+     *
      * @return Token instance
      * @throws InvalidToken
      */
@@ -400,7 +401,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Source endpoint
-     * 
+     *
      * @return Source instance
      * @throws InvalidToken
      */
@@ -413,7 +414,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Raw endpoint
-     * 
+     *
      * @return Raw instance
      * @throws InvalidToken
      */
@@ -426,7 +427,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Role endpoint
-     * 
+     *
      * @return Role instance
      * @throws InvalidToken
      */
@@ -439,7 +440,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates Review endpoint
-     * 
+     *
      * @return Review instance
      * @throws InvalidToken
      */
@@ -452,7 +453,7 @@ public class IdOSAPIFactory {
 
     /**
      * Instantiates SSO endpoint
-     * 
+     *
      * @return SSO instance
      * @throws InvalidToken
      */
