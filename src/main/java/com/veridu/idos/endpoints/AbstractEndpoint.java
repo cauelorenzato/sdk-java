@@ -58,7 +58,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Fetches an API Resource
-     * 
+     *
      * @param method
      *            String
      * @param resource
@@ -72,7 +72,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Fetches an API Resource
-     * 
+     *
      * @param method
      *            String
      * @param resource
@@ -126,7 +126,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Regenerate the token
-     * 
+     *
      * @throws InvalidToken
      */
     public void refreshToken() throws InvalidToken {
@@ -176,7 +176,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Sends the request
-     * 
+     *
      * @param method
      * @param url
      * @param data
@@ -186,7 +186,13 @@ public abstract class AbstractEndpoint {
         try {
             URL requestUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
-            connection.setRequestMethod(method);
+
+            if (method.equals("PATCH")) {
+                connection.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+                connection.setRequestMethod("POST");
+            } else
+                connection.setRequestMethod(method);
+
             connection.setConnectTimeout(10000);
             connection.setReadTimeout(10000);
             connection.setUseCaches(false);
@@ -269,7 +275,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Generates an authorization token
-     * 
+     *
      * @throws InvalidToken
      */
     private String generateAuthToken() throws InvalidToken {
@@ -298,7 +304,7 @@ public abstract class AbstractEndpoint {
 
     /**
      * Sets Credentials (public and private keys)
-     * 
+     *
      * @param credentials
      *            HashMap<String, String>
      */
